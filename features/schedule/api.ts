@@ -1,0 +1,45 @@
+import axios from "axios";
+
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+interface GetAvailabilityParams {
+  start_date: string;
+  end_date: string;
+  start_time: string;
+  end_time: string;
+  selected_days: string[];
+  duration_minutes: number;
+  users: { email: string }[];
+  required_participants: number;
+}
+
+interface StoreFormDataParams {
+  isConfirmed: boolean;
+  start_date: string;
+  end_date: string;
+  start_time: string;
+  end_time: string;
+  selected_days: string[];
+  duration_minutes: number;
+  users: { email: string }[];
+  candidates: string[][];
+}
+
+export const getAvailability = async (params: GetAvailabilityParams) => {
+  try {
+    const { data } = await axios.post(`${apiUrl}/get_availability`, params);
+    return data;
+  } catch (error) {
+    throw new Error("Failed to fetch schedule");
+  }
+};
+
+export const storeFormData = async (params: StoreFormDataParams): Promise<string | null> => {
+  try {
+    const { data } = await axios.post(`${apiUrl}/store_form_data`, params);
+    return data.token;
+  } catch (error) {
+    console.error("Error storing form data:", error);
+    return null;
+  }
+}; 
