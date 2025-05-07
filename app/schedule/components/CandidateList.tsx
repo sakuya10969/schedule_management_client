@@ -173,7 +173,7 @@ export default function CandidateList({
 
   return (
     <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-2">候補日一覧</h2>
+      <h2 className="text-xl font-semibold mb-2 text-black">候補日一覧</h2>
       <div className="relative bg-blue-100 p-8 rounded min-h-[400px]">
         {isLoading ? (
           // ローディング中はサークル型スピナーを表示
@@ -186,7 +186,7 @@ export default function CandidateList({
             {/* コピー用ボタン */}
             <button
               onClick={handleCopy}
-              className="absolute top-2 right-2 bg-white text-sm px-2 py-1 rounded shadow hover:bg-gray-50"
+              className="absolute top-2 right-2 bg-white text-sm px-2 py-1 rounded shadow hover:bg-gray-50 text-black"
             >
               copy
             </button>
@@ -197,7 +197,7 @@ export default function CandidateList({
                 ))}
               </ul>
             ) : (
-              <p className="text-gray-500">候補がありません。</p>
+              <p className="text-black">候補がありません。</p>
             )}
           </>
         )}
