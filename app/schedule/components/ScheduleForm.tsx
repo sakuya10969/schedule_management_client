@@ -1,22 +1,13 @@
 "use client";
 import { FormEventHandler } from "react";
+import DateRangePicker from "@/app/schedule/components/DateRangePicker";
+import TimeRangePicker from "@/app/schedule/components/TimeRangePicker";
+import WeekdaySelector from "@/app/schedule/components/WeekdaySelector";
+import DurationSelector from "@/app/schedule/components/DurationSelector";
+import ParticipantsInput from "@/app/schedule/components/ParticipantsInput";
 
 interface User {
   email: string;
-}
-
-function generateTimeOptions(): string[] {
-  const options: string[] = [];
-  for (let hour = 0; hour < 24; hour++) {
-    for (const minute of [0, 30]) {
-      // "00:00" の場合はスキップする
-      if (hour === 0 && minute === 0) continue;
-      const hh = String(hour).padStart(2, "0");
-      const mm = String(minute).padStart(2, "0");
-      options.push(`${hh}:${mm}`);
-    }
-  }
-  return options;
 }
 
 interface ScheduleFormProps {
@@ -41,188 +32,69 @@ interface ScheduleFormProps {
   setRequiredParticipants: (value: number) => void;
 }
 
-export default function ScheduleForm(props: ScheduleFormProps) {
-  const {
-    startDate, setStartDate,
-    endDate, setEndDate,
-    startTime, setStartTime,
-    endTime, setEndTime,
-    selectedDays, setSelectedDays,
-    durationMinutes, setDurationMinutes,
-    users,
-    handleAddUser,
-    handleRemoveUser,
-    handleChangeUserEmail,
-    handleSubmit,
-    requiredParticipants,
-    setRequiredParticipants,
-  } = props;
-
-  // 曜日チェックボックス用の設定（selectedDays は配列）
-  const weekdays = ['月', '火', '水', '木', '金', '土', '日'];
-  const selectedDaysArray = selectedDays;
-
-  const handleDayToggle = (day: string) => {
-    let newSelectedDaysArray: string[];
-    if (selectedDaysArray.includes(day)) {
-      newSelectedDaysArray = selectedDaysArray.filter((d) => d !== day);
-    } else {
-      newSelectedDaysArray = [...selectedDaysArray, day];
-    }
-    setSelectedDays(newSelectedDaysArray);
-  };
-
+const ScheduleForm = ({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  startTime,
+  setStartTime,
+  endTime,
+  setEndTime,
+  selectedDays,
+  setSelectedDays,
+  durationMinutes,
+  setDurationMinutes,
+  users,
+  handleAddUser,
+  handleRemoveUser,
+  handleChangeUserEmail,
+  handleSubmit,
+  requiredParticipants,
+  setRequiredParticipants,
+}: ScheduleFormProps) => {
   return (
     <div>
-      <h1 className="mb-5 font-semibold text-xl text-black">スケジュール調整</h1>
+      <h1 className="mb-5 ml-2 font-semibold text-xl text-black">スケジュール調整</h1>
       <form onSubmit={handleSubmit} className="gap-4 md:grid-cols-2">
-        {/* 日付範囲 */}
-        <div className="flex items-end space-x-2 p-3 rounded w-full">
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold text-xl text-black">調整期間</label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="border p-3 w-full bg-blue-100 text-black"
-              required
-            />
-          </div>
-          <span className="pb-3">~</span>
-          <div className="flex-1">
-            <label className="block mb-1 mt-7"></label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="border p-3 w-full bg-blue-100 text-black"
-              required
-            />
-          </div>
-        </div>
+        
+        {/* 日付範囲選択 */}
+        <DateRangePicker
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
 
-        {/* 時間範囲 */}
-        <div className="flex items-end space-x-2 p-3 rounded w-full">
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold text-xl text-black">時間帯</label>
-            <select
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
-              required
-            >
-              {generateTimeOptions().map((timeStr) => (
-                <option key={timeStr} value={timeStr} className="cursor-pointer">
-                  {timeStr}
-                </option>
-              ))}
-            </select>
-          </div>
-          <span className="pb-3">~</span>
-          <div className="flex-1">
-            <label className="block mb-1 mt-7"></label>
-            <select
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
-              required
-            >
-              {generateTimeOptions().map((timeStr) => (
-                <option key={timeStr} value={timeStr}>
-                  {timeStr}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        {/* 時間範囲選択 */}
+        <TimeRangePicker
+          startTime={startTime}
+          setStartTime={setStartTime}
+          endTime={endTime}
+          setEndTime={setEndTime}
+        />
+
         {/* 曜日選択 */}
-        <div className="p-4 rounded-lg ">
-          <label className="block mb-1 font-bold text-xl text-black">曜日選択</label>
-          <div className="flex flex-wrap gap-4">
-            {weekdays.map((day) => (
-              <label key={day} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={selectedDaysArray.includes(day)}
-                  onChange={() => handleDayToggle(day)}
-                  className="w-5 h-6 cursor-pointer"
-                />
-                <span className="text-xl font-medium text-black">{day}</span>
-              </label>
-            ))}
-            <button
-              type="button"
-              onClick={() => setSelectedDays([])}
-              className="bg-blue-300 hover:bg-blue-400 text-sm text-black py-1 px-2 rounded"
-            >
-              曜日選択をリセット
-            </button>
-          </div>
-        </div>
+        <WeekdaySelector
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+        />
 
-        {/* 面談時間 */}
-        <div className="items-end p-3 rounded">
-          <label className="block mb-1 font-semibold text-xl text-black">面談時間</label>
-          <select
-            value={durationMinutes}
-            onChange={(e) => setDurationMinutes(Number(e.target.value))}
-            className="border p-3 bg-blue-100 text-black cursor-pointer"
-          >
-            <option value={30}>30</option>
-            <option value={60}>60</option>
-            <option value={90}>90</option>
-            <option value={120}>120</option>
-          </select>
-          <span className="pb-3 ml-3 text-black">分</span>
-        </div>
+        {/* 面談時間選択 */}
+        <DurationSelector
+          durationMinutes={durationMinutes}
+          setDurationMinutes={setDurationMinutes}
+        />
 
-        {/* 参加者メールアドレス */}
-        <div className="md:col-span-2 mt-2 ml-4">
-          <label className="block mb-1 font-semibold text-xl text-black">担当者</label>
-          {users.map((user, index) => (
-            <div key={index} className="flex items-center mb-2">
-              <input
-                type="email"
-                value={user.email}
-                onChange={(e) => handleChangeUserEmail(index, e.target.value)}
-                className="border p-2 mr-2 flex-1"
-                placeholder="email@example.com"
-              />
-              {index > 0 && (
-                <button
-                  type="button"
-                  onClick={() => handleRemoveUser(index)}
-                  className="bg-red-500 text-white px-2 py-1 rounded transition-all duration-200 active:scale-95 active:ring-2 active:ring-red-400"
-                >
-                  削除
-                </button>
-              )}
-            </div>
-          ))}
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={handleAddUser}
-              className="bg-blue-300 hover:bg-blue-400 text-xl text-black py-3 px-4 rounded whitespace-nowrap"
-            >
-              担当者を追加
-            </button>
-            <div className="flex items-center gap-2">
-              <select
-                value={requiredParticipants}
-                onChange={(e) => setRequiredParticipants(Number(e.target.value))}
-                className="border p-3 bg-blue-100 text-black cursor-pointer"
-              >
-                <option value={users.length}>全員</option>
-                {Array.from({ length: users.length - 1 }, (_, i) => i + 1).map((num) => (
-                  <option key={num} value={num}>
-                    いずれか{num}名
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
+        {/* 参加者メールアドレス入力 */}
+        <ParticipantsInput
+          users={users}
+          handleAddUser={handleAddUser}
+          handleRemoveUser={handleRemoveUser}
+          handleChangeUserEmail={handleChangeUserEmail}
+          requiredParticipants={requiredParticipants}
+          setRequiredParticipants={setRequiredParticipants}
+        />
 
         {/* フォーム送信ボタン */}
         <div className="md:col-span-2 ml-4">
@@ -237,3 +109,5 @@ export default function ScheduleForm(props: ScheduleFormProps) {
     </div>
   );
 }
+
+export default ScheduleForm;
