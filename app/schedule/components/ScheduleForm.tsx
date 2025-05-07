@@ -74,17 +74,17 @@ export default function ScheduleForm(props: ScheduleFormProps) {
 
   return (
     <div>
-      <h1 className="mb-5 font-semibold text-xl">スケジュール調整</h1>
+      <h1 className="mb-5 font-semibold text-xl text-black">スケジュール調整</h1>
       <form onSubmit={handleSubmit} className="gap-4 md:grid-cols-2">
         {/* 日付範囲 */}
         <div className="flex items-end space-x-2 p-3 rounded w-full">
           <div className="flex-1">
-            <label className="block mb-1 font-semibold text-xl">調整期間</label>
+            <label className="block mb-1 font-semibold text-xl text-black">調整期間</label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="border p-3 w-full bg-blue-100"
+              className="border p-3 w-full bg-blue-100 text-black"
               required
             />
           </div>
@@ -95,7 +95,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="border p-3 w-full bg-blue-100"
+              className="border p-3 w-full bg-blue-100 text-black"
               required
             />
           </div>
@@ -104,11 +104,11 @@ export default function ScheduleForm(props: ScheduleFormProps) {
         {/* 時間範囲 */}
         <div className="flex items-end space-x-2 p-3 rounded w-full">
           <div className="flex-1">
-            <label className="block mb-1 font-semibold text-xl">時間帯</label>
+            <label className="block mb-1 font-semibold text-xl text-black">時間帯</label>
             <select
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
-              className="border p-3 bg-blue-100 w-full"
+              className="border p-3 bg-blue-100 w-full text-black"
               required
             >
               {generateTimeOptions().map((timeStr) => (
@@ -124,7 +124,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
             <select
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
-              className="border p-3 bg-blue-100 w-full"
+              className="border p-3 bg-blue-100 w-full text-black"
               required
             >
               {generateTimeOptions().map((timeStr) => (
@@ -137,7 +137,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
         </div>
         {/* 曜日選択 */}
         <div className="p-4 rounded-lg ">
-          <label className="block mb-1 font-bold text-xl text-gray-800">曜日選択</label>
+          <label className="block mb-1 font-bold text-xl text-black">曜日選択</label>
           <div className="flex flex-wrap gap-4">
             {weekdays.map((day) => (
               <label key={day} className="flex items-center cursor-pointer space-x-2">
@@ -147,7 +147,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
                   onChange={() => handleDayToggle(day)}
                   className="w-5 h-6"
                 />
-                <span className="text-xl font-medium">{day}</span>
+                <span className="text-xl font-medium text-black">{day}</span>
               </label>
             ))}
             <button
@@ -162,23 +162,23 @@ export default function ScheduleForm(props: ScheduleFormProps) {
 
         {/* 面談時間 */}
         <div className="items-end p-3 rounded">
-          <label className="block mb-1 font-semibold text-xl">面談時間</label>
+          <label className="block mb-1 font-semibold text-xl text-black">面談時間</label>
           <select
             value={durationMinutes}
             onChange={(e) => setDurationMinutes(Number(e.target.value))}
-            className="border p-3 bg-blue-100"
+            className="border p-3 bg-blue-100 text-black"
           >
             <option value={30}>30</option>
             <option value={60}>60</option>
             <option value={90}>90</option>
             <option value={120}>120</option>
           </select>
-          <span className="pb-3 ml-3">分</span>
+          <span className="pb-3 ml-3 text-black">分</span>
         </div>
 
         {/* 参加者メールアドレス */}
         <div className="md:col-span-2 mt-2 ml-4">
-          <label className="block mb-1 font-semibold text-xl">担当者</label>
+          <label className="block mb-1 font-semibold text-xl text-black">担当者</label>
           {users.map((user, index) => (
             <div key={index} className="flex items-center mb-2">
               <input
@@ -211,7 +211,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
               <select
                 value={requiredParticipants}
                 onChange={(e) => setRequiredParticipants(Number(e.target.value))}
-                className="border p-3 bg-blue-100"
+                className="border p-3 bg-blue-100 text-black"
               >
                 <option value={users.length}>全員</option>
                 {Array.from({ length: users.length - 1 }, (_, i) => i + 1).map((num) => (
