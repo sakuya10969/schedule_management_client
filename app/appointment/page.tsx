@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { parseISO, format } from "date-fns";
-import { Calendar, Clock, Check } from "lucide-react";
+
+import { ScheduleForm } from "./components/ScheduleForm";
+import { ConfirmedSchedule } from "./components/ConfirmedSchedule";
 
 export default function SelectSchedulePage() {
   // 各種 state
@@ -198,162 +200,25 @@ export default function SelectSchedulePage() {
             </p>
           </div>
           {isConfirmed ? (
-            <>
-              <div className="p-8 bg-gray-200 rounded-lg text-center mb-4">
-                <p className="text-xl font-semibold text-gray-800">確定した日程</p>
-                <p className="text-lg text-gray-700">
-                  {confirmedCandidate === "none"
-                    ? "確定した日程はありません。\n再度担当者から連絡します。"
-                    : confirmedCandidate
-                      ? confirmedCandidate
-                      : "日程の詳細が取得できませんでした。"}
-                </p>
-              </div>
-              <div className="p-8 bg-gray-100 rounded-lg text-center">
-                <p className="text-xl font-semibold text-gray-700">このフォームは既に使用済みです。</p>
-              </div>
-            </>
+            <ConfirmedSchedule confirmedCandidate={confirmedCandidate} />
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* 入力フィールド：氏名*/}
-              <div className="grid gap-6 mb-6 md:grid-cols-2">
-                <div>
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    氏
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={lastname}
-                    onChange={(e) => setLastName(e.target.value)}
-                    placeholder="山田"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    名
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={firstname}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="太郎"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    required
-                  />
-                </div>
-              </div>
-              {/* 入力フィールド：会社名*/}
-              <div>
-                <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  会社名
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  placeholder="株式会社〇〇"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  required
-                />
-              </div>
-              {/* 入力フィールド：連絡先（メールアドレス） */}
-              <div className="mb-6">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  連絡先 (メールアドレス)
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="example@domain.com"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  required
-                />
-              </div>
-              {/* 日程候補の表示 */}
-              <div className="grid gap-6">
-                {filteredCandidates.map((candidate, index) => {
-                  const candidateValue = candidate.join(", ");
-                  const isSelected = selectedCandidate === candidateValue;
-                  const candidateDate = formatDatePart(candidate[0]);
-                  const startTime = formatTimePart(candidate[0]);
-                  const endTime = formatTimePart(candidate[1]);
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setSelectedCandidate(candidateValue)}
-                      className={`cursor-pointer relative rounded-xl border-2 transition-all duration-300 p-6 flex justify-between items-center transform hover:scale-105 active:scale-95 active:ring-2 active:ring-blue-400 ${isSelected
-                        ? "border-blue-500 bg-blue-100 shadow-lg"
-                        : "border-gray-300 hover:border-blue-400 hover:shadow-md"
-                        }`}
-                    >
-                      <div className="flex items-center space-x-6">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className={`h-6 w-6 ${isSelected ? "text-blue-500" : "text-gray-500"}`} />
-                          <span className={`text-xl ${isSelected ? "font-semibold text-blue-500" : "text-gray-700"}`}>
-                            {candidateDate}
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Clock className={`h-6 w-6 ${isSelected ? "text-blue-500" : "text-gray-500"}`} />
-                          <span className={`text-xl ${isSelected ? "font-semibold text-blue-500" : "text-gray-700"}`}>
-                            {startTime} - {endTime}
-                          </span>
-                        </div>
-                      </div>
-                      <div
-                        className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${isSelected ? "bg-blue-500 text-white" : "bg-gray-300"
-                          }`}
-                      >
-                        <Check className={`w-5 h-5 ${isSelected ? "opacity-100" : "opacity-0"}`} />
-                      </div>
-                    </div>
-                  );
-                })}
-                {/* 「可能な日程がない」選択肢 */}
-                <div
-                  onClick={() => setSelectedCandidate("none")}
-                  className={`cursor-pointer relative rounded-xl border-2 transition-all duration-300 p-6 flex justify-between items-center transform hover:scale-105 active:scale-95 active:ring-2 active:ring-red-400 ${selectedCandidate === "none"
-                    ? "border-red-500 bg-red-100 shadow-lg"
-                    : "border-gray-300 hover:border-red-400 hover:shadow-md"
-                    }`}
-                >
-                  <div className="flex items-center space-x-6">
-                    <span
-                      className={`text-xl ${selectedCandidate === "none"
-                        ? "font-semibold text-red-500"
-                        : "text-gray-700"
-                        }`}
-                    >
-                      可能な日程がない
-                    </span>
-                  </div>
-                  <div
-                    className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${selectedCandidate === "none"
-                      ? "bg-red-500 text-white"
-                      : "bg-gray-300"
-                      }`}
-                  >
-                    <Check className={`w-5 h-5 ${selectedCandidate === "none" ? "opacity-100" : "opacity-0"}`} />
-                  </div>
-                </div>
-              </div>
-              {/* 送信ボタン */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`w-full py-4 mt-8 bg-green-500 hover:bg-green-600 transition-all duration-200 text-white text-lg font-semibold rounded-lg shadow-md ${isLoading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-              >
-                {isLoading ? "処理中..." : "日程を確定する"}
-              </button>
-            </form>
+            <ScheduleForm
+              lastname={lastname}
+              firstname={firstname}
+              company={company}
+              email={email}
+              selectedCandidate={selectedCandidate}
+              isLoading={isLoading}
+              filteredCandidates={filteredCandidates}
+              onLastNameChange={setLastName}
+              onFirstNameChange={setFirstName}
+              onCompanyChange={setCompany}
+              onEmailChange={setEmail}
+              onSelectCandidate={setSelectedCandidate}
+              onSubmit={handleSubmit}
+              formatDatePart={formatDatePart}
+              formatTimePart={formatTimePart}
+            />
           )}
         </div>
       </div>
