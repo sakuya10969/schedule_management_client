@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import CandidateList from "@/features/schedule/components/CandidateList";
 import ScheduleForm from "@/features/schedule/components/ScheduleForm";
 import { useSchedule } from "@/features/schedule/hooks/useSchedule";

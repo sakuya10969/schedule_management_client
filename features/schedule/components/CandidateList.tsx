@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useMemo } from "react";
+
 import { formatCandidate, filteredCandidates, mergedCandidates, handleCopy } from "@/features/schedule/utils";
 
 interface CandidateListProps {

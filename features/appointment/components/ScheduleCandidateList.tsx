@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 
-import { ScheduleCandidateItem } from './ScheduleCandidateItem';
+import { ScheduleCandidateItem } from '@/features/appointment/components/ScheduleCandidateItem';
 
 interface ScheduleCandidateListProps {
   candidates: string[][];
