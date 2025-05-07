@@ -1,5 +1,5 @@
 "use client";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { parseISO, format } from "date-fns";
 
 interface CandidateListProps {
@@ -22,7 +22,7 @@ export default function CandidateList({
   const dayMap = ["日", "月", "火", "水", "木", "金", "土"];
 
   // "2025-02-03T10:30:00" → "M/d(曜) HH:mm-HH:mm" のようにフォーマットする関数
-  const formatCandidate = (slotPair: string[]): string => {
+  const formatCandidate = useCallback((slotPair: string[]): string => {
     if (slotPair.length !== 2) {
       return slotPair.join(" ");
     }
@@ -49,7 +49,7 @@ export default function CandidateList({
       console.error("Date parsing error:", err);
       return slotPair.join(" ");
     }
-  };
+  }, [dayMap]);
 
   // 候補の時間帯を、minTime 〜 maxTime の範囲内にフィルタリングする
   // 曜日フィルタも適用
@@ -86,71 +86,74 @@ export default function CandidateList({
   });
 
   // 連続している時間帯や重複する時間帯をマージする処理
-  const mergedCandidates: string[][] = [];
+  const mergedCandidates = useMemo(() => {
+    const result: string[][] = [];
 
-  if (sortedCandidates.length > 0) {
-    // 同じ日付の時間枠をグループ化
-    const candidatesByDay: Record<string, string[][]> = {};
+    if (sortedCandidates.length > 0) {
+      // 同じ日付の時間枠をグループ化
+      const candidatesByDay: Record<string, string[][]> = {};
 
-    // 候補を日付ごとにグループ化
-    sortedCandidates.forEach(candidate => {
-      const dateStr = candidate[0].substring(0, 10); // YYYY-MM-DD部分を取得
-      if (!candidatesByDay[dateStr]) {
-        candidatesByDay[dateStr] = [];
-      }
-      candidatesByDay[dateStr].push(candidate);
-    });
-
-    // 各日付ごとに処理
-    Object.keys(candidatesByDay).forEach(dateStr => {
-      const dayCandidates = candidatesByDay[dateStr];
-
-      // 開始時間でソート
-      dayCandidates.sort((a, b) => {
-        return parseISO(a[0]).getTime() - parseISO(b[0]).getTime();
+      // 候補を日付ごとにグループ化
+      sortedCandidates.forEach(candidate => {
+        const dateStr = candidate[0].substring(0, 10); // YYYY-MM-DD部分を取得
+        if (!candidatesByDay[dateStr]) {
+          candidatesByDay[dateStr] = [];
+        }
+        candidatesByDay[dateStr].push(candidate);
       });
 
-      // マージ処理
-      let merged: string[][] = [];
+      // 各日付ごとに処理
+      Object.keys(candidatesByDay).forEach(dateStr => {
+        const dayCandidates = candidatesByDay[dateStr];
 
-      if (dayCandidates.length > 0) {
-        // 最初の候補で初期化
-        let current = [...dayCandidates[0]];
+        // 開始時間でソート
+        dayCandidates.sort((a, b) => {
+          return parseISO(a[0]).getTime() - parseISO(b[0]).getTime();
+        });
 
-        for (let i = 1; i < dayCandidates.length; i++) {
-          const candidate = dayCandidates[i];
+        // マージ処理
+        const merged: string[][] = [];
 
-          const currentStartTime = parseISO(current[0]).getTime();
-          const currentEndTime = parseISO(current[1]).getTime();
-          const candidateStartTime = parseISO(candidate[0]).getTime();
-          const candidateEndTime = parseISO(candidate[1]).getTime();
+        if (dayCandidates.length > 0) {
+          // 最初の候補で初期化
+          let current = [...dayCandidates[0]];
 
-          // 重複または連続しているか判定
-          if (candidateStartTime <= currentEndTime) {
-            // 重複または連続している場合、終了時間を更新（より遅い方を採用）
-            if (candidateEndTime > currentEndTime) {
-              current[1] = candidate[1];
+          for (let i = 1; i < dayCandidates.length; i++) {
+            const candidate = dayCandidates[i];
+
+            const currentEndTime = parseISO(current[1]).getTime();
+            const candidateStartTime = parseISO(candidate[0]).getTime();
+            const candidateEndTime = parseISO(candidate[1]).getTime();
+
+            // 重複または連続しているか判定
+            if (candidateStartTime <= currentEndTime) {
+              // 重複または連続している場合、終了時間を更新（より遅い方を採用）
+              if (candidateEndTime > currentEndTime) {
+                current[1] = candidate[1];
+              }
+            } else {
+              // 重複も連続もしていない場合、現在のグループを確定して新しいグループを開始
+              merged.push(current);
+              current = [...candidate];
             }
-          } else {
-            // 重複も連続もしていない場合、現在のグループを確定して新しいグループを開始
-            merged.push(current);
-            current = [...candidate];
           }
+
+          // 最後のグループを追加
+          merged.push(current);
         }
 
-        // 最後のグループを追加
-        merged.push(current);
-      }
+        // 全体の結果に追加
+        result.push(...merged);
+      });
 
-      // 全体の結果に追加
-      mergedCandidates.push(...merged);
-    });
+      // 再度開始時間でソート（日付をまたいでソート）
+      result.sort((a, b) => {
+        return parseISO(a[0]).getTime() - parseISO(b[0]).getTime();
+      });
+    }
 
-    // 再度開始時間でソート（日付をまたいでソート）
-    mergedCandidates.sort((a, b) => {
-      return parseISO(a[0]).getTime() - parseISO(b[0]).getTime();
-    });
-  }
+    return result;
+  }, [sortedCandidates]);
 
   // 「コピー」ボタン押下時の処理（マージ済み候補を利用）
   const handleCopy = useCallback(() => {
@@ -166,7 +169,7 @@ export default function CandidateList({
       .catch((err) => {
         console.error("コピーに失敗しました:", err);
       });
-  }, [mergedCandidates]);
+  }, [mergedCandidates, formatCandidate]);
 
   return (
     <div className="mt-8">

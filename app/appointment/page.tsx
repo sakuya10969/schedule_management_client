@@ -54,7 +54,7 @@ export default function SelectSchedulePage() {
           console.error("Error retrieving form data:", error);
         });
     }
-  }, []);
+  }, [apiUrl]);
 
   // 日付・時刻のフォーマット関数
   const formatDatePart = (isoString: string) => {
