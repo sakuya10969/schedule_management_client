@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import CandidateList from "@/app/schedule/components/CandidateList";
-import ScheduleForm from "@/app/schedule/components/ScheduleForm";
+import CandidateList from "@/features/schedule/components/CandidateList";
+import ScheduleForm from "@/features/schedule/components/ScheduleForm";
 import { useSchedule } from "@/features/schedule/hooks/useSchedule";
 import { useUsers } from "@/features/schedule/hooks/useUsers";
 import { getAvailability, storeFormData } from "@/features/schedule/api";
