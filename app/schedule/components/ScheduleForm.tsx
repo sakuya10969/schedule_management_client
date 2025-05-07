@@ -108,11 +108,11 @@ export default function ScheduleForm(props: ScheduleFormProps) {
             <select
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
-              className="border p-3 bg-blue-100 w-full text-black"
+              className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
               required
             >
               {generateTimeOptions().map((timeStr) => (
-                <option key={timeStr} value={timeStr}>
+                <option key={timeStr} value={timeStr} className="cursor-pointer">
                   {timeStr}
                 </option>
               ))}
@@ -124,7 +124,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
             <select
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
-              className="border p-3 bg-blue-100 w-full text-black"
+              className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
               required
             >
               {generateTimeOptions().map((timeStr) => (
@@ -140,12 +140,12 @@ export default function ScheduleForm(props: ScheduleFormProps) {
           <label className="block mb-1 font-bold text-xl text-black">曜日選択</label>
           <div className="flex flex-wrap gap-4">
             {weekdays.map((day) => (
-              <label key={day} className="flex items-center cursor-pointer space-x-2">
+              <label key={day} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
                   checked={selectedDaysArray.includes(day)}
                   onChange={() => handleDayToggle(day)}
-                  className="w-5 h-6"
+                  className="w-5 h-6 cursor-pointer"
                 />
                 <span className="text-xl font-medium text-black">{day}</span>
               </label>
@@ -166,7 +166,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
           <select
             value={durationMinutes}
             onChange={(e) => setDurationMinutes(Number(e.target.value))}
-            className="border p-3 bg-blue-100 text-black"
+            className="border p-3 bg-blue-100 text-black cursor-pointer"
           >
             <option value={30}>30</option>
             <option value={60}>60</option>
@@ -211,7 +211,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
               <select
                 value={requiredParticipants}
                 onChange={(e) => setRequiredParticipants(Number(e.target.value))}
-                className="border p-3 bg-blue-100 text-black"
+                className="border p-3 bg-blue-100 text-black cursor-pointer"
               >
                 <option value={users.length}>全員</option>
                 {Array.from({ length: users.length - 1 }, (_, i) => i + 1).map((num) => (
