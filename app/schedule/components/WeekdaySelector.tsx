@@ -1,17 +1,11 @@
-const weekdays = ['月', '火', '水', '木', '金', '土', '日'];
-
+import { weekdays } from "@/constants";
+import { handleDayToggle } from "@/features/schedule/utils";
 interface WeekdaySelectorProps {
   selectedDays: string[];
   setSelectedDays: (value: string[]) => void;
 }
 
 const WeekdaySelector = ({ selectedDays, setSelectedDays }: WeekdaySelectorProps) => {
-  const handleDayToggle = (day: string) => {
-    const newDays = selectedDays.includes(day)
-      ? selectedDays.filter((d) => d !== day)
-      : [...selectedDays, day];
-    setSelectedDays(newDays);
-  };
 
   return (
     <div className="p-4 rounded-lg">
@@ -22,7 +16,7 @@ const WeekdaySelector = ({ selectedDays, setSelectedDays }: WeekdaySelectorProps
             <input
               type="checkbox"
               checked={selectedDays.includes(day)}
-              onChange={() => handleDayToggle(day)}
+              onChange={() => handleDayToggle(day, selectedDays, setSelectedDays)}
               className="w-5 h-6 cursor-pointer"
             />
             <span className="text-xl font-medium text-black">{day}</span>

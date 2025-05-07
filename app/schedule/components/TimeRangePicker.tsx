@@ -1,15 +1,4 @@
-const generateTimeOptions = (): string[] => {
-    const options: string[] = [];
-    for (let hour = 0; hour < 24; hour++) {
-      for (const minute of [0, 30]) {
-        if (hour === 0 && minute === 0) continue;
-        const hh = String(hour).padStart(2, "0");
-        const mm = String(minute).padStart(2, "0");
-        options.push(`${hh}:${mm}`);
-      }
-    }
-    return options;
-  };
+import { generateTimeOptions } from "@/features/schedule/utils";
   
   interface TimeRangePickerProps {
     startTime: string;

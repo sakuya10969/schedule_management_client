@@ -1,3 +1,5 @@
+import { durationOptions } from "@/constants";
+
 interface DurationSelectorProps {
     durationMinutes: number;
     setDurationMinutes: (value: number) => void;
@@ -12,7 +14,7 @@ interface DurationSelectorProps {
           onChange={(e) => setDurationMinutes(Number(e.target.value))}
           className="border p-3 bg-blue-100 text-black cursor-pointer"
         >
-          {[30, 60, 90, 120].map((duration) => (
+          {durationOptions.map((duration) => (
             <option key={duration} value={duration}>
               {duration}
             </option>

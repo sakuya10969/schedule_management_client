@@ -28,7 +28,7 @@ interface User {
               type="email"
               value={user.email}
               onChange={(e) => handleChangeUserEmail(index, e.target.value)}
-              className="border p-2 mr-2 flex-1"
+              className="border p-2 mr-2 flex-1 text-black"
               placeholder="email@example.com"
             />
             {index > 0 && (
