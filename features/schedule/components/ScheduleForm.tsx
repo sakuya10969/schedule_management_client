@@ -1,5 +1,4 @@
 'use client';
-import { FormEventHandler } from 'react';
 
 import DateRangePicker from '@/features/schedule/components/DateRangePicker';
 import TimeRangePicker from '@/features/schedule/components/TimeRangePicker';

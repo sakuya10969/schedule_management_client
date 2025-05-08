@@ -1,5 +1,3 @@
-import { FormEventHandler } from 'react';
-
 export interface CandidateListProps {
   candidates: string[][];
   minTime: string;
@@ -50,7 +48,7 @@ export interface ScheduleFormProps {
   handleAddUser: () => void;
   handleRemoveUser: (index: number) => void;
   handleChangeUserEmail: (index: number, value: string) => void;
-  handleSubmit: FormEventHandler<HTMLFormElement>;
+  handleSubmit: React.FormEventHandler<HTMLFormElement>;
   requiredParticipants: number;
   setRequiredParticipants: (value: number) => void;
 }
