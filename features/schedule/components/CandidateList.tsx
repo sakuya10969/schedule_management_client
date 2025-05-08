@@ -3,8 +3,8 @@ import { useCallback, useMemo } from 'react';
 
 import {
   formatCandidate,
-  filteredCandidates,
-  mergedCandidates,
+  filterCandidates,
+  mergeCandidates,
   handleCopy,
 } from '@/features/schedule/utils';
 import { CandidateListProps } from '@/features/schedule/type';
@@ -17,30 +17,30 @@ const CandidateList = ({
   selectedDays,
 }: CandidateListProps) => {
   // フィルタリング済み候補を取得
-  const filtered = useMemo(
-    () => filteredCandidates(candidates, minTime, maxTime, selectedDays),
+  const filteredCandidates = useMemo(
+    () => filterCandidates(candidates, minTime, maxTime, selectedDays),
     [candidates, minTime, maxTime, selectedDays]
   );
 
   // フィルタリング済み候補を開始時刻でソート
   const sortedCandidates = useMemo(() => {
-    return [...filtered].sort((a, b) => {
+    return [...filteredCandidates].sort((a, b) => {
       return new Date(a[0]).getTime() - new Date(b[0]).getTime();
     });
-  }, [filtered]);
+  }, [filteredCandidates]);
 
   // 重複または連続している候補をマージ
-  const merged = useMemo(
-    () => mergedCandidates(sortedCandidates),
+  const mergedCandidates = useMemo(
+    () => mergeCandidates(sortedCandidates),
     [sortedCandidates]
   );
 
   // コピー処理
   const handleCopyClick = useCallback(() => {
-    if (merged.length === 0) return;
-    const text = merged.map((pair) => formatCandidate(pair)).join('\n');
+    if (mergedCandidates.length === 0) return;
+    const text = mergedCandidates.map((pair) => formatCandidate(pair)).join('\n');
     handleCopy(text);
-  }, [merged]);
+  }, [mergedCandidates]);
 
   return (
     <div className="mt-8">
@@ -59,9 +59,9 @@ const CandidateList = ({
             >
               copy
             </button>
-            {merged.length > 0 ? (
+            {mergedCandidates.length > 0 ? (
               <ul className="list-inside space-y-1">
-                {merged.map((slotPair, index) => (
+                {mergedCandidates.map((slotPair, index) => (
                   <li key={index}>{formatCandidate(slotPair)}</li>
                 ))}
               </ul>

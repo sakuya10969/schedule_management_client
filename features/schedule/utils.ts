@@ -49,7 +49,7 @@ export const generateTimeOptions = (): string[] => {
 };
 
 // 候補日程をフィルタリング
-export const filteredCandidates = (
+export const filterCandidates = (
   candidates: string[][],
   minTime: string,
   maxTime: string,
@@ -81,7 +81,7 @@ export const filteredCandidates = (
 };
 
 // 候補日程をマージ
-export const mergedCandidates = (sortedCandidates: string[][]): string[][] => {
+export const mergeCandidates = (sortedCandidates: string[][]): string[][] => {
   const result: string[][] = [];
   if (sortedCandidates.length === 0) return result;
 
