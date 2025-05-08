@@ -5,10 +5,7 @@ import {
   formatCandidate,
   filterCandidates,
 } from '@/features/appointment/utils';
-
-interface UseScheduleFormProps {
-  apiUrl: string;
-}
+import { UseScheduleFormProps } from '@/features/appointment/type';
 
 export const useScheduleForm = ({ apiUrl }: UseScheduleFormProps) => {
   const [candidates, setCandidates] = useState<string[][]>([]);

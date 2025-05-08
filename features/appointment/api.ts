@@ -1,14 +1,6 @@
 import axios from 'axios';
 
-interface FormData {
-  users: { email: string }[];
-  candidates: string[][];
-  start_time: string;
-  end_time: string;
-  selected_days: string[];
-  isConfirmed: boolean;
-  confirmedCandidate: string;
-}
+import { FormData } from '@/features/appointment/type';
 
 export const fetchFormData = async (
   apiUrl: string,

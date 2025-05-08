@@ -2,14 +2,7 @@ import React from 'react';
 import { Check } from 'lucide-react';
 
 import { ScheduleCandidateItem } from '@/features/appointment/components/ScheduleCandidateItem';
-
-interface ScheduleCandidateListProps {
-  candidates: string[][];
-  selectedCandidate: string;
-  onSelectCandidate: (value: string) => void;
-  formatDatePart: (isoString: string) => string;
-  formatTimePart: (isoString: string) => string;
-}
+import { ScheduleCandidateListProps } from '@/features/appointment/type';
 
 export const ScheduleCandidateList: React.FC<ScheduleCandidateListProps> = ({
   candidates,

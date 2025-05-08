@@ -1,24 +1,7 @@
 import React from 'react';
 
 import { ScheduleCandidateList } from '@/features/appointment/components/ScheduleCandidateList';
-
-interface ScheduleFormProps {
-  lastname: string;
-  firstname: string;
-  company: string;
-  email: string;
-  selectedCandidate: string;
-  isLoading: boolean;
-  filteredCandidates: string[][];
-  onLastNameChange: (value: string) => void;
-  onFirstNameChange: (value: string) => void;
-  onCompanyChange: (value: string) => void;
-  onEmailChange: (value: string) => void;
-  onSelectCandidate: (value: string) => void;
-  onSubmit: (e: React.FormEvent) => void;
-  formatDatePart: (isoString: string) => string;
-  formatTimePart: (isoString: string) => string;
-}
+import { ScheduleFormProps } from '@/features/appointment/type';
 
 export const ScheduleForm: React.FC<ScheduleFormProps> = ({
   lastname,
