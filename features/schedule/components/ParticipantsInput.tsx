@@ -1,15 +1,4 @@
-interface User {
-  email: string;
-}
-
-interface ParticipantsInputProps {
-  users: User[];
-  handleAddUser: () => void;
-  handleRemoveUser: (index: number) => void;
-  handleChangeUserEmail: (index: number, value: string) => void;
-  requiredParticipants: number;
-  setRequiredParticipants: (value: number) => void;
-}
+import { ParticipantsInputProps } from '@/features/schedule/type';
 
 const ParticipantsInput = ({
   users,

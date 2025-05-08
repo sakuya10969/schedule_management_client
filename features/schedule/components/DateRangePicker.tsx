@@ -1,9 +1,4 @@
-interface DateRangePickerProps {
-  startDate: string;
-  setStartDate: (value: string) => void;
-  endDate: string;
-  setEndDate: (value: string) => void;
-}
+import { DateRangePickerProps } from '@/features/schedule/type';
 
 const DateRangePicker = ({
   startDate,

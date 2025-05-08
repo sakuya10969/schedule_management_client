@@ -7,14 +7,7 @@ import {
   mergedCandidates,
   handleCopy,
 } from '@/features/schedule/utils';
-
-interface CandidateListProps {
-  candidates: string[][];
-  minTime: string;
-  maxTime: string;
-  isLoading: boolean;
-  selectedDays: string[];
-}
+import { CandidateListProps } from '@/features/schedule/type';
 
 const CandidateList = ({
   candidates,

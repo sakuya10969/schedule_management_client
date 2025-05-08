@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-interface User {
-  email: string;
-}
+import { User } from '@/features/schedule/type';
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([{ email: '' }]);

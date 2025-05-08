@@ -1,29 +1,8 @@
 import axios from 'axios';
 
+import { GetAvailabilityParams, StoreFormDataParams } from '@/features/schedule/type';
+
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
-interface GetAvailabilityParams {
-  start_date: string;
-  end_date: string;
-  start_time: string;
-  end_time: string;
-  selected_days: string[];
-  duration_minutes: number;
-  users: { email: string }[];
-  required_participants: number;
-}
-
-interface StoreFormDataParams {
-  isConfirmed: boolean;
-  start_date: string;
-  end_date: string;
-  start_time: string;
-  end_time: string;
-  selected_days: string[];
-  duration_minutes: number;
-  users: { email: string }[];
-  candidates: string[][];
-}
 
 export const getAvailability = async (params: GetAvailabilityParams) => {
   try {

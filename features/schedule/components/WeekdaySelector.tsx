@@ -1,10 +1,6 @@
 import { weekdays } from '@/constants';
 import { handleDayToggle } from '@/features/schedule/utils';
-
-interface WeekdaySelectorProps {
-  selectedDays: string[];
-  setSelectedDays: (value: string[]) => void;
-}
+import { WeekdaySelectorProps } from '@/features/schedule/type';
 
 const WeekdaySelector = ({
   selectedDays,
