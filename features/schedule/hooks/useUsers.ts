@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface User {
   email: string;
 }
 
 export const useUsers = () => {
-  const [users, setUsers] = useState<User[]>([{ email: "" }]);
+  const [users, setUsers] = useState<User[]>([{ email: '' }]);
 
   const handleAddUser = () => {
-    setUsers((prev) => [...prev, { email: "" }]);
+    setUsers((prev) => [...prev, { email: '' }]);
   };
 
   const handleRemoveUser = (index: number) => {
@@ -22,7 +22,7 @@ export const useUsers = () => {
   };
 
   const getValidUsers = () => {
-    return users.filter((u) => u.email.trim() !== "");
+    return users.filter((u) => u.email.trim() !== '');
   };
 
   return {
@@ -33,4 +33,4 @@ export const useUsers = () => {
     handleChangeUserEmail,
     getValidUsers,
   };
-}; 
+};

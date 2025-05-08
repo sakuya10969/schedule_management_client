@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from 'react';
+import Link from 'next/link';
 
-import CandidateList from "@/features/schedule/components/CandidateList";
-import ScheduleForm from "@/features/schedule/components/ScheduleForm";
-import { useSchedule } from "@/features/schedule/hooks/useSchedule";
-import { useUsers } from "@/features/schedule/hooks/useUsers";
-import { getAvailability, storeFormData } from "@/features/schedule/api";
+import CandidateList from '@/features/schedule/components/CandidateList';
+import ScheduleForm from '@/features/schedule/components/ScheduleForm';
+import { useSchedule } from '@/features/schedule/hooks/useSchedule';
+import { useUsers } from '@/features/schedule/hooks/useUsers';
+import { getAvailability, storeFormData } from '@/features/schedule/api';
 
 export default function SchedulePage() {
   const {
@@ -45,7 +45,7 @@ export default function SchedulePage() {
 
     const validUsers = getValidUsers();
     if (!validUsers.length) {
-      alert("参加者がありません。");
+      alert('参加者がありません。');
       return;
     }
 
@@ -63,16 +63,16 @@ export default function SchedulePage() {
       });
       setCandidates(data.common_availability || []);
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  //「日程調整画面を表示」ボタン押下時の処理 
+  //「日程調整画面を表示」ボタン押下時の処理
   const handleCreateForm = async () => {
     if (candidates.length === 0) {
-      alert("候補がありません。候補を取得してください。");
+      alert('候補がありません。候補を取得してください。');
       return;
     }
     const token = await storeFormData({
@@ -87,17 +87,17 @@ export default function SchedulePage() {
       candidates,
     });
     if (!token) {
-      alert("フォームの作成に失敗しました。再度お試しください。");
+      alert('フォームの作成に失敗しました。再度お試しください。');
       return;
     }
     const url = `/appointment?token=${encodeURIComponent(token)}`;
-    window.open(url, "SelectScheduleForm", "width=600,height=800");
+    window.open(url, 'SelectScheduleForm', 'width=600,height=800');
   };
 
   // 「リンクを共有」ボタン押下時の処理（メール送信用）
   const handleShareForm = async () => {
     if (candidates.length === 0) {
-      alert("候補がありません。フォームを作成してください。");
+      alert('候補がありません。フォームを作成してください。');
       return;
     }
     const token = await storeFormData({
@@ -112,12 +112,14 @@ export default function SchedulePage() {
       candidates,
     });
     if (!token) {
-      alert("フォームの共有に失敗しました。再度お試しください。");
+      alert('フォームの共有に失敗しました。再度お試しください。');
       return;
     }
-    const shareUrl = window.location.origin + `/appointment?token=${encodeURIComponent(token)}`;
+    const shareUrl =
+      window.location.origin +
+      `/appointment?token=${encodeURIComponent(token)}`;
 
-    const subject = "【日程調整のお願い】インテリジェントフォース/採用担当";
+    const subject = '【日程調整のお願い】インテリジェントフォース/採用担当';
     const body = `＜ここにメール相手の性を入力＞様
 
                   インテリジェントフォース採用担当です。

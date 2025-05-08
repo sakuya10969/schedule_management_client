@@ -1,32 +1,36 @@
-import { parseISO, format } from "date-fns";
+import { parseISO, format } from 'date-fns';
 
-import { weekdays } from "@/constants";
+import { weekdays } from '@/constants';
 
 // 候補日程のフォーマット
 export const formatCandidate = (slotPair: string[]): string => {
   if (slotPair.length !== 2) {
-    return slotPair.join(" ");
+    return slotPair.join(' ');
   }
   try {
     const startDate = parseISO(slotPair[0]);
     const endDate = parseISO(slotPair[1]);
 
-    if (format(startDate, "M/d") === format(endDate, "M/d")) {
+    if (format(startDate, 'M/d') === format(endDate, 'M/d')) {
       const candidateDay = weekdays[startDate.getDay()];
-      const datePart = format(startDate, "M/d") + `(${candidateDay})`;
-      const startTime = format(startDate, "HH:mm");
-      const endTime = format(endDate, "HH:mm");
+      const datePart = format(startDate, 'M/d') + `(${candidateDay})`;
+      const startTime = format(startDate, 'HH:mm');
+      const endTime = format(endDate, 'HH:mm');
       return `${datePart} ${startTime}-${endTime}`;
     } else {
       const startDay = weekdays[startDate.getDay()];
       const endDay = weekdays[endDate.getDay()];
-      const startFormatted = format(startDate, "MM/dd") + `(${startDay}) ` + format(startDate, "HH:mm");
-      const endFormatted = format(endDate, "MM/dd") + `(${endDay}) ` + format(endDate, "HH:mm");
+      const startFormatted =
+        format(startDate, 'MM/dd') +
+        `(${startDay}) ` +
+        format(startDate, 'HH:mm');
+      const endFormatted =
+        format(endDate, 'MM/dd') + `(${endDay}) ` + format(endDate, 'HH:mm');
       return `${startFormatted} ~ ${endFormatted}`;
     }
   } catch (err) {
-    console.error("Date parsing error:", err);
-    return slotPair.join(" ");
+    console.error('Date parsing error:', err);
+    return slotPair.join(' ');
   }
 };
 
@@ -36,8 +40,8 @@ export const generateTimeOptions = (): string[] => {
   for (let hour = 0; hour < 24; hour++) {
     for (const minute of [0, 30]) {
       if (hour === 0 && minute === 0) continue;
-      const hh = String(hour).padStart(2, "0");
-      const mm = String(minute).padStart(2, "0");
+      const hh = String(hour).padStart(2, '0');
+      const mm = String(minute).padStart(2, '0');
       options.push(`${hh}:${mm}`);
     }
   }
@@ -54,7 +58,8 @@ export const filteredCandidates = (
   return candidates.filter((slotPair) => {
     if (slotPair.length !== 2) return false;
 
-    if (slotPair[0].substring(0, 10) !== slotPair[1].substring(0, 10)) return false;
+    if (slotPair[0].substring(0, 10) !== slotPair[1].substring(0, 10))
+      return false;
 
     const candidateStart = slotPair[0].substring(11, 16);
     const candidateEnd = slotPair[1].substring(11, 16);
@@ -67,7 +72,7 @@ export const filteredCandidates = (
         const candidateDay = weekdays[date.getDay()];
         if (!selectedDays.includes(candidateDay)) return false;
       } catch (err) {
-        console.error("Day parsing error:", err);
+        console.error('Day parsing error:', err);
         return false;
       }
     }
@@ -102,9 +107,10 @@ export const mergedCandidates = (sortedCandidates: string[][]): string[][] => {
 
 // クリップボードにコピー
 export const handleCopy = (text: string) => {
-  navigator.clipboard.writeText(text)
-    .then(() => alert("候補日程をコピーしました!"))
-    .catch((err) => console.error("コピーに失敗しました:", err));
+  navigator.clipboard
+    .writeText(text)
+    .then(() => alert('候補日程をコピーしました!'))
+    .catch((err) => console.error('コピーに失敗しました:', err));
 };
 
 // 曜日選択を切り替え

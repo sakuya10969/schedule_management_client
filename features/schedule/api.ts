@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -30,16 +30,18 @@ export const getAvailability = async (params: GetAvailabilityParams) => {
     const { data } = await axios.post(`${apiUrl}/get_availability`, params);
     return data;
   } catch (error) {
-    throw new Error("Failed to fetch schedule");
+    throw new Error('Failed to fetch schedule');
   }
 };
 
-export const storeFormData = async (params: StoreFormDataParams): Promise<string | null> => {
+export const storeFormData = async (
+  params: StoreFormDataParams
+): Promise<string | null> => {
   try {
     const { data } = await axios.post(`${apiUrl}/store_form_data`, params);
     return data.token;
   } catch (error) {
-    console.error("Error storing form data:", error);
+    console.error('Error storing form data:', error);
     return null;
   }
-}; 
+};

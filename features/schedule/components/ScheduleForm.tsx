@@ -1,11 +1,11 @@
-"use client";
-import { FormEventHandler } from "react";
+'use client';
+import { FormEventHandler } from 'react';
 
-import DateRangePicker from "@/features/schedule/components/DateRangePicker";
-import TimeRangePicker from "@/features/schedule/components/TimeRangePicker";
-import WeekdaySelector from "@/features/schedule/components/WeekdaySelector";
-import DurationSelector from "@/features/schedule/components/DurationSelector";
-import ParticipantsInput from "@/features/schedule/components/ParticipantsInput";
+import DateRangePicker from '@/features/schedule/components/DateRangePicker';
+import TimeRangePicker from '@/features/schedule/components/TimeRangePicker';
+import WeekdaySelector from '@/features/schedule/components/WeekdaySelector';
+import DurationSelector from '@/features/schedule/components/DurationSelector';
+import ParticipantsInput from '@/features/schedule/components/ParticipantsInput';
 
 interface User {
   email: string;
@@ -56,9 +56,10 @@ const ScheduleForm = ({
 }: ScheduleFormProps) => {
   return (
     <div>
-      <h1 className="mb-5 ml-2 font-semibold text-xl text-black">スケジュール調整</h1>
+      <h1 className="mb-5 ml-2 font-semibold text-xl text-black">
+        スケジュール調整
+      </h1>
       <form onSubmit={handleSubmit} className="gap-4 md:grid-cols-2">
-        
         {/* 日付範囲選択 */}
         <DateRangePicker
           startDate={startDate}
@@ -109,6 +110,6 @@ const ScheduleForm = ({
       </form>
     </div>
   );
-}
+};
 
 export default ScheduleForm;

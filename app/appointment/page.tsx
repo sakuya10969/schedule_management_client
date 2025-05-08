@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { ScheduleForm } from "@/features/appointment/components/ScheduleForm";
-import { ConfirmedSchedule } from "@/features/appointment/components/ConfirmedSchedule";
-import { useScheduleForm } from "@/features/appointment/hooks/useScheduleForm";
-import { formatDatePart, formatTimePart } from "@/features/appointment/utils";
+import { ScheduleForm } from '@/features/appointment/components/ScheduleForm';
+import { ConfirmedSchedule } from '@/features/appointment/components/ConfirmedSchedule';
+import { useScheduleForm } from '@/features/appointment/hooks/useScheduleForm';
+import { formatDatePart, formatTimePart } from '@/features/appointment/utils';
 
 export default function SelectSchedulePage() {
-  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL || '';
   const {
     lastname,
     firstname,
@@ -30,7 +30,9 @@ export default function SelectSchedulePage() {
       <div className="w-full max-w-3xl">
         <div className="bg-white shadow rounded-lg p-8">
           <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold text-gray-800 tracking-tight">日程選択</h1>
+            <h1 className="text-4xl font-bold text-gray-800 tracking-tight">
+              日程選択
+            </h1>
             <p className="mt-2 text-gray-600 text-lg">
               以下の候補から希望する日程を選択してください。
             </p>

@@ -1,13 +1,13 @@
-import { parseISO, format } from "date-fns";
+import { parseISO, format } from 'date-fns';
 
-import { weekdays } from "@/constants";
+import { weekdays } from '@/constants';
 
 export const formatDatePart = (isoString: string) => {
   try {
     const date = parseISO(isoString);
-    return format(date, "M/d") + `(${weekdays[date.getDay()]})`;
+    return format(date, 'M/d') + `(${weekdays[date.getDay()]})`;
   } catch (err) {
-    console.error("Date parsing error:", err);
+    console.error('Date parsing error:', err);
     return isoString;
   }
 };
@@ -15,9 +15,9 @@ export const formatDatePart = (isoString: string) => {
 export const formatTimePart = (isoString: string) => {
   try {
     const date = parseISO(isoString);
-    return format(date, "HH:mm");
+    return format(date, 'HH:mm');
   } catch (err) {
-    console.error("Time parsing error:", err);
+    console.error('Time parsing error:', err);
     return isoString;
   }
 };
@@ -26,23 +26,23 @@ export const formatCandidate = (slotPair: string[]): string => {
   try {
     const startDate = parseISO(slotPair[0]);
     const endDate = parseISO(slotPair[1]);
-    if (format(startDate, "M/d") === format(endDate, "M/d")) {
+    if (format(startDate, 'M/d') === format(endDate, 'M/d')) {
       const candidateDay = weekdays[startDate.getDay()];
-      return `${format(startDate, "M/d")}(${candidateDay}) ${format(
+      return `${format(startDate, 'M/d')}(${candidateDay}) ${format(
         startDate,
-        "HH:mm"
-      )} - ${format(endDate, "HH:mm")}`;
+        'HH:mm'
+      )} - ${format(endDate, 'HH:mm')}`;
     } else {
-      return `${format(startDate, "MM/dd HH:mm")} ~ ${format(
+      return `${format(startDate, 'MM/dd HH:mm')} ~ ${format(
         endDate,
-        "MM/dd HH:mm"
+        'MM/dd HH:mm'
       )}`;
     }
   } catch (err) {
-    console.error("Error formatting candidate:", err);
-    return slotPair.join(", ");
+    console.error('Error formatting candidate:', err);
+    return slotPair.join(', ');
   }
-}; 
+};
 
 export const filterCandidates = (
   candidates: string[][],
@@ -64,10 +64,10 @@ export const filterCandidates = (
         const candidateDay = weekdays[date.getDay()];
         if (!selectedDays.includes(candidateDay)) return false;
       } catch (err) {
-        console.error("Day parsing error:", err);
+        console.error('Day parsing error:', err);
         return false;
       }
     }
     return true;
   });
-}; 
+};

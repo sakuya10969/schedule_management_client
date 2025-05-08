@@ -42,7 +42,10 @@ export const ScheduleForm: React.FC<ScheduleFormProps> = ({
       {/* 入力フィールド：氏名*/}
       <div className="grid gap-6 mb-6 md:grid-cols-2">
         <div>
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
             氏
           </label>
           <input
@@ -56,7 +59,10 @@ export const ScheduleForm: React.FC<ScheduleFormProps> = ({
           />
         </div>
         <div>
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
             名
           </label>
           <input
@@ -72,7 +78,10 @@ export const ScheduleForm: React.FC<ScheduleFormProps> = ({
       </div>
       {/* 入力フィールド：会社名*/}
       <div>
-        <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label
+          htmlFor="company"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
           会社名
         </label>
         <input
@@ -87,7 +96,10 @@ export const ScheduleForm: React.FC<ScheduleFormProps> = ({
       </div>
       {/* 入力フィールド：連絡先（メールアドレス） */}
       <div className="mb-6">
-        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label
+          htmlFor="email"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
           連絡先 (メールアドレス)
         </label>
         <input
@@ -113,11 +125,11 @@ export const ScheduleForm: React.FC<ScheduleFormProps> = ({
         type="submit"
         disabled={isLoading}
         className={`w-full py-4 mt-8 bg-green-500 hover:bg-green-600 transition-all duration-200 text-white text-lg font-semibold rounded-lg shadow-md ${
-          isLoading ? "opacity-50 cursor-not-allowed" : ""
+          isLoading ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
-        {isLoading ? "処理中..." : "日程を確定する"}
+        {isLoading ? '処理中...' : '日程を確定する'}
       </button>
     </form>
   );
-}; 
+};
