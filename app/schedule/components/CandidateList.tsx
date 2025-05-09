@@ -60,7 +60,7 @@ const CandidateList = ({
               copy
             </button>
             {merged.length > 0 ? (
-              <ul className="list-inside space-y-1">
+              <ul className="list-inside space-y-1 text-black">
                 {merged.map((slotPair, index) => (
                   <li key={index}>{formatCandidate(slotPair)}</li>
                 ))}
