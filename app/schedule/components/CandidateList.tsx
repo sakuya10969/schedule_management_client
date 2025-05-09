@@ -1,13 +1,14 @@
-'use client';
-import { useCallback, useMemo } from 'react';
+"use client";
+import { useCallback, useMemo } from "react";
+import { formatCandidate, filterCandidates, mergeCandidates, handleCopy } from "@/features/schedule/utils";
 
-import {
-  formatCandidate,
-  filterCandidates,
-  mergeCandidates,
-  handleCopy,
-} from '@/features/schedule/utils';
-import { CandidateListProps } from '@/features/schedule/type';
+interface CandidateListProps {
+  candidates: string[][];
+  minTime: string;
+  maxTime: string;
+  isLoading: boolean;
+  selectedDays: string[];
+}
 
 const CandidateList = ({
   candidates,
@@ -17,30 +18,29 @@ const CandidateList = ({
   selectedDays,
 }: CandidateListProps) => {
   // フィルタリング済み候補を取得
-  const filteredCandidates = useMemo(
-    () => filterCandidates(candidates, minTime, maxTime, selectedDays),
-    [candidates, minTime, maxTime, selectedDays]
-  );
+  const filtered = useMemo(() => filterCandidates(candidates, minTime, maxTime, selectedDays), [
+    candidates,
+    minTime,
+    maxTime,
+    selectedDays,
+  ]);
 
   // フィルタリング済み候補を開始時刻でソート
   const sortedCandidates = useMemo(() => {
-    return [...filteredCandidates].sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       return new Date(a[0]).getTime() - new Date(b[0]).getTime();
     });
-  }, [filteredCandidates]);
+  }, [filtered]);
 
   // 重複または連続している候補をマージ
-  const mergedCandidates = useMemo(
-    () => mergeCandidates(sortedCandidates),
-    [sortedCandidates]
-  );
+  const merged = useMemo(() => mergeCandidates(sortedCandidates), [sortedCandidates]);
 
   // コピー処理
   const handleCopyClick = useCallback(() => {
-    if (mergedCandidates.length === 0) return;
-    const text = mergedCandidates.map((pair) => formatCandidate(pair)).join('\n');
+    if (merged.length === 0) return;
+    const text = merged.map((pair) => formatCandidate(pair)).join("\n");
     handleCopy(text);
-  }, [mergedCandidates]);
+  }, [merged]);
 
   return (
     <div className="mt-8">
@@ -59,9 +59,9 @@ const CandidateList = ({
             >
               copy
             </button>
-            {mergedCandidates.length > 0 ? (
+            {merged.length > 0 ? (
               <ul className="list-inside space-y-1">
-                {mergedCandidates.map((slotPair, index) => (
+                {merged.map((slotPair, index) => (
                   <li key={index}>{formatCandidate(slotPair)}</li>
                 ))}
               </ul>

@@ -1,11 +1,36 @@
-'use client';
+"use client";
+import { FormEventHandler } from "react";
+import DateRangePicker from "@/app/schedule/components/DateRangePicker";
+import TimeRangePicker from "@/app/schedule/components/TimeRangePicker";
+import WeekdaySelector from "@/app/schedule/components/WeekdaySelector";
+import DurationSelector from "@/app/schedule/components/DurationSelector";
+import ParticipantsInput from "@/app/schedule/components/ParticipantsInput";
 
-import DateRangePicker from '@/features/schedule/components/DateRangePicker';
-import TimeRangePicker from '@/features/schedule/components/TimeRangePicker';
-import WeekdaySelector from '@/features/schedule/components/WeekdaySelector';
-import DurationSelector from '@/features/schedule/components/DurationSelector';
-import ParticipantsInput from '@/features/schedule/components/ParticipantsInput';
-import { ScheduleFormProps } from '@/features/schedule/type';
+interface User {
+  email: string;
+}
+
+interface ScheduleFormProps {
+  startDate: string;
+  setStartDate: (value: string) => void;
+  endDate: string;
+  setEndDate: (value: string) => void;
+  startTime: string;
+  setStartTime: (value: string) => void;
+  endTime: string;
+  setEndTime: (value: string) => void;
+  selectedDays: string[];
+  setSelectedDays: (value: string[]) => void;
+  durationMinutes: number;
+  setDurationMinutes: (value: number) => void;
+  users: User[];
+  handleAddUser: () => void;
+  handleRemoveUser: (index: number) => void;
+  handleChangeUserEmail: (index: number, value: string) => void;
+  handleSubmit: FormEventHandler<HTMLFormElement>;
+  requiredParticipants: number;
+  setRequiredParticipants: (value: number) => void;
+}
 
 const ScheduleForm = ({
   startDate,
@@ -30,10 +55,9 @@ const ScheduleForm = ({
 }: ScheduleFormProps) => {
   return (
     <div>
-      <h1 className="mb-5 ml-2 font-semibold text-xl text-black">
-        スケジュール調整
-      </h1>
+      <h1 className="mb-5 ml-2 font-semibold text-xl text-black">スケジュール調整</h1>
       <form onSubmit={handleSubmit} className="gap-4 md:grid-cols-2">
+        
         {/* 日付範囲選択 */}
         <DateRangePicker
           startDate={startDate}
@@ -84,6 +108,6 @@ const ScheduleForm = ({
       </form>
     </div>
   );
-};
+}
 
 export default ScheduleForm;
