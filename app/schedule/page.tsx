@@ -91,7 +91,7 @@ export default function SchedulePage() {
       return;
     }
     const url = `/appointment?token=${encodeURIComponent(token)}`;
-    window.open(url, 'SelectScheduleForm', 'width=600,height=800');
+    window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
 
   // 「リンクを共有」ボタン押下時の処理（メール送信用）
