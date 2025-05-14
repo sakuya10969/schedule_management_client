@@ -6,7 +6,6 @@ import { useScheduleForm } from "@/features/appointment/hooks/useScheduleForm";
 import { formatDatePart, formatTimePart } from "@/features/appointment/utils";
 
 export default function SelectSchedulePage() {
-  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
   const {
     lastname,
     firstname,
@@ -23,7 +22,7 @@ export default function SelectSchedulePage() {
     setEmail,
     setSelectedCandidate,
     handleSubmit,
-  } = useScheduleForm({ apiUrl });
+  } = useScheduleForm();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center py-12 px-4">

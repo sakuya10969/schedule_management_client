@@ -5,9 +5,8 @@ import {
   formatCandidate,
   filterCandidates,
 } from '@/features/appointment/utils';
-import { UseScheduleFormProps } from '@/features/appointment/type';
 
-export const useScheduleForm = ({ apiUrl }: UseScheduleFormProps) => {
+export const useScheduleForm = () => {
   const [candidates, setCandidates] = useState<string[][]>([]);
   const [users, setUsers] = useState<{ email: string }[]>([]);
   const [selectedCandidate, setSelectedCandidate] = useState<string>('');
@@ -30,7 +29,7 @@ export const useScheduleForm = ({ apiUrl }: UseScheduleFormProps) => {
     if (token) {
       (async () => {
         try {
-          const data = await fetchFormData(apiUrl, token);
+          const data = await fetchFormData(token);
           if (data.users) setUsers(data.users);
           if (data.candidates) setCandidates(data.candidates);
           if (data.start_time) setMinTime(data.start_time);
@@ -45,7 +44,7 @@ export const useScheduleForm = ({ apiUrl }: UseScheduleFormProps) => {
         }
       })();
     }
-  }, [apiUrl]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,7 +82,7 @@ export const useScheduleForm = ({ apiUrl }: UseScheduleFormProps) => {
     };
 
     try {
-      await submitSchedule(apiUrl, payload);
+      await submitSchedule(payload);
       setConfirmedCandidate(formattedCandidate);
       setIsConfirmed(true);
     } catch (error) {

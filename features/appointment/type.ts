@@ -48,4 +48,5 @@ export interface FormData {
   selected_days: string[];
   isConfirmed: boolean;
   confirmedCandidate: string;
+  required_participants: number;
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { GetAvailabilityParams, StoreFormDataParams } from '@/features/schedule/type';
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const getAvailability = async (params: GetAvailabilityParams) => {
   try {

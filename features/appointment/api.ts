@@ -2,10 +2,9 @@ import axios from 'axios';
 
 import { FormData } from '@/features/appointment/type';
 
-export const fetchFormData = async (
-  apiUrl: string,
-  token: string
-): Promise<FormData> => {
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+export const fetchFormData = async (token: string): Promise<FormData> => {
   try {
     const { data } = await axios.get(`${apiUrl}/retrieve_form_data`, {
       params: { token },
@@ -17,7 +16,7 @@ export const fetchFormData = async (
   }
 };
 
-export const submitSchedule = async (apiUrl: string, payload: any) => {
+export const submitSchedule = async (payload: any) => {
   try {
     const { data } = await axios.post(`${apiUrl}/appointment`, payload);
     return data;
