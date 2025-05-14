@@ -86,4 +86,5 @@ export interface StoreFormDataParams {
   duration_minutes: number;
   users: { email: string }[];
   candidates: string[][];
+  required_participants: number;
 }

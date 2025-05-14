@@ -83,6 +83,7 @@ export default function SchedulePage() {
       selected_days: selectedDays,
       duration_minutes: durationMinutes,
       users,
+      required_participants: requiredParticipants,
       candidates,
     });
     if (!token) {
@@ -108,6 +109,7 @@ export default function SchedulePage() {
       selected_days: selectedDays,
       duration_minutes: durationMinutes,
       users,
+      required_participants: requiredParticipants,
       candidates,
     });
     if (!token) {
