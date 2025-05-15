@@ -33,7 +33,7 @@ export const ScheduleCandidateList: React.FC<ScheduleCandidateListProps> = ({
       {/* 「可能な日程がない」選択肢 */}
       <div
         onClick={() => onSelectCandidate("none")}
-        className={`cursor-pointer relative rounded-xl border-2 transition-all duration-300 p-6 flex justify-between items-center transform hover:scale-105 active:scale-95 active:ring-2 active:ring-red-400 ${
+        className={`cursor-pointer relative rounded-xl border-2 p-6 flex justify-between items-center ${
           selectedCandidate === "none"
             ? "border-red-500 bg-red-100 shadow-lg"
             : "border-gray-300 hover:border-red-400 hover:shadow-md"
@@ -51,7 +51,7 @@ export const ScheduleCandidateList: React.FC<ScheduleCandidateListProps> = ({
           </span>
         </div>
         <div
-          className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+          className={`flex items-center justify-center w-10 h-10 rounded-full ${
             selectedCandidate === "none"
               ? "bg-red-500 text-white"
               : "bg-gray-300"
