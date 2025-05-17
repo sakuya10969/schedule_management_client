@@ -24,7 +24,7 @@ export const ScheduleCandidateItem: React.FC<ScheduleCandidateItemProps> = ({
   return (
     <div
       onClick={() => onSelect(candidateValue)}
-      className={`cursor-pointer relative rounded-xl border-2 transition-all duration-300 p-6 flex justify-between items-center transform hover:scale-105 active:scale-95 active:ring-2 active:ring-blue-400 ${
+      className={`cursor-pointer relative rounded-xl border-2 transition-colors duration-300 p-6 flex justify-between items-center active:ring-2 active:ring-blue-400 ${
         isSelected
           ? "border-blue-500 bg-blue-100 shadow-lg"
           : "border-gray-300 hover:border-blue-400 hover:shadow-md"
