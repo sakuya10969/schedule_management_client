@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useMemo } from "react";
 import { formatCandidate, filterCandidates, mergeCandidates, handleCopy } from "@/features/schedule/utils";
-
+import { parseISO } from "date-fns";
 interface CandidateListProps {
   candidates: string[][];
   minTime: string;
@@ -28,7 +28,7 @@ const CandidateList = ({
   // フィルタリング済み候補を開始時刻でソート
   const sortedCandidates = useMemo(() => {
     return [...filtered].sort((a, b) => {
-      return new Date(a[0]).getTime() - new Date(b[0]).getTime();
+      return parseISO(a[0]).getTime() - parseISO(b[0]).getTime();
     });
   }, [filtered]);
 

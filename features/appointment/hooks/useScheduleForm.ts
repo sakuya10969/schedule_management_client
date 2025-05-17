@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 
 import { fetchFormData, submitSchedule } from '@/features/appointment/api';
@@ -26,25 +28,27 @@ export const useScheduleForm = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get('token');
-    if (token) {
-      (async () => {
-        try {
-          const data = await fetchFormData(token);
-          if (data.users) setUsers(data.users);
-          if (data.candidates) setCandidates(data.candidates);
-          if (data.start_time) setMinTime(data.start_time);
-          if (data.end_time) setMaxTime(data.end_time);
-          if (data.selected_days) setSelectedDays(data.selected_days);
-          if (data.isConfirmed) {
-            setIsConfirmed(true);
-            setConfirmedCandidate(data.confirmedCandidate || '');
-          }
-        } catch (error) {
-          alert('データの取得に失敗しました。');
+    if (!token) return;
+  
+    const fetchData = async () => {
+      try {
+        const data = await fetchFormData(token);
+        if (data.users) setUsers(data.users);
+        if (data.candidates) setCandidates(data.candidates);
+        if (data.start_time) setMinTime(data.start_time);
+        if (data.end_time) setMaxTime(data.end_time);
+        if (data.selected_days) setSelectedDays(data.selected_days);
+        if (data.isConfirmed) {
+          setIsConfirmed(true);
+          setConfirmedCandidate(data.confirmedCandidate || '');
         }
-      })();
-    }
-  }, []);
+      } catch (error) {
+        alert('データの取得に失敗しました。');
+      }
+    };
+  
+    fetchData();
+  }, []);  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
