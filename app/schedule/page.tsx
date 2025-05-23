@@ -8,6 +8,8 @@ import { useSchedule } from "@/features/schedule/hooks/useSchedule";
 import { useUsers } from "@/features/schedule/hooks/useUsers";
 import { getAvailability, storeFormData } from "@/features/schedule/api";
 
+const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/";
+
 export default function SchedulePage() {
   const {
     startDate,
@@ -142,12 +144,14 @@ export default function SchedulePage() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="text-right mb-5">
-        <Link
-          href="/"
+        <a
+          href={recruitment_url}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block bg-gray-500 text-white px-4 py-2 rounded"
         >
-          ホームページへ
-        </Link>
+          採用管理ページへ
+        </a>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* 左カラム */}
