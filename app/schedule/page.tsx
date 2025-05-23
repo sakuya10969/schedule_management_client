@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from "react";
-import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
+
 import CandidateList from "@/app/schedule/components/CandidateList";
 import ScheduleForm from "@/app/schedule/components/ScheduleForm";
 import { useSchedule } from "@/features/schedule/hooks/useSchedule";
@@ -39,6 +40,8 @@ export default function SchedulePage() {
   const isConfirmed = false;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [candidates, setCandidates] = useState<string[][]>([]);
+
+  const searchParams = useSearchParams();
 
   // スケジュール取得リクエスト送信
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,7 +95,9 @@ export default function SchedulePage() {
       alert('フォームの作成に失敗しました。再度お試しください。');
       return;
     }
-    const url = `/appointment?token=${encodeURIComponent(token)}`;
+    const candidateId = searchParams.get('candidateId');
+    const stage = searchParams.get('stage');
+    const url = `/appointment?token=${token}&candidateId=${candidateId}&stage=${stage}`;
     window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
 
@@ -120,7 +125,7 @@ export default function SchedulePage() {
     }
     const shareUrl =
       window.location.origin +
-      `/appointment?token=${encodeURIComponent(token)}`;
+      `/appointment?token=${token}`;
 
     const subject = '【日程調整のお願い】インテリジェントフォース/採用担当';
     const body = `＜ここにメール相手の性を入力＞様
@@ -134,7 +139,6 @@ export default function SchedulePage() {
 
                   ご不明点やご質問がございましたら、お気軽にご連絡くださいませ。
                   お手数をおかけいたしますが、何卒よろしくお願い申し上げます。
-
                   `;
 
     const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

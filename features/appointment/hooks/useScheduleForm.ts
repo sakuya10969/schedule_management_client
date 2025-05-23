@@ -54,6 +54,8 @@ export const useScheduleForm = () => {
     e.preventDefault();
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get('token');
+    const candidateId = searchParams.get('candidateId');
+    const stage = searchParams.get('stage');
 
     if (!selectedCandidate) {
       alert('候補を選択してください。');
@@ -83,6 +85,8 @@ export const useScheduleForm = () => {
       company,
       email,
       token,
+      candidate_id: candidateId,
+      stage
     };
 
     try {
