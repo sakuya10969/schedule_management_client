@@ -8,7 +8,7 @@ import { useSchedule } from "@/features/schedule/hooks/useSchedule";
 import { useUsers } from "@/features/schedule/hooks/useUsers";
 import { getAvailability, storeFormData } from "@/features/schedule/api";
 
-const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/";
+// const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/";
 
 export default function SchedulePage() {
   const {
@@ -151,7 +151,7 @@ export default function SchedulePage() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="text-right mb-5">
         <a
-          href={recruitment_url}
+          href="https://gentle-pond-049b89100.6.azurestaticapps.net"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-gray-500 text-white px-4 py-2 rounded"
