@@ -100,7 +100,7 @@ export default function SchedulePage() {
     const candidateId = searchParams?.get('candidateId');
     const stage = searchParams?.get('stage');
     const url = `/appointment?token=${token}&candidateId=${candidateId}&stage=${stage}`;
-    window.open(url, 'SelectScheduleForm', 'width=700,height=800');
+    window.open(url, 'SelectScheduleForm', 'width=600,height=800');
   };
 
   // 「リンクを共有」ボタン押下時の処理（メール送信用）
