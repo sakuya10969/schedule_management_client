@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import { useSearchParams } from 'next/navigation';
 
 import CandidateList from "@/app/schedule/components/CandidateList";
 import ScheduleForm from "@/app/schedule/components/ScheduleForm";
@@ -41,7 +40,7 @@ export default function SchedulePage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [candidates, setCandidates] = useState<string[][]>([]);
 
-  const searchParams = useSearchParams();
+  const searchParams = new URLSearchParams(window.location.search);
 
   // スケジュール取得リクエスト送信
   const handleSubmit = async (e: React.FormEvent) => {
