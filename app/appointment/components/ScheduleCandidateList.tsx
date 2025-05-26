@@ -4,13 +4,13 @@ import { Check } from 'lucide-react';
 import { ScheduleCandidateItem } from '@/app/appointment/components/ScheduleCandidateItem';
 import { ScheduleCandidateListProps } from '@/features/appointment/types';
 
-export const ScheduleCandidateList: React.FC<ScheduleCandidateListProps> = ({
+export const ScheduleCandidateList= ({
   candidates,
   selectedCandidate,
   onSelectCandidate,
   formatDatePart,
   formatTimePart,
-}) => {
+}: ScheduleCandidateListProps) => {
   return (
     <div className="grid gap-6">
       {candidates.map((candidate, index) => (

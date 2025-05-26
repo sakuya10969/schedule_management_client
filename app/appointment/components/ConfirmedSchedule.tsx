@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ConfirmedScheduleProps } from '@/features/appointment/types';
 
-export const ConfirmedSchedule: React.FC<ConfirmedScheduleProps> = ({ confirmedCandidate }) => {
+export const ConfirmedSchedule = ({ confirmedCandidate }: ConfirmedScheduleProps) => {
   return (
     <>
       <div className="p-8 bg-gray-200 rounded-lg text-center mb-4">
