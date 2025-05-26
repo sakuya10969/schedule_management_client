@@ -30,9 +30,7 @@ export default function SchedulePage() {
 
   const {
     users,
-    handleAddUser,
-    handleRemoveUser,
-    handleChangeUserEmail,
+    setUsers,
     getValidUsers,
   } = useUsers();
 
@@ -177,9 +175,7 @@ export default function SchedulePage() {
             durationMinutes={durationMinutes}
             setDurationMinutes={setDurationMinutes}
             users={users}
-            handleAddUser={handleAddUser}
-            handleRemoveUser={handleRemoveUser}
-            handleChangeUserEmail={handleChangeUserEmail}
+            setUsers={setUsers}
             handleSubmit={handleSubmit}
             requiredParticipants={requiredParticipants}
             setRequiredParticipants={setRequiredParticipants}

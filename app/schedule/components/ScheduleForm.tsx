@@ -24,9 +24,7 @@ interface ScheduleFormProps {
   durationMinutes: number;
   setDurationMinutes: (value: number) => void;
   users: User[];
-  handleAddUser: () => void;
-  handleRemoveUser: (index: number) => void;
-  handleChangeUserEmail: (index: number, value: string) => void;
+  setUsers: (users: User[]) => void;
   handleSubmit: FormEventHandler<HTMLFormElement>;
   requiredParticipants: number;
   setRequiredParticipants: (value: number) => void;
@@ -46,9 +44,7 @@ const ScheduleForm = ({
   durationMinutes,
   setDurationMinutes,
   users,
-  handleAddUser,
-  handleRemoveUser,
-  handleChangeUserEmail,
+  setUsers,
   handleSubmit,
   requiredParticipants,
   setRequiredParticipants,
@@ -89,9 +85,7 @@ const ScheduleForm = ({
         {/* 参加者メールアドレス入力 */}
         <ParticipantsInput
           users={users}
-          handleAddUser={handleAddUser}
-          handleRemoveUser={handleRemoveUser}
-          handleChangeUserEmail={handleChangeUserEmail}
+          setUsers={setUsers}
           requiredParticipants={requiredParticipants}
           setRequiredParticipants={setRequiredParticipants}
         />
