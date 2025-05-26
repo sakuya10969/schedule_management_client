@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FormData } from '@/features/appointment/type';
+import { FormData } from '@/features/appointment/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 

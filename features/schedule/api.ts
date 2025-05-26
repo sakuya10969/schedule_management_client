@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GetAvailabilityParams, StoreFormDataParams } from '@/features/schedule/type';
+import { GetAvailabilityParams, StoreFormDataParams } from '@/features/schedule/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
