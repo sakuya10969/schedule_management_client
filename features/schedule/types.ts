@@ -86,13 +86,13 @@ export interface StoreFormDataParams {
 }
 
 export interface Option {
-  name: string
-  email: string
+  name: string;
+  email: string;
 }
 
 export interface MultiSelectProps {
-  options: Option[]
-  selectedValues: string[]
-  onChange: (values: string[]) => void
-  placeholder?: string
+  options: Option[];
+  selectedValues: string[];
+  onChange: (values: string[]) => void;
+  placeholder?: string;
 }

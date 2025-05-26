@@ -1,10 +1,15 @@
-"use client";
+'use client';
 
-import { useCallback, useMemo } from "react";
-import { parseISO } from "date-fns";
+import { useCallback, useMemo } from 'react';
+import { parseISO } from 'date-fns';
 
-import { formatCandidate, filterCandidates, mergeCandidates, handleCopy } from "@/features/schedule/utils";
-import { CandidateListProps } from "@/features/schedule/types";
+import {
+  formatCandidate,
+  filterCandidates,
+  mergeCandidates,
+  handleCopy,
+} from '@/features/schedule/utils';
+import { CandidateListProps } from '@/features/schedule/types';
 
 const CandidateList = ({
   candidates,
@@ -14,12 +19,10 @@ const CandidateList = ({
   selectedDays,
 }: CandidateListProps) => {
   // フィルタリング済み候補を取得
-  const filtered = useMemo(() => filterCandidates(candidates, minTime, maxTime, selectedDays), [
-    candidates,
-    minTime,
-    maxTime,
-    selectedDays,
-  ]);
+  const filtered = useMemo(
+    () => filterCandidates(candidates, minTime, maxTime, selectedDays),
+    [candidates, minTime, maxTime, selectedDays]
+  );
 
   // フィルタリング済み候補を開始時刻でソート
   const sortedCandidates = useMemo(() => {
@@ -29,12 +32,15 @@ const CandidateList = ({
   }, [filtered]);
 
   // 重複または連続している候補をマージ
-  const merged = useMemo(() => mergeCandidates(sortedCandidates), [sortedCandidates]);
+  const merged = useMemo(
+    () => mergeCandidates(sortedCandidates),
+    [sortedCandidates]
+  );
 
   // コピー処理
   const handleCopyClick = useCallback(() => {
     if (merged.length === 0) return;
-    const text = merged.map((pair) => formatCandidate(pair)).join("\n");
+    const text = merged.map((pair) => formatCandidate(pair)).join('\n');
     handleCopy(text);
   }, [merged]);
 

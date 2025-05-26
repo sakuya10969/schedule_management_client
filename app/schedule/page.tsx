@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import CandidateList from "@/app/schedule/components/CandidateList";
-import ScheduleForm from "@/app/schedule/components/ScheduleForm";
-import { useSchedule } from "@/features/schedule/hooks/useSchedule";
-import { useUsers } from "@/features/schedule/hooks/useUsers";
-import { getAvailability, storeFormData } from "@/features/schedule/api";
+import CandidateList from '@/app/schedule/components/CandidateList';
+import ScheduleForm from '@/app/schedule/components/ScheduleForm';
+import { useSchedule } from '@/features/schedule/hooks/useSchedule';
+import { useUsers } from '@/features/schedule/hooks/useUsers';
+import { getAvailability, storeFormData } from '@/features/schedule/api';
 
 // const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/";
 
@@ -28,16 +28,14 @@ export default function SchedulePage() {
     setRequiredParticipants,
   } = useSchedule();
 
-  const {
-    users,
-    setUsers,
-    getValidUsers,
-  } = useUsers();
+  const { users, setUsers, getValidUsers } = useUsers();
 
   const isConfirmed = false;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [candidates, setCandidates] = useState<string[][]>([]);
-  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
+  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
+    null
+  );
 
   useEffect(() => {
     setSearchParams(new URLSearchParams(window.location.search));
@@ -123,9 +121,7 @@ export default function SchedulePage() {
       alert('フォームの共有に失敗しました。再度お試しください。');
       return;
     }
-    const shareUrl =
-      window.location.origin +
-      `/appointment?token=${token}`;
+    const shareUrl = window.location.origin + `/appointment?token=${token}`;
 
     const subject = '【日程調整のお願い】インテリジェントフォース/採用担当';
     const body = `＜ここにメール相手の性を入力＞様

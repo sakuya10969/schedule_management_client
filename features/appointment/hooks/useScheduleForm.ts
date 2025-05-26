@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 
@@ -29,7 +29,7 @@ export const useScheduleForm = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get('token');
     if (!token) return;
-  
+
     const fetchData = async () => {
       try {
         const data = await fetchFormData(token);
@@ -46,9 +46,9 @@ export const useScheduleForm = () => {
         alert('データの取得に失敗しました。');
       }
     };
-  
+
     fetchData();
-  }, []);  
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,7 +86,7 @@ export const useScheduleForm = () => {
       email,
       token,
       candidate_id: candidateId,
-      stage
+      stage,
     };
 
     try {
