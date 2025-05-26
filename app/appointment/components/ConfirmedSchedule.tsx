@@ -1,8 +1,6 @@
 import React from 'react';
 
-interface ConfirmedScheduleProps {
-  confirmedCandidate: string;
-}
+import { ConfirmedScheduleProps } from '@/features/appointment/types';
 
 export const ConfirmedSchedule: React.FC<ConfirmedScheduleProps> = ({ confirmedCandidate }) => {
   return (
