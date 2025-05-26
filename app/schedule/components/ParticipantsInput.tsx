@@ -1,16 +1,6 @@
 import { employeeEmails } from '@/constants';
-import MultiSelect from './MultiSelect';
-
-interface User {
-  email: string;
-}
-
-interface ParticipantsInputProps {
-  users: User[];
-  setUsers: (users: User[]) => void;
-  requiredParticipants: number;
-  setRequiredParticipants: (value: number) => void;
-}
+import MultiSelect from '@/app/schedule/components/MultiSelect';
+import { ParticipantsInputProps } from '@/features/schedule/types';
 
 const ParticipantsInput = ({
   users,

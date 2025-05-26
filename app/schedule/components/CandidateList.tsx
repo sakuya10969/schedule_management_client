@@ -1,14 +1,10 @@
 "use client";
+
 import { useCallback, useMemo } from "react";
-import { formatCandidate, filterCandidates, mergeCandidates, handleCopy } from "@/features/schedule/utils";
 import { parseISO } from "date-fns";
-interface CandidateListProps {
-  candidates: string[][];
-  minTime: string;
-  maxTime: string;
-  isLoading: boolean;
-  selectedDays: string[];
-}
+
+import { formatCandidate, filterCandidates, mergeCandidates, handleCopy } from "@/features/schedule/utils";
+import { CandidateListProps } from "@/features/schedule/types";
 
 const CandidateList = ({
   candidates,

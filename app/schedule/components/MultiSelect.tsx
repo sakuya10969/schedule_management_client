@@ -1,16 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-interface Option {
-  name: string
-  email: string
-}
-
-interface MultiSelectProps {
-  options: Option[]
-  selectedValues: string[]
-  onChange: (values: string[]) => void
-  placeholder?: string
-}
+import { MultiSelectProps } from '@/features/schedule/types';
 
 const MultiSelect = ({
   options,

@@ -1,11 +1,5 @@
 import { generateTimeOptions } from "@/features/schedule/utils";
-  
-  interface TimeRangePickerProps {
-    startTime: string;
-    setStartTime: (value: string) => void;
-    endTime: string;
-    setEndTime: (value: string) => void;
-  }
+import { TimeRangePickerProps } from "@/features/schedule/types";
   
   const TimeRangePicker = ({ startTime, setStartTime, endTime, setEndTime }: TimeRangePickerProps) => {
     return (

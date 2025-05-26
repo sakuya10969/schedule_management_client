@@ -5,30 +5,7 @@ import TimeRangePicker from "@/app/schedule/components/TimeRangePicker";
 import WeekdaySelector from "@/app/schedule/components/WeekdaySelector";
 import DurationSelector from "@/app/schedule/components/DurationSelector";
 import ParticipantsInput from "@/app/schedule/components/ParticipantsInput";
-
-interface User {
-  email: string;
-}
-
-interface ScheduleFormProps {
-  startDate: string;
-  setStartDate: (value: string) => void;
-  endDate: string;
-  setEndDate: (value: string) => void;
-  startTime: string;
-  setStartTime: (value: string) => void;
-  endTime: string;
-  setEndTime: (value: string) => void;
-  selectedDays: string[];
-  setSelectedDays: (value: string[]) => void;
-  durationMinutes: number;
-  setDurationMinutes: (value: number) => void;
-  users: User[];
-  setUsers: (users: User[]) => void;
-  handleSubmit: FormEventHandler<HTMLFormElement>;
-  requiredParticipants: number;
-  setRequiredParticipants: (value: number) => void;
-}
+import { ScheduleFormProps } from "@/features/schedule/types";
 
 const ScheduleForm = ({
   startDate,

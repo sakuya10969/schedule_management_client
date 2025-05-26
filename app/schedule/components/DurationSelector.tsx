@@ -1,9 +1,5 @@
 import { durationOptions } from "@/constants";
-
-interface DurationSelectorProps {
-    durationMinutes: number;
-    setDurationMinutes: (value: number) => void;
-  }
+import { DurationSelectorProps } from "@/features/schedule/types";
   
   const DurationSelector = ({ durationMinutes, setDurationMinutes }: DurationSelectorProps) => {
     return (
