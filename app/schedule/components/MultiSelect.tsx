@@ -71,7 +71,7 @@ const MultiSelect = ({
             className="w-full p-2 border-b text-black"
             onClick={(e) => e.stopPropagation()}
           />
-          <div className="max-h-[400px] overflow-y-auto">
+          <div className="max-h-[400px] min-h-[400px] overflow-y-auto">
             {filteredOptions.map((option) => (
               <div
                 key={option.email}
