@@ -24,9 +24,7 @@ export interface User {
 
 export interface ParticipantsInputProps {
   users: User[];
-  handleAddUser: () => void;
-  handleRemoveUser: (index: number) => void;
-  handleChangeUserEmail: (index: number, value: string) => void;
+  setUsers: (users: User[]) => void;
   requiredParticipants: number;
   setRequiredParticipants: (value: number) => void;
 }
@@ -45,9 +43,7 @@ export interface ScheduleFormProps {
   durationMinutes: number;
   setDurationMinutes: (value: number) => void;
   users: User[];
-  handleAddUser: () => void;
-  handleRemoveUser: (index: number) => void;
-  handleChangeUserEmail: (index: number, value: string) => void;
+  setUsers: (users: User[]) => void;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
   requiredParticipants: number;
   setRequiredParticipants: (value: number) => void;
@@ -87,4 +83,16 @@ export interface StoreFormDataParams {
   users: { email: string }[];
   candidates: string[][];
   required_participants: number;
+}
+
+export interface Option {
+  name: string
+  email: string
+}
+
+export interface MultiSelectProps {
+  options: Option[]
+  selectedValues: string[]
+  onChange: (values: string[]) => void
+  placeholder?: string
 }
