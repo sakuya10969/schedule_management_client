@@ -12,7 +12,6 @@ const ParticipantsInput = ({
     const filtered = selectedEmails.filter((email) => email.trim() !== '');
     const updatedUsers = filtered.map((email) => ({ email }));
     setUsers(updatedUsers);
-    console.log(updatedUsers);
   
     if (requiredParticipants > updatedUsers.length) {
       setRequiredParticipants(updatedUsers.length);
