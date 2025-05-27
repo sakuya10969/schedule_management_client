@@ -13,15 +13,15 @@ import { CandidateListProps } from '@/features/schedule/types';
 
 const CandidateList = ({
   candidates,
-  minTime,
-  maxTime,
+  startTime,
+  endTime,
   isLoading,
   selectedDays,
 }: CandidateListProps) => {
   // フィルタリング済み候補を取得
   const filtered = useMemo(
-    () => filterCandidates(candidates, minTime, maxTime, selectedDays),
-    [candidates, minTime, maxTime, selectedDays]
+    () => filterCandidates(candidates, startTime, endTime, selectedDays),
+    [candidates, startTime, endTime, selectedDays]
   );
 
   // フィルタリング済み候補を開始時刻でソート

@@ -51,8 +51,8 @@ export const generateTimeOptions = (): string[] => {
 // 候補日程をフィルタリング
 export const filterCandidates = (
   candidates: string[][],
-  minTime: string,
-  maxTime: string,
+  startTime: string,
+  endTime: string,
   selectedDays: string[]
 ): string[][] => {
   return candidates.filter((slotPair) => {
@@ -64,7 +64,7 @@ export const filterCandidates = (
     const candidateStart = slotPair[0].substring(11, 16);
     const candidateEnd = slotPair[1].substring(11, 16);
     if (candidateEnd < candidateStart) return false;
-    if (!(candidateStart >= minTime && candidateEnd <= maxTime)) return false;
+    if (!(candidateStart >= startTime && candidateEnd <= endTime)) return false;
 
     if (selectedDays.length > 0) {
       try {

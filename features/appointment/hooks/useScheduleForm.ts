@@ -14,8 +14,8 @@ export const useScheduleForm = () => {
   const [selectedCandidate, setSelectedCandidate] = useState<string>('');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [minTime, setMinTime] = useState('9:00');
-  const [maxTime, setMaxTime] = useState('18:00');
+  const [startTime, setStartTime] = useState('9:00');
+  const [endTime, setEndTime] = useState('18:00');
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [confirmedCandidate, setConfirmedCandidate] = useState<string>('');
 
@@ -35,8 +35,8 @@ export const useScheduleForm = () => {
         const data = await fetchFormData(token);
         if (data.users) setUsers(data.users);
         if (data.candidates) setCandidates(data.candidates);
-        if (data.start_time) setMinTime(data.start_time);
-        if (data.end_time) setMaxTime(data.end_time);
+        if (data.start_time) setStartTime(data.start_time);
+        if (data.end_time) setEndTime(data.end_time);
         if (data.selected_days) setSelectedDays(data.selected_days);
         if (data.isConfirmed) {
           setIsConfirmed(true);
@@ -102,8 +102,8 @@ export const useScheduleForm = () => {
 
   const filteredCandidates = filterCandidates(
     candidates,
-    minTime,
-    maxTime,
+    startTime,
+    endTime,
     selectedDays
   );
 
@@ -113,8 +113,8 @@ export const useScheduleForm = () => {
     selectedCandidate,
     selectedDays,
     isLoading,
-    minTime,
-    maxTime,
+    startTime,
+    endTime,
     isConfirmed,
     confirmedCandidate,
     lastname,
@@ -124,8 +124,8 @@ export const useScheduleForm = () => {
     filteredCandidates,
     setSelectedCandidate,
     setSelectedDays,
-    setMinTime,
-    setMaxTime,
+    setStartTime,
+    setEndTime,
     setLastName,
     setFirstName,
     setCompany,

@@ -46,8 +46,8 @@ export const formatCandidate = (slotPair: string[]): string => {
 
 export const filterCandidates = (
   candidates: string[][],
-  minTime: string,
-  maxTime: string,
+  startTime: string,
+  endTime: string,
   selectedDays: string[]
 ) => {
   return candidates.filter((candidate) => {
@@ -57,7 +57,7 @@ export const filterCandidates = (
     const candidateStart = candidate[0].substring(11, 16);
     const candidateEnd = candidate[1].substring(11, 16);
     if (candidateEnd < candidateStart) return false;
-    if (!(candidateStart >= minTime && candidateEnd <= maxTime)) return false;
+    if (!(candidateStart >= startTime && candidateEnd <= endTime)) return false;
     if (selectedDays.length > 0) {
       try {
         const date = parseISO(candidate[0]);

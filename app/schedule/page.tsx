@@ -182,8 +182,8 @@ export default function SchedulePage() {
           {/* 候補日一覧の表示 */}
           <CandidateList
             candidates={candidates}
-            minTime={startTime}
-            maxTime={endTime}
+            startTime={startTime}
+            endTime={endTime}
             isLoading={isLoading}
             selectedDays={selectedDays}
           />

@@ -1,7 +1,7 @@
 export interface CandidateListProps {
   candidates: string[][];
-  minTime: string;
-  maxTime: string;
+  startTime: string;
+  endTime: string;
   isLoading: boolean;
   selectedDays: string[];
 }
