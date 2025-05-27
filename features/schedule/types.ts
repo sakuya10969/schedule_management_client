@@ -73,7 +73,7 @@ export interface GetAvailabilityParams {
 }
 
 export interface StoreFormDataParams {
-  isConfirmed: boolean;
+  is_confirmed: boolean;
   start_date: string;
   end_date: string;
   start_time: string;

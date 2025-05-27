@@ -78,7 +78,7 @@ export default function SchedulePage() {
       return;
     }
     const token = await storeFormData({
-      isConfirmed,
+      is_confirmed: isConfirmed,
       start_date: startDate,
       end_date: endDate,
       start_time: startTime,
@@ -106,7 +106,7 @@ export default function SchedulePage() {
       return;
     }
     const token = await storeFormData({
-      isConfirmed,
+      is_confirmed: isConfirmed,
       start_date: startDate,
       end_date: endDate,
       start_time: startTime,

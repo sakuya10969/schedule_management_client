@@ -38,7 +38,7 @@ export const useScheduleForm = () => {
         if (data.start_time) setStartTime(data.start_time);
         if (data.end_time) setEndTime(data.end_time);
         if (data.selected_days) setSelectedDays(data.selected_days);
-        if (data.isConfirmed) {
+        if (data.is_confirmed) {
           setIsConfirmed(true);
           setConfirmedCandidate(data.confirmedCandidate || '');
         }

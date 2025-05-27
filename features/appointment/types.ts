@@ -46,7 +46,7 @@ export interface FormData {
   start_time: string;
   end_time: string;
   selected_days: string[];
-  isConfirmed: boolean;
+  is_confirmed: boolean;
   confirmedCandidate: string;
   required_participants: number;
 }
