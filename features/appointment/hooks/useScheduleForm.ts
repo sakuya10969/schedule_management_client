@@ -14,7 +14,7 @@ export const useScheduleForm = () => {
   const [selectedCandidate, setSelectedCandidate] = useState<string>('');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [minTime, setMinTime] = useState('10:00');
+  const [minTime, setMinTime] = useState('9:00');
   const [maxTime, setMaxTime] = useState('18:00');
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [confirmedCandidate, setConfirmedCandidate] = useState<string>('');
