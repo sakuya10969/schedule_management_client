@@ -50,3 +50,15 @@ export interface FormData {
   confirmedCandidate: string;
   required_participants: number;
 }
+
+export interface SubmitSchedulePayload {
+  candidate: string | null;
+  users: string[];
+  lastname: string;
+  firstname: string;
+  company: string;
+  email: string;
+  token: string | null;
+  candidate_id: string | null;
+  stage: string | null;
+}

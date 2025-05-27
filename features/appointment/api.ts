@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FormData } from '@/features/appointment/types';
+import { FormData, SubmitSchedulePayload } from '@/features/appointment/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -16,7 +16,7 @@ export const fetchFormData = async (token: string): Promise<FormData> => {
   }
 };
 
-export const submitSchedule = async (payload: any) => {
+export const submitSchedule = async (payload: SubmitSchedulePayload) => {
   try {
     const { data } = await axios.post(`${apiUrl}/appointment`, payload);
     return data;
