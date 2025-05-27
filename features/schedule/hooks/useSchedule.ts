@@ -4,6 +4,7 @@ import { weekdays } from '@/constants';
 
 export const useSchedule = () => {
   const today = new Date().toISOString().split('T')[0];
+  
   const [startDate, setStartDate] = useState<string>(today);
   const [endDate, setEndDate] = useState<string>(today);
   const [startTime, setStartTime] = useState<string>('09:00');
