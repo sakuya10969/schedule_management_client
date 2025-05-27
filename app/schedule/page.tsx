@@ -8,7 +8,7 @@ import { useSchedule } from '@/features/schedule/hooks/useSchedule';
 import { useUsers } from '@/features/schedule/hooks/useUsers';
 import { getAvailability, storeFormData } from '@/features/schedule/api';
 
-const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/";
+const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
 export default function SchedulePage() {
   const {
