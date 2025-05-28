@@ -77,7 +77,7 @@ export default function SchedulePage() {
       alert('候補がありません。候補を取得してください。');
       return;
     }
-    const token = await storeFormData({
+    const cosmos_db_id = await storeFormData({
       is_confirmed: isConfirmed,
       start_date: startDate,
       end_date: endDate,
@@ -89,13 +89,13 @@ export default function SchedulePage() {
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
-    if (!token) {
+    if (!cosmos_db_id) {
       alert('フォームの作成に失敗しました。再度お試しください。');
       return;
     }
     const candidateId = searchParams?.get('candidateId');
     const interviewStage = searchParams?.get('interview_stage');
-    const url = `/appointment?token=${token}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
+    const url = `/appointment?cosmos_db_id=${cosmos_db_id}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
     window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
 
@@ -105,7 +105,7 @@ export default function SchedulePage() {
       alert('候補がありません。フォームを作成してください。');
       return;
     }
-    const token = await storeFormData({
+    const cosmos_db_id = await storeFormData({
       is_confirmed: isConfirmed,
       start_date: startDate,
       end_date: endDate,
@@ -117,11 +117,11 @@ export default function SchedulePage() {
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
-    if (!token) {
+    if (!cosmos_db_id) {
       alert('フォームの共有に失敗しました。再度お試しください。');
       return;
     }
-    const shareUrl = window.location.origin + `/appointment?token=${token}`;
+    const shareUrl = window.location.origin + `/appointment?cosmos_db_id=${cosmos_db_id}`;
 
     const subject = '【日程調整のお願い】インテリジェントフォース/採用担当';
     const body = `＜ここにメール相手の性を入力＞様

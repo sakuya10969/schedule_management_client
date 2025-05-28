@@ -27,12 +27,12 @@ export const useScheduleForm = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const az_cosmos_id = searchParams.get('az_cosmos_id');
-    if (!az_cosmos_id) return;
+    const cosmos_db_id = searchParams.get('cosmos_db_id');
+    if (!cosmos_db_id) return;
 
     const fetchData = async () => {
       try {
-        const data = await fetchFormData(az_cosmos_id);
+        const data = await fetchFormData(cosmos_db_id);
         if (data.employee_emails) setEmployeeEmail(data.employee_emails[0].email);
         if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(data.schedule_interview_datetimes);
         if (data.start_time) setStartTime(data.start_time);
@@ -53,7 +53,7 @@ export const useScheduleForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const searchParams = new URLSearchParams(window.location.search);
-    const azCosmosId = searchParams?.get('azCosmosId');
+    const cosmosDbId = searchParams?.get('cosmosDbId');
     const candidateId = searchParams?.get('candidateId');
     const interviewStage = searchParams?.get('interviewStage');
 
@@ -84,7 +84,7 @@ export const useScheduleForm = () => {
       candidate_firstname: candidateFirstname,
       company,
       candidate_email: candidateEmail,
-      az_cosmos_id: azCosmosId,
+      cosmos_db_id: cosmosDbId,
       candidate_id: candidateId,
       interview_stage: interviewStage,
     };

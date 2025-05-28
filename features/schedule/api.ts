@@ -21,7 +21,7 @@ export const storeFormData = async (
 ): Promise<string | null> => {
   try {
     const { data } = await axios.post(`${apiUrl}/store_form_data`, params);
-    return data.token;
+    return data.cosmos_db_id;
   } catch (error) {
     console.error('Error storing form data:', error);
     return null;
