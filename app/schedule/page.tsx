@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import CandidateList from '@/app/schedule/components/CandidateList';
 import ScheduleForm from '@/app/schedule/components/ScheduleForm';
 import { useSchedule } from '@/features/schedule/hooks/useSchedule';
-import { useUsers } from '@/features/schedule/hooks/useUsers';
+import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
 import { getAvailability, storeFormData } from '@/features/schedule/api';
 
 const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
@@ -28,11 +28,11 @@ export default function SchedulePage() {
     setRequiredParticipants,
   } = useSchedule();
 
-  const { users, setUsers, getValidUsers } = useUsers();
+  const { employeeEmails, setEmployeeEmails, getValidEmployeeEmails } = useEmployeeEmails();
 
   const isConfirmed = false;
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [candidates, setCandidates] = useState<string[][]>([]);
+  const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
   const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
     null
   );
@@ -45,8 +45,8 @@ export default function SchedulePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const validUsers = getValidUsers();
-    if (!validUsers.length) {
+    const validEmployeeEmails = getValidEmployeeEmails();
+    if (!validEmployeeEmails.length) {
       alert('参加者がありません。');
       return;
     }
@@ -60,10 +60,10 @@ export default function SchedulePage() {
         end_time: endTime,
         selected_days: selectedDays,
         duration_minutes: durationMinutes,
-        users: validUsers,
+        employee_emails: validEmployeeEmails,
         required_participants: requiredParticipants,
       });
-      setCandidates(data.common_availability || []);
+      setScheduleInterviewDatetimes(data.common_availability || []);
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -73,7 +73,7 @@ export default function SchedulePage() {
 
   //「日程調整画面を表示」ボタン押下時の処理
   const handleCreateForm = async () => {
-    if (candidates.length === 0) {
+    if (scheduleInterviewDatetimes.length === 0) {
       alert('候補がありません。候補を取得してください。');
       return;
     }
@@ -85,23 +85,23 @@ export default function SchedulePage() {
       end_time: endTime,
       selected_days: selectedDays,
       duration_minutes: durationMinutes,
-      users,
+      employee_emails: employeeEmails,
       required_participants: requiredParticipants,
-      candidates,
+      schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
     if (!token) {
       alert('フォームの作成に失敗しました。再度お試しください。');
       return;
     }
     const candidateId = searchParams?.get('candidateId');
-    const stage = searchParams?.get('stage');
-    const url = `/appointment?token=${token}&candidateId=${candidateId}&stage=${stage}`;
+    const interviewStage = searchParams?.get('interview_stage');
+    const url = `/appointment?token=${token}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
     window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
 
   // 「リンクを共有」ボタン押下時の処理（メール送信用）
   const handleShareForm = async () => {
-    if (candidates.length === 0) {
+    if (scheduleInterviewDatetimes.length === 0) {
       alert('候補がありません。フォームを作成してください。');
       return;
     }
@@ -113,9 +113,9 @@ export default function SchedulePage() {
       end_time: endTime,
       selected_days: selectedDays,
       duration_minutes: durationMinutes,
-      users,
+      employee_emails: employeeEmails,
       required_participants: requiredParticipants,
-      candidates,
+      schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
     if (!token) {
       alert('フォームの共有に失敗しました。再度お試しください。');
@@ -170,8 +170,8 @@ export default function SchedulePage() {
             setSelectedDays={setSelectedDays}
             durationMinutes={durationMinutes}
             setDurationMinutes={setDurationMinutes}
-            users={users}
-            setUsers={setUsers}
+            employeeEmails={employeeEmails}
+            setEmployeeEmails={setEmployeeEmails}
             handleSubmit={handleSubmit}
             requiredParticipants={requiredParticipants}
             setRequiredParticipants={setRequiredParticipants}
@@ -181,7 +181,7 @@ export default function SchedulePage() {
         <div>
           {/* 候補日一覧の表示 */}
           <CandidateList
-            candidates={candidates}
+            scheduleInterviewDatetimes={scheduleInterviewDatetimes}
             startTime={startTime}
             endTime={endTime}
             isLoading={isLoading}

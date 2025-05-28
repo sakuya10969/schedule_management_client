@@ -1,5 +1,5 @@
 export interface CandidateListProps {
-  candidates: string[][];
+  scheduleInterviewDatetimes: string[][];
   startTime: string;
   endTime: string;
   isLoading: boolean;
@@ -18,13 +18,13 @@ export interface DurationSelectorProps {
   setDurationMinutes: (value: number) => void;
 }
 
-export interface User {
+export interface EmployeeEmail {
   email: string;
 }
 
 export interface ParticipantsInputProps {
-  users: User[];
-  setUsers: (users: User[]) => void;
+  employeeEmails: EmployeeEmail[];
+  setEmployeeEmails: (employeeEmails: EmployeeEmail[]) => void;
   requiredParticipants: number;
   setRequiredParticipants: (value: number) => void;
 }
@@ -42,8 +42,8 @@ export interface ScheduleFormProps {
   setSelectedDays: (value: string[]) => void;
   durationMinutes: number;
   setDurationMinutes: (value: number) => void;
-  users: User[];
-  setUsers: (users: User[]) => void;
+  employeeEmails: EmployeeEmail[];
+  setEmployeeEmails: (employeeEmails: EmployeeEmail[]) => void;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
   requiredParticipants: number;
   setRequiredParticipants: (value: number) => void;
@@ -68,7 +68,7 @@ export interface GetAvailabilityParams {
   end_time: string;
   selected_days: string[];
   duration_minutes: number;
-  users: { email: string }[];
+  employee_emails: { email: string }[];
   required_participants: number;
 }
 
@@ -80,8 +80,8 @@ export interface StoreFormDataParams {
   end_time: string;
   selected_days: string[];
   duration_minutes: number;
-  users: { email: string }[];
-  candidates: string[][];
+  employee_emails: { email: string }[];
+  schedule_interview_datetimes: string[][];
   required_participants: number;
 }
 

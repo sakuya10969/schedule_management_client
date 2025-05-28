@@ -1,36 +1,36 @@
 export interface ConfirmedScheduleProps {
-  confirmedCandidate: string;
+  confirmedScheduleInterviewDatetime: string;
 }
 
 export interface ScheduleCandidateItemProps {
-  candidate: string[];
+  scheduleInterviewDatetime: string[];
   isSelected: boolean;
-  onSelect: (value: string) => void;
+  onSelectScheduleInterviewDatetime: (value: string) => void;
   formatDatePart: (isoString: string) => string;
   formatTimePart: (isoString: string) => string;
 }
 
 export interface ScheduleCandidateListProps {
-  candidates: string[][];
-  selectedCandidate: string;
-  onSelectCandidate: (value: string) => void;
+  scheduleInterviewDatetimes: string[][];
+  selectedScheduleInterviewDatetime: string;
+  onSelectScheduleInterviewDatetime: (value: string) => void;
   formatDatePart: (isoString: string) => string;
   formatTimePart: (isoString: string) => string;
 }
 
 export interface ScheduleFormProps {
-  lastname: string;
-  firstname: string;
+  candidateLastname: string;
+  candidateFirstname: string;
   company: string;
-  email: string;
-  selectedCandidate: string;
+  candidateEmail: string;
+  selectedScheduleInterviewDatetime: string;
   isLoading: boolean;
-  filteredCandidates: string[][];
-  onLastNameChange: (value: string) => void;
-  onFirstNameChange: (value: string) => void;
+  filteredScheduleInterviewDatetimes: string[][];
+  onCandidateLastNameChange: (value: string) => void;
+  onCandidateFirstNameChange: (value: string) => void;
   onCompanyChange: (value: string) => void;
-  onEmailChange: (value: string) => void;
-  onSelectCandidate: (value: string) => void;
+  onCandidateEmailChange: (value: string) => void;
+  onSelectScheduleInterviewDatetime: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   formatDatePart: (isoString: string) => string;
   formatTimePart: (isoString: string) => string;
@@ -41,8 +41,8 @@ export interface UseScheduleFormProps {
 }
 
 export interface FormData {
-  users: { email: string }[];
-  candidates: string[][];
+  employee_emails: { email: string }[];
+  schedule_interview_datetimes: string[][];
   start_time: string;
   end_time: string;
   selected_days: string[];
@@ -52,13 +52,13 @@ export interface FormData {
 }
 
 export interface SubmitSchedulePayload {
-  candidate: string | null;
-  users: string[];
-  lastname: string;
-  firstname: string;
+  schedule_interview_datetime: string | null;
+  employee_email: string;
+  candidate_lastname: string;
+  candidate_firstname: string;
   company: string;
-  email: string;
-  token: string | null;
+  candidate_email: string;
+  az_cosmos_id: string | null;
   candidate_id: string | null;
-  stage: string | null;
+  interview_stage: string | null;
 }

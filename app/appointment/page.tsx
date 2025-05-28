@@ -7,20 +7,20 @@ import { formatDatePart, formatTimePart } from '@/features/appointment/utils';
 
 export default function SelectSchedulePage() {
   const {
-    lastname,
-    firstname,
+    candidateLastname,
+    candidateFirstname,
     company,
-    email,
-    selectedCandidate,
+    candidateEmail,
+    selectedScheduleInterviewDatetime,
     isLoading,
-    filteredCandidates,
+    filteredScheduleInterviewDatetimes,
     isConfirmed,
-    confirmedCandidate,
-    setLastName,
-    setFirstName,
+    confirmedScheduleInterviewDatetime,
+    setCandidateLastName,
+    setCandidateFirstName,
     setCompany,
-    setEmail,
-    setSelectedCandidate,
+    setCandidateEmail,
+    setSelectedScheduleInterviewDatetime,
     handleSubmit,
   } = useScheduleForm();
 
@@ -37,21 +37,21 @@ export default function SelectSchedulePage() {
             </p>
           </div>
           {isConfirmed ? (
-            <ConfirmedSchedule confirmedCandidate={confirmedCandidate} />
+            <ConfirmedSchedule confirmedScheduleInterviewDatetime={confirmedScheduleInterviewDatetime} />
           ) : (
             <ScheduleForm
-              lastname={lastname}
-              firstname={firstname}
+              candidateLastname={candidateLastname}
+              candidateFirstname={candidateFirstname}
               company={company}
-              email={email}
-              selectedCandidate={selectedCandidate}
+              candidateEmail={candidateEmail}
+              selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
               isLoading={isLoading}
-              filteredCandidates={filteredCandidates}
-              onLastNameChange={setLastName}
-              onFirstNameChange={setFirstName}
+              filteredScheduleInterviewDatetimes={filteredScheduleInterviewDatetimes}
+              onCandidateLastNameChange={setCandidateLastName}
+              onCandidateFirstNameChange={setCandidateFirstName}
               onCompanyChange={setCompany}
-              onEmailChange={setEmail}
-              onSelectCandidate={setSelectedCandidate}
+              onCandidateEmailChange={setCandidateEmail}
+              onSelectScheduleInterviewDatetime={setSelectedScheduleInterviewDatetime}
               onSubmit={handleSubmit}
               formatDatePart={formatDatePart}
               formatTimePart={formatTimePart}

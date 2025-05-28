@@ -22,7 +22,7 @@ export const formatTimePart = (isoString: string) => {
   }
 };
 
-export const formatCandidate = (slotPair: string[]): string => {
+export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
   try {
     const startDate = parseISO(slotPair[0]);
     const endDate = parseISO(slotPair[1]);
@@ -44,7 +44,7 @@ export const formatCandidate = (slotPair: string[]): string => {
   }
 };
 
-export const filterCandidates = (
+export const filterScheduleInterviewDatetimes = (
   candidates: string[][],
   startTime: string,
   endTime: string,

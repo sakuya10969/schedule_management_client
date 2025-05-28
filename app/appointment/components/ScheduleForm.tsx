@@ -4,18 +4,18 @@ import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCand
 import { ScheduleFormProps } from '@/features/appointment/types';
 
 export const ScheduleForm = ({
-  lastname,
-  firstname,
+  candidateLastname,
+  candidateFirstname,
   company,
-  email,
-  selectedCandidate,
+  candidateEmail,
+  selectedScheduleInterviewDatetime,
   isLoading,
-  filteredCandidates,
-  onLastNameChange,
-  onFirstNameChange,
+  filteredScheduleInterviewDatetimes,
+  onCandidateLastNameChange,
+  onCandidateFirstNameChange,
   onCompanyChange,
-  onEmailChange,
-  onSelectCandidate,
+  onCandidateEmailChange,
+  onSelectScheduleInterviewDatetime,
   onSubmit,
   formatDatePart,
   formatTimePart,
@@ -34,8 +34,8 @@ export const ScheduleForm = ({
           <input
             type="text"
             id="name"
-            value={lastname}
-            onChange={(e) => onLastNameChange(e.target.value)}
+            value={candidateLastname}
+            onChange={(e) => onCandidateLastNameChange(e.target.value)}
             placeholder="山田"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             required
@@ -51,8 +51,8 @@ export const ScheduleForm = ({
           <input
             type="text"
             id="name"
-            value={firstname}
-            onChange={(e) => onFirstNameChange(e.target.value)}
+            value={candidateFirstname}
+            onChange={(e) => onCandidateFirstNameChange(e.target.value)}
             placeholder="太郎"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             required
@@ -88,8 +88,8 @@ export const ScheduleForm = ({
         <input
           type="email"
           id="email"
-          value={email}
-          onChange={(e) => onEmailChange(e.target.value)}
+          value={candidateEmail}
+          onChange={(e) => onCandidateEmailChange(e.target.value)}
           placeholder="example@domain.com"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required
@@ -97,9 +97,9 @@ export const ScheduleForm = ({
       </div>
       {/* 日程候補の表示 */}
       <ScheduleCandidateList
-        candidates={filteredCandidates}
-        selectedCandidate={selectedCandidate}
-        onSelectCandidate={onSelectCandidate}
+        scheduleInterviewDatetimes={filteredScheduleInterviewDatetimes}
+        selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
+        onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
         formatDatePart={formatDatePart}
         formatTimePart={formatTimePart}
       />

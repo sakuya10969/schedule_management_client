@@ -3,7 +3,7 @@ import { parseISO, format } from 'date-fns';
 import { weekdays } from '@/constants';
 
 // 候補日程のフォーマット
-export const formatCandidate = (slotPair: string[]): string => {
+export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
   if (slotPair.length !== 2) {
     return slotPair.join(' ');
   }
@@ -49,28 +49,28 @@ export const generateTimeOptions = (): string[] => {
 };
 
 // 候補日程をフィルタリング
-export const filterCandidates = (
-  candidates: string[][],
+export const filterScheduleInterviewDatetimes = (
+  scheduleInterviewDatetimes: string[][],
   startTime: string,
   endTime: string,
   selectedDays: string[]
 ): string[][] => {
-  return candidates.filter((slotPair) => {
+  return scheduleInterviewDatetimes.filter((slotPair) => {
     if (slotPair.length !== 2) return false;
 
     if (slotPair[0].substring(0, 10) !== slotPair[1].substring(0, 10))
       return false;
 
-    const candidateStart = slotPair[0].substring(11, 16);
-    const candidateEnd = slotPair[1].substring(11, 16);
-    if (candidateEnd < candidateStart) return false;
-    if (!(candidateStart >= startTime && candidateEnd <= endTime)) return false;
+    const scheduleInterviewDatetimeStart = slotPair[0].substring(11, 16);
+    const scheduleInterviewDatetimeEnd = slotPair[1].substring(11, 16);
+    if (scheduleInterviewDatetimeEnd < scheduleInterviewDatetimeStart) return false;
+    if (!(scheduleInterviewDatetimeStart >= startTime && scheduleInterviewDatetimeEnd <= endTime)) return false;
 
     if (selectedDays.length > 0) {
       try {
         const date = parseISO(slotPair[0]);
-        const candidateDay = weekdays[date.getDay()];
-        if (!selectedDays.includes(candidateDay)) return false;
+        const scheduleInterviewDatetimeDay = weekdays[date.getDay()];
+        if (!selectedDays.includes(scheduleInterviewDatetimeDay)) return false;
       } catch (err) {
         console.error('Day parsing error:', err);
         return false;
@@ -81,24 +81,24 @@ export const filterCandidates = (
 };
 
 // 候補日程をマージ
-export const mergeCandidates = (sortedCandidates: string[][]): string[][] => {
+export const mergeScheduleInterviewDatetimes = (sortedScheduleInterviewDatetimes: string[][]): string[][] => {
   const result: string[][] = [];
-  if (sortedCandidates.length === 0) return result;
+  if (sortedScheduleInterviewDatetimes.length === 0) return result;
 
-  let current = [...sortedCandidates[0]];
-  for (let i = 1; i < sortedCandidates.length; i++) {
-    const candidate = sortedCandidates[i];
+  let current = [...sortedScheduleInterviewDatetimes[0]];
+  for (let i = 1; i < sortedScheduleInterviewDatetimes.length; i++) {
+    const scheduleInterviewDatetime = sortedScheduleInterviewDatetimes[i];
     const currentEndTime = parseISO(current[1]).getTime();
-    const candidateStartTime = parseISO(candidate[0]).getTime();
-    const candidateEndTime = parseISO(candidate[1]).getTime();
+    const scheduleInterviewDatetimeStartTime = parseISO(scheduleInterviewDatetime[0]).getTime();
+    const scheduleInterviewDatetimeEndTime = parseISO(scheduleInterviewDatetime[1]).getTime();
 
-    if (candidateStartTime <= currentEndTime) {
-      if (candidateEndTime > currentEndTime) {
-        current[1] = candidate[1];
+    if (scheduleInterviewDatetimeStartTime <= currentEndTime) {
+      if (scheduleInterviewDatetimeEndTime > currentEndTime) {
+        current[1] = scheduleInterviewDatetime[1];
       }
     } else {
       result.push(current);
-      current = [...candidate];
+      current = [...scheduleInterviewDatetime];
     }
   }
   result.push(current);
@@ -115,12 +115,12 @@ export const handleCopy = (text: string) => {
 
 // 曜日選択を切り替え
 export const handleDayToggle = (
-  day: string,
+  scheduleInterviewDatetimeDay: string,
   selectedDays: string[],
   setSelectedDays: (value: string[]) => void
 ) => {
-  const newDays = selectedDays.includes(day)
-    ? selectedDays.filter((d) => d !== day)
-    : [...selectedDays, day];
+  const newDays = selectedDays.includes(scheduleInterviewDatetimeDay)
+    ? selectedDays.filter((day) => day !== scheduleInterviewDatetimeDay)
+    : [...selectedDays, scheduleInterviewDatetimeDay];
   setSelectedDays(newDays);
 };

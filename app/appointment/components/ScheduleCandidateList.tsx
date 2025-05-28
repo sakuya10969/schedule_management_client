@@ -5,29 +5,29 @@ import { ScheduleCandidateItem } from '@/app/appointment/components/ScheduleCand
 import { ScheduleCandidateListProps } from '@/features/appointment/types';
 
 export const ScheduleCandidateList = ({
-  candidates,
-  selectedCandidate,
-  onSelectCandidate,
+  scheduleInterviewDatetimes,
+  selectedScheduleInterviewDatetime,
+  onSelectScheduleInterviewDatetime,
   formatDatePart,
   formatTimePart,
 }: ScheduleCandidateListProps) => {
   return (
     <div className="grid gap-6">
-      {candidates.map((candidate, index) => (
+      {scheduleInterviewDatetimes.map((scheduleInterviewDatetime, index) => (
         <ScheduleCandidateItem
           key={index}
-          candidate={candidate}
-          isSelected={selectedCandidate === candidate.join(', ')}
-          onSelect={onSelectCandidate}
+          scheduleInterviewDatetime={scheduleInterviewDatetime}
+          isSelected={selectedScheduleInterviewDatetime === scheduleInterviewDatetime.join(', ')}
+          onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
           formatDatePart={formatDatePart}
           formatTimePart={formatTimePart}
         />
       ))}
       {/* 「可能な日程がない」選択肢 */}
       <div
-        onClick={() => onSelectCandidate('none')}
+        onClick={() => onSelectScheduleInterviewDatetime('none')}
         className={`cursor-pointer relative rounded-xl border-2 p-6 flex justify-between items-center ${
-          selectedCandidate === 'none'
+          selectedScheduleInterviewDatetime === 'none'
             ? 'border-red-500 bg-red-100 shadow-lg'
             : 'border-gray-300 hover:border-red-400 hover:shadow-md'
         }`}
@@ -35,7 +35,7 @@ export const ScheduleCandidateList = ({
         <div className="flex items-center space-x-6">
           <span
             className={`text-xl ${
-              selectedCandidate === 'none'
+              selectedScheduleInterviewDatetime === 'none'
                 ? 'font-semibold text-red-500'
                 : 'text-gray-700'
             }`}
@@ -45,13 +45,13 @@ export const ScheduleCandidateList = ({
         </div>
         <div
           className={`flex items-center justify-center w-10 h-10 rounded-full ${
-            selectedCandidate === 'none'
+            selectedScheduleInterviewDatetime === 'none'
               ? 'bg-red-500 text-white'
               : 'bg-gray-300'
           }`}
         >
           <Check
-            className={`w-5 h-5 ${selectedCandidate === 'none' ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-5 h-5 ${selectedScheduleInterviewDatetime === 'none' ? 'opacity-100' : 'opacity-0'}`}
           />
         </div>
       </div>

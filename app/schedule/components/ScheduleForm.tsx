@@ -20,8 +20,8 @@ const ScheduleForm = ({
   setSelectedDays,
   durationMinutes,
   setDurationMinutes,
-  users,
-  setUsers,
+  employeeEmails,
+  setEmployeeEmails,
   handleSubmit,
   requiredParticipants,
   setRequiredParticipants,
@@ -62,8 +62,8 @@ const ScheduleForm = ({
 
         {/* 参加者メールアドレス入力 */}
         <ParticipantsInput
-          users={users}
-          setUsers={setUsers}
+          employeeEmails={employeeEmails}
+          setEmployeeEmails={setEmployeeEmails}
           requiredParticipants={requiredParticipants}
           setRequiredParticipants={setRequiredParticipants}
         />

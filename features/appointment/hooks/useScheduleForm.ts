@@ -4,43 +4,43 @@ import { useState, useEffect } from 'react';
 
 import { fetchFormData, submitSchedule } from '@/features/appointment/api';
 import {
-  formatCandidate,
-  filterCandidates,
+  formatScheduleInterviewDatetime,
+  filterScheduleInterviewDatetimes,
 } from '@/features/appointment/utils';
 
 export const useScheduleForm = () => {
-  const [candidates, setCandidates] = useState<string[][]>([]);
-  const [users, setUsers] = useState<{ email: string }[]>([]);
-  const [selectedCandidate, setSelectedCandidate] = useState<string>('');
+  const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
+  const [employeeEmail, setEmployeeEmail] = useState<string>('');
+  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [startTime, setStartTime] = useState('9:00');
   const [endTime, setEndTime] = useState('18:00');
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [confirmedCandidate, setConfirmedCandidate] = useState<string>('');
+  const [confirmedScheduleInterviewDatetime, setConfirmedScheduleInterviewDatetime] = useState<string>('');
 
   // 新規入力欄用の state
-  const [lastname, setLastName] = useState('');
-  const [firstname, setFirstName] = useState('');
+  const [candidateLastname, setCandidateLastName] = useState('');
+  const [candidateFirstname, setCandidateFirstName] = useState('');
   const [company, setCompany] = useState('');
-  const [email, setEmail] = useState('');
+  const [candidateEmail, setCandidateEmail] = useState('');
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const token = searchParams.get('token');
-    if (!token) return;
+    const az_cosmos_id = searchParams.get('az_cosmos_id');
+    if (!az_cosmos_id) return;
 
     const fetchData = async () => {
       try {
-        const data = await fetchFormData(token);
-        if (data.users) setUsers(data.users);
-        if (data.candidates) setCandidates(data.candidates);
+        const data = await fetchFormData(az_cosmos_id);
+        if (data.employee_emails) setEmployeeEmail(data.employee_emails[0].email);
+        if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(data.schedule_interview_datetimes);
         if (data.start_time) setStartTime(data.start_time);
         if (data.end_time) setEndTime(data.end_time);
         if (data.selected_days) setSelectedDays(data.selected_days);
         if (data.is_confirmed) {
           setIsConfirmed(true);
-          setConfirmedCandidate(data.confirmedCandidate || '');
+          setConfirmedScheduleInterviewDatetime(data.confirmedCandidate || '');
         }
       } catch (error) {
         alert('データの取得に失敗しました。');
@@ -53,19 +53,19 @@ export const useScheduleForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const searchParams = new URLSearchParams(window.location.search);
-    const token = searchParams?.get('token');
+    const azCosmosId = searchParams?.get('azCosmosId');
     const candidateId = searchParams?.get('candidateId');
-    const stage = searchParams?.get('stage');
+    const interviewStage = searchParams?.get('interviewStage');
 
-    if (!selectedCandidate) {
+    if (!selectedScheduleInterviewDatetime) {
       alert('候補を選択してください。');
       return;
     }
 
     const formattedCandidate =
-      selectedCandidate === 'none'
+      selectedScheduleInterviewDatetime === 'none'
         ? 'なし'
-        : formatCandidate(selectedCandidate.split(', '));
+        : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
 
     if (
       !window.confirm(
@@ -78,20 +78,20 @@ export const useScheduleForm = () => {
     setIsLoading(true);
 
     const payload = {
-      candidate: selectedCandidate === 'none' ? null : selectedCandidate,
-      users: users.map((user) => user.email),
-      lastname,
-      firstname,
+      schedule_interview_datetime: selectedScheduleInterviewDatetime === 'none' ? null : selectedScheduleInterviewDatetime,
+      employee_email: employeeEmail,
+      candidate_lastname: candidateLastname,
+      candidate_firstname: candidateFirstname,
       company,
-      email,
-      token,
+      candidate_email: candidateEmail,
+      az_cosmos_id: azCosmosId,
       candidate_id: candidateId,
-      stage,
+      interview_stage: interviewStage,
     };
 
     try {
       await submitSchedule(payload);
-      setConfirmedCandidate(formattedCandidate);
+      setConfirmedScheduleInterviewDatetime(formattedCandidate);
       setIsConfirmed(true);
     } catch (error) {
       alert('日程の確定に失敗しました。');
@@ -100,36 +100,36 @@ export const useScheduleForm = () => {
     }
   };
 
-  const filteredCandidates = filterCandidates(
-    candidates,
+  const filteredScheduleInterviewDatetimes = filterScheduleInterviewDatetimes(
+    scheduleInterviewDatetimes,
     startTime,
     endTime,
     selectedDays
   );
 
   return {
-    candidates,
-    users,
-    selectedCandidate,
+    scheduleInterviewDatetimes,
+    employeeEmail,
+    selectedScheduleInterviewDatetime,
     selectedDays,
     isLoading,
     startTime,
     endTime,
     isConfirmed,
-    confirmedCandidate,
-    lastname,
-    firstname,
+    confirmedScheduleInterviewDatetime,
+    candidateLastname,
+    candidateFirstname,
     company,
-    email,
-    filteredCandidates,
-    setSelectedCandidate,
+    candidateEmail,
+    filteredScheduleInterviewDatetimes,
+    setSelectedScheduleInterviewDatetime,
     setSelectedDays,
     setStartTime,
     setEndTime,
-    setLastName,
-    setFirstName,
+    setCandidateLastName,
+    setCandidateFirstName,
     setCompany,
-    setEmail,
+    setCandidateEmail,
     handleSubmit,
   };
 };

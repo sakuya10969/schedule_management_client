@@ -4,20 +4,20 @@ import { Calendar, Clock, Check } from 'lucide-react';
 import { ScheduleCandidateItemProps } from '@/features/appointment/types';
 
 export const ScheduleCandidateItem = ({
-  candidate,
+  scheduleInterviewDatetime,
   isSelected,
-  onSelect,
+  onSelectScheduleInterviewDatetime,
   formatDatePart,
   formatTimePart,
 }: ScheduleCandidateItemProps) => {
-  const candidateValue = candidate.join(', ');
-  const candidateDate = formatDatePart(candidate[0]);
-  const startTime = formatTimePart(candidate[0]);
-  const endTime = formatTimePart(candidate[1]);
+  const candidateValue = scheduleInterviewDatetime.join(', ');
+  const candidateDate = formatDatePart(scheduleInterviewDatetime[0]);
+  const startTime = formatTimePart(scheduleInterviewDatetime[0]);
+  const endTime = formatTimePart(scheduleInterviewDatetime[1]);
 
   return (
     <div
-      onClick={() => onSelect(candidateValue)}
+      onClick={() => onSelectScheduleInterviewDatetime(candidateValue)}
       className={`cursor-pointer relative rounded-xl border-2 transition-colors duration-300 p-6 flex justify-between items-center active:ring-2 active:ring-blue-400 ${
         isSelected
           ? 'border-blue-500 bg-blue-100 shadow-lg'

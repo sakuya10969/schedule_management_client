@@ -4,7 +4,7 @@ export const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
 
 export const durationOptions = [30, 60, 90, 120];
 
-export const employeeEmails = [
+export const employeeEmailList = [
   {
     name: '池上 響子 / Kyoko Ikegami',
     email: 'k.ikegami@intelligentforce.co.jp',

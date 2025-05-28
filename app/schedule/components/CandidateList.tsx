@@ -4,15 +4,15 @@ import { useCallback, useMemo } from 'react';
 import { parseISO } from 'date-fns';
 
 import {
-  formatCandidate,
-  filterCandidates,
-  mergeCandidates,
+  formatScheduleInterviewDatetime,
+  filterScheduleInterviewDatetimes,
+  mergeScheduleInterviewDatetimes,
   handleCopy,
 } from '@/features/schedule/utils';
 import { CandidateListProps } from '@/features/schedule/types';
 
 const CandidateList = ({
-  candidates,
+  scheduleInterviewDatetimes,
   startTime,
   endTime,
   isLoading,
@@ -20,8 +20,8 @@ const CandidateList = ({
 }: CandidateListProps) => {
   // フィルタリング済み候補を取得
   const filtered = useMemo(
-    () => filterCandidates(candidates, startTime, endTime, selectedDays),
-    [candidates, startTime, endTime, selectedDays]
+    () => filterScheduleInterviewDatetimes(scheduleInterviewDatetimes, startTime, endTime, selectedDays),
+    [scheduleInterviewDatetimes, startTime, endTime, selectedDays]
   );
 
   // フィルタリング済み候補を開始時刻でソート
@@ -33,14 +33,14 @@ const CandidateList = ({
 
   // 重複または連続している候補をマージ
   const merged = useMemo(
-    () => mergeCandidates(sortedCandidates),
+    () => mergeScheduleInterviewDatetimes(sortedCandidates),
     [sortedCandidates]
   );
 
   // コピー処理
   const handleCopyClick = useCallback(() => {
     if (merged.length === 0) return;
-    const text = merged.map((pair) => formatCandidate(pair)).join('\n');
+    const text = merged.map((pair) => formatScheduleInterviewDatetime(pair)).join('\n');
     handleCopy(text);
   }, [merged]);
 
@@ -64,7 +64,7 @@ const CandidateList = ({
             {merged.length > 0 ? (
               <ul className="list-inside space-y-1 text-black">
                 {merged.map((slotPair, index) => (
-                  <li key={index}>{formatCandidate(slotPair)}</li>
+                  <li key={index}>{formatScheduleInterviewDatetime(slotPair)}</li>
                 ))}
               </ul>
             ) : (
