@@ -53,9 +53,9 @@ export const useScheduleForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const searchParams = new URLSearchParams(window.location.search);
-    const token = searchParams.get('token');
-    const candidateId = searchParams.get('candidateId');
-    const stage = searchParams.get('stage');
+    const token = searchParams?.get('token');
+    const candidateId = searchParams?.get('candidateId');
+    const stage = searchParams?.get('stage');
 
     if (!selectedCandidate) {
       alert('候補を選択してください。');
