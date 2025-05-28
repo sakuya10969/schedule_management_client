@@ -59,6 +59,6 @@ export interface SubmitSchedulePayload {
   company: string;
   candidate_email: string;
   cosmos_db_id: string | null;
-  candidate_id: string | null;
+  candidate_id: number | null;
   interview_stage: string | null;
 }

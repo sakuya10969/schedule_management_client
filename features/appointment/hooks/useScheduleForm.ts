@@ -27,12 +27,12 @@ export const useScheduleForm = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const cosmos_db_id = searchParams.get('cosmos_db_id');
-    if (!cosmos_db_id) return;
+    const cosmosDbId = searchParams.get('cosmosDbId');
+    if (!cosmosDbId) return;
 
     const fetchData = async () => {
       try {
-        const data = await fetchFormData(cosmos_db_id);
+        const data = await fetchFormData(cosmosDbId);
         if (data.employee_emails) setEmployeeEmail(data.employee_emails[0].email);
         if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(data.schedule_interview_datetimes);
         if (data.start_time) setStartTime(data.start_time);
@@ -85,7 +85,7 @@ export const useScheduleForm = () => {
       company,
       candidate_email: candidateEmail,
       cosmos_db_id: cosmosDbId,
-      candidate_id: candidateId,
+      candidate_id: candidateId ? Number(candidateId) : null,
       interview_stage: interviewStage,
     };
 

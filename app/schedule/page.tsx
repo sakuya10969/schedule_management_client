@@ -77,7 +77,7 @@ export default function SchedulePage() {
       alert('候補がありません。候補を取得してください。');
       return;
     }
-    const cosmos_db_id = await storeFormData({
+    const cosmosDbId = await storeFormData({
       is_confirmed: isConfirmed,
       start_date: startDate,
       end_date: endDate,
@@ -89,13 +89,13 @@ export default function SchedulePage() {
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
-    if (!cosmos_db_id) {
+    if (!cosmosDbId) {
       alert('フォームの作成に失敗しました。再度お試しください。');
       return;
     }
     const candidateId = searchParams?.get('candidateId');
     const interviewStage = searchParams?.get('interview_stage');
-    const url = `/appointment?cosmos_db_id=${cosmos_db_id}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
+    const url = `/appointment?cosmosDbId=${cosmosDbId}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
     window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
 
