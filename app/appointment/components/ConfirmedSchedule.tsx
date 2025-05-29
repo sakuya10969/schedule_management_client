@@ -3,17 +3,17 @@ import React from 'react';
 import { ConfirmedScheduleProps } from '@/features/appointment/types';
 
 export const ConfirmedSchedule = ({
-  confirmedCandidate,
+  confirmedScheduleInterviewDatetime,
 }: ConfirmedScheduleProps) => {
   return (
     <>
       <div className="p-8 bg-gray-200 rounded-lg text-center mb-4">
         <p className="text-xl font-semibold text-gray-800">確定した日程</p>
         <p className="text-lg text-gray-700">
-          {confirmedCandidate === 'none'
+          {confirmedScheduleInterviewDatetime === 'none'
             ? '確定した日程はありません。\n再度担当者から連絡します。'
-            : confirmedCandidate
-              ? confirmedCandidate
+            : confirmedScheduleInterviewDatetime
+              ? confirmedScheduleInterviewDatetime
               : '日程の詳細が取得できませんでした。'}
         </p>
       </div>
