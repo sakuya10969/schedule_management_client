@@ -43,7 +43,7 @@ const ParticipantsInput = ({
           <select
             value={requiredParticipants}
             onChange={(e) => setRequiredParticipants(Number(e.target.value))}
-            className="border p-3 bg-blue-100 text-black cursor-pointer w-[100px]"
+            className="border p-3 bg-blue-100 text-black cursor-pointer w-[130px]"
           >
             <option value={employeeEmails.length}>全員</option>
             {Array.from({ length: employeeEmails.length - 1 }, (_, i) => i + 1).map(
