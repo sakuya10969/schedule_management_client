@@ -25,7 +25,7 @@ const CandidateList = ({
   );
 
   // フィルタリング済み候補を開始時刻でソート
-  const sortedCandidates = useMemo(() => {
+  const sortedScheduleInterviewDatetimes = useMemo(() => {
     return [...filtered].sort((a, b) => {
       return parseISO(a[0]).getTime() - parseISO(b[0]).getTime();
     });
@@ -33,8 +33,8 @@ const CandidateList = ({
 
   // 重複または連続している候補をマージ
   const merged = useMemo(
-    () => mergeScheduleInterviewDatetimes(sortedCandidates),
-    [sortedCandidates]
+    () => mergeScheduleInterviewDatetimes(sortedScheduleInterviewDatetimes),
+    [sortedScheduleInterviewDatetimes]
   );
 
   // コピー処理

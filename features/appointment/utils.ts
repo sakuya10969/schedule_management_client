@@ -45,24 +45,24 @@ export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
 };
 
 export const filterScheduleInterviewDatetimes = (
-  candidates: string[][],
+  scheduleInterviewDatetimes: string[][],
   startTime: string,
   endTime: string,
   selectedDays: string[]
 ) => {
-  return candidates.filter((candidate) => {
-    if (candidate.length !== 2) return false;
-    if (candidate[0].substring(0, 10) !== candidate[1].substring(0, 10))
+  return scheduleInterviewDatetimes.filter((scheduleInterviewDatetime) => {
+    if (scheduleInterviewDatetime.length !== 2) return false;
+    if (scheduleInterviewDatetime[0].substring(0, 10) !== scheduleInterviewDatetime[1].substring(0, 10))
       return false;
-    const candidateStart = candidate[0].substring(11, 16);
-    const candidateEnd = candidate[1].substring(11, 16);
-    if (candidateEnd < candidateStart) return false;
-    if (!(candidateStart >= startTime && candidateEnd <= endTime)) return false;
+    const scheduleInterviewDatetimeStart = scheduleInterviewDatetime[0].substring(11, 16);
+    const scheduleInterviewDatetimeEnd = scheduleInterviewDatetime[1].substring(11, 16);
+    if (scheduleInterviewDatetimeEnd < scheduleInterviewDatetimeStart) return false;
+    if (!(scheduleInterviewDatetimeStart >= startTime && scheduleInterviewDatetimeEnd <= endTime)) return false;
     if (selectedDays.length > 0) {
       try {
-        const date = parseISO(candidate[0]);
-        const candidateDay = weekdays[date.getDay()];
-        if (!selectedDays.includes(candidateDay)) return false;
+        const date = parseISO(scheduleInterviewDatetime[0]);
+        const scheduleInterviewDatetimeDay = weekdays[date.getDay()];
+        if (!selectedDays.includes(scheduleInterviewDatetimeDay)) return false;
       } catch (err) {
         console.error('Day parsing error:', err);
         return false;
