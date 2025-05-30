@@ -94,7 +94,7 @@ export default function SchedulePage() {
       return;
     }
     const candidateId = searchParams?.get('candidateId');
-    const interviewStage = searchParams?.get('interview_stage');
+    const interviewStage = searchParams?.get('interviewStage');
     const url = `/appointment?cosmosDbId=${cosmosDbId}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
     window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
