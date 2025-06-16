@@ -133,7 +133,7 @@ export default function SchedulePage() {
     以下URLよりご都合の良い時間帯を登録いただけますでしょうか。
 
     ▼面接日程調整URL
-    ${shareUrl}
+    <${shareUrl}>
 
     ご不明点やご質問がございましたら、お気軽にご連絡くださいませ。
     お手数をおかけいたしますが、何卒よろしくお願い申し上げます。`;
