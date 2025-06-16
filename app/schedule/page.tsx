@@ -105,7 +105,7 @@ export default function SchedulePage() {
       alert('候補がありません。フォームを作成してください。');
       return;
     }
-    const cosmos_db_id = await storeFormData({
+    const cosmosDbId = await storeFormData({
       is_confirmed: isConfirmed,
       start_date: startDate,
       end_date: endDate,
@@ -117,25 +117,26 @@ export default function SchedulePage() {
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
-    if (!cosmos_db_id) {
+    if (!cosmosDbId) {
       alert('フォームの共有に失敗しました。再度お試しください。');
       return;
     }
-    const shareUrl = window.location.origin + `/appointment?cosmos_db_id=${cosmos_db_id}`;
+    const candidateId = searchParams?.get('candidateId');
+    const interviewStage = searchParams?.get('interviewStage');
+    const shareUrl = window.location.origin + `/appointment?cosmosDbId=${cosmosDbId}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
 
     const subject = '【日程調整のお願い】インテリジェントフォース/採用担当';
     const body = `＜ここにメール相手の性を入力＞様
 
-                  インテリジェントフォース採用担当です。
+    インテリジェントフォース採用担当です。
 
-                  以下URLよりご都合の良い時間帯を登録いただけますでしょうか。
+    以下URLよりご都合の良い時間帯を登録いただけますでしょうか。
 
-                  ▼面接日程調整URL
-                  ${shareUrl}
+    ▼面接日程調整URL
+    ${shareUrl}
 
-                  ご不明点やご質問がございましたら、お気軽にご連絡くださいませ。
-                  お手数をおかけいたしますが、何卒よろしくお願い申し上げます。
-                  `;
+    ご不明点やご質問がございましたら、お気軽にご連絡くださいませ。
+    お手数をおかけいたしますが、何卒よろしくお願い申し上げます。`;
 
     const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
