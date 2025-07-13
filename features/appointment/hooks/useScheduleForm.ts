@@ -13,10 +13,10 @@ export const useScheduleForm = () => {
   const [employeeEmail, setEmployeeEmail] = useState<string>('');
   const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [startTime, setStartTime] = useState('9:00');
-  const [endTime, setEndTime] = useState('18:00');
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [startTime, setStartTime] = useState<string>('9:00');
+  const [endTime, setEndTime] = useState<string>('18:00');
+  const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [confirmedScheduleInterviewDatetime, setConfirmedScheduleInterviewDatetime] = useState<string>('');
 
   // 新規入力欄用の state
