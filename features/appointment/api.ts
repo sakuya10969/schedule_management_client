@@ -4,7 +4,7 @@ import { FormData, SubmitSchedulePayload } from '@/features/appointment/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export const fetchFormData = async (cosmos_db_id: string): Promise<FormData> => {
+export const getFormData = async (cosmos_db_id: string): Promise<FormData> => {
   try {
     const { data } = await axios.get(`${apiUrl}/retrieve_form_data`, {
       params: { cosmos_db_id },

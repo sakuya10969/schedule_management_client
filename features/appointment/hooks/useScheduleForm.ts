@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-import { fetchFormData, submitSchedule } from '@/features/appointment/api';
+import { getFormData, submitSchedule } from '@/features/appointment/api';
 import {
   formatScheduleInterviewDatetime,
   filterScheduleInterviewDatetimes,
@@ -30,9 +30,9 @@ export const useScheduleForm = () => {
     const cosmosDbId = searchParams.get('cosmosDbId');
     if (!cosmosDbId) return;
 
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        const data = await fetchFormData(cosmosDbId);
+        const data = await getFormData(cosmosDbId);
         if (data.employee_emails) setEmployeeEmail(data.employee_emails[0].email);
         if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(data.schedule_interview_datetimes);
         if (data.start_time) setStartTime(data.start_time);
@@ -47,7 +47,7 @@ export const useScheduleForm = () => {
       }
     };
 
-    fetchData();
+    getData();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
