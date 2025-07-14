@@ -14,10 +14,10 @@ export const getRescheduleData = async (cosmos_db_id: string) => {
     }
 }
 
-export const submitRescheduleData = async (cosmos_db_id: string) => {
+export const submitRescheduleData = async (cosmos_db_id: string, schedule_interview_datetime: string) => {
     try {
         const { data } = await axios.post(`${apiUrl}/reschedule`, {
-            params: { cosmos_db_id },
+            params: { cosmos_db_id, schedule_interview_datetime },
         });
         return data;
     } catch (error) {

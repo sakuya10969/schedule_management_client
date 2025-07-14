@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Check } from 'lucide-react';
 
 import { ScheduleCandidateItem } from '@/app/appointment/components/ScheduleCandidateItem';
-import { formatDatePart, formatTimePart } from '@/features/appointment/utils';
+import { formatDatePart, formatTimePart, formatScheduleInterviewDatetime } from '@/features/appointment/utils';
 import { getRescheduleData, submitRescheduleData } from '@/features/reschedule/api';
 
 export default function ReschedulePage() {
@@ -51,7 +51,11 @@ export default function ReschedulePage() {
 
     try {
       setIsLoading(true);
-      await submitRescheduleData(cosmosDbId!);
+      const formattedCandidate =
+      selectedScheduleInterviewDatetime === 'none'
+        ? 'なし'
+        : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
+      await submitRescheduleData(cosmosDbId!, formattedCandidate);
       setIsConfirmed(true);
     } catch (error) {
       console.error('Error submitting reschedule:', error);
