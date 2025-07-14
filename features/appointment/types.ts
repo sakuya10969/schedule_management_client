@@ -36,10 +36,6 @@ export interface ScheduleFormProps {
   formatTimePart: (isoString: string) => string;
 }
 
-export interface UseScheduleFormProps {
-  apiUrl: string;
-}
-
 export interface FormData {
   employee_emails: { email: string }[];
   schedule_interview_datetimes: string[][];
