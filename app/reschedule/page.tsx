@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Check } from 'lucide-react';
 
-import { ScheduleCandidateItem } from '@/app/appointment/components/ScheduleCandidateItem';
-import { formatDatePart, formatTimePart, formatScheduleInterviewDatetime } from '@/features/appointment/utils';
+import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCandidateList';
+import { formatDatePart, formatTimePart, formatScheduleInterviewDatetime, filterScheduleInterviewDatetimes, filterFutureSchedules } from '@/features/appointment/utils';
 import { getRescheduleData, submitRescheduleData } from '@/features/reschedule/api';
 
 export default function ReschedulePage() {
@@ -13,6 +12,9 @@ export default function ReschedulePage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
   const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('');
+  const [startTime, setStartTime] = useState<string>('09:00');
+  const [endTime, setEndTime] = useState<string>('18:00');
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const searchParams = useSearchParams();
 
@@ -28,7 +30,10 @@ export default function ReschedulePage() {
     try {
       setIsLoading(true);
       const data = await getRescheduleData(cosmosDbId!);
-      setScheduleInterviewDatetimes(data.scheduleInterviewDatetimes || []);
+      setScheduleInterviewDatetimes(data.schedule_interview_datetimes || []);
+      setStartTime(data.start_time || '09:00');
+      setEndTime(data.end_time || '18:00');
+      setSelectedDays(data.selected_days || []);
     } catch (error) {
       console.error('Error loading reschedule data:', error);
       alert('データの読み込みに失敗しました。');
@@ -36,6 +41,15 @@ export default function ReschedulePage() {
       setIsLoading(false);
     }
   };
+
+  const filteredScheduleInterviewDatetimes = filterFutureSchedules(
+    filterScheduleInterviewDatetimes(
+      scheduleInterviewDatetimes,
+      startTime,
+      endTime,
+      selectedDays
+    )
+  );  
 
   const handleCancel = () => {
     setShowRescheduleForm(true);
@@ -55,7 +69,7 @@ export default function ReschedulePage() {
       selectedScheduleInterviewDatetime === 'none'
         ? 'なし'
         : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
-      await submitRescheduleData(cosmosDbId!, formattedCandidate);
+      await submitRescheduleData(formattedCandidate);
       setIsConfirmed(true);
     } catch (error) {
       console.error('Error submitting reschedule:', error);
@@ -110,50 +124,14 @@ export default function ReschedulePage() {
             </div>
             
             <form onSubmit={handleSubmit}>
-              <div className="grid gap-6">
-                {scheduleInterviewDatetimes.map((scheduleInterviewDatetime, index) => (
-                  <ScheduleCandidateItem
-                    key={index}
-                    scheduleInterviewDatetime={scheduleInterviewDatetime}
-                    isSelected={selectedScheduleInterviewDatetime === scheduleInterviewDatetime.join(', ')}
-                    onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
-                    formatDatePart={formatDatePart}
-                    formatTimePart={formatTimePart}
-                  />
-                ))}
-                {/* 「可能な日程がない」選択肢 */}
-                <div
-                  onClick={() => onSelectScheduleInterviewDatetime('none')}
-                  className={`cursor-pointer relative rounded-xl border-2 p-6 flex justify-between items-center ${
-                    selectedScheduleInterviewDatetime === 'none'
-                      ? 'border-red-500 bg-red-100 shadow-lg'
-                      : 'border-gray-300 hover:border-red-400 hover:shadow-md'
-                  }`}
-                >
-                  <div className="flex items-center space-x-6">
-                    <span
-                      className={`text-xl ${
-                        selectedScheduleInterviewDatetime === 'none'
-                          ? 'font-semibold text-red-500'
-                          : 'text-gray-700'
-                      }`}
-                    >
-                      可能な日程がない
-                    </span>
-                  </div>
-                  <div
-                    className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                      selectedScheduleInterviewDatetime === 'none'
-                        ? 'bg-red-500 text-white'
-                        : 'bg-gray-300'
-                    }`}
-                  >
-                    <Check
-                      className={`w-5 h-5 ${selectedScheduleInterviewDatetime === 'none' ? 'opacity-100' : 'opacity-0'}`}
-                    />
-                  </div>
-                </div>
-              </div>
+              {/* 日程候補の表示 */}
+              <ScheduleCandidateList
+                scheduleInterviewDatetimes={filteredScheduleInterviewDatetimes}
+                selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
+                onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
+                formatDatePart={formatDatePart}
+                formatTimePart={formatTimePart}
+              />
               
               {/* 送信ボタン */}
               <button
