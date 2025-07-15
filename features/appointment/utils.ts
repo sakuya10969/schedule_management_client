@@ -1,4 +1,4 @@
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, isAfter } from 'date-fns';
 
 import { weekdays } from '@/constants';
 
@@ -49,25 +49,50 @@ export const filterScheduleInterviewDatetimes = (
   startTime: string,
   endTime: string,
   selectedDays: string[]
-) => {
+): string[][] => {
   return scheduleInterviewDatetimes.filter((scheduleInterviewDatetime) => {
     if (scheduleInterviewDatetime.length !== 2) return false;
-    if (scheduleInterviewDatetime[0].substring(0, 10) !== scheduleInterviewDatetime[1].substring(0, 10))
+
+    let start: Date, end: Date;
+    try {
+      start = parseISO(scheduleInterviewDatetime[0]);
+      end = parseISO(scheduleInterviewDatetime[1]);
+    } catch (err) {
+      console.error('Datetime parsing error:', err);
       return false;
-    const scheduleInterviewDatetimeStart = scheduleInterviewDatetime[0].substring(11, 16);
-    const scheduleInterviewDatetimeEnd = scheduleInterviewDatetime[1].substring(11, 16);
-    if (scheduleInterviewDatetimeEnd < scheduleInterviewDatetimeStart) return false;
-    if (!(scheduleInterviewDatetimeStart >= startTime && scheduleInterviewDatetimeEnd <= endTime)) return false;
-    if (selectedDays.length > 0) {
-      try {
-        const date = parseISO(scheduleInterviewDatetime[0]);
-        const scheduleInterviewDatetimeDay = weekdays[date.getDay()];
-        if (!selectedDays.includes(scheduleInterviewDatetimeDay)) return false;
-      } catch (err) {
-        console.error('Day parsing error:', err);
-        return false;
-      }
     }
+
+    if (format(start, 'yyyy-MM-dd') !== format(end, 'yyyy-MM-dd')) return false;
+    if (end < start) return false;
+
+    const startTimeStr = format(start, 'HH:mm');
+    const endTimeStr = format(end, 'HH:mm');
+
+    if (!(startTimeStr >= startTime && endTimeStr <= endTime)) return false;
+
+    if (selectedDays.length > 0) {
+      const day = weekdays[start.getDay()];
+      if (!selectedDays.includes(day)) return false;
+    }
+
     return true;
+  });
+};
+
+export const filterFutureSchedules = (
+  scheduleInterviewDatetimes: string[][]
+): string[][] => {
+  const now = new Date();
+
+  return scheduleInterviewDatetimes.filter((datetimePair) => {
+    if (datetimePair.length !== 2) return false;
+
+    try {
+      const start = parseISO(datetimePair[0]);
+      return isAfter(start, now);
+    } catch (err) {
+      console.error('Datetime parsing error:', err);
+      return false;
+    }
   });
 };
