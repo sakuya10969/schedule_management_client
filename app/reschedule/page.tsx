@@ -136,18 +136,18 @@ export default function ReschedulePage() {
           {/* 現在の予定の表示 */}
           {currentParsedScheduleDatetime && (
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">現在の予定日時</h2>
-              <div className="bg-blue-50 border border-blue-800 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-black mb-4">現在の予定日時</h2>
+              <div className="bg-white border border-black rounded-xl p-6">
                 <div className="flex items-center space-x-6">
                   <div className="flex items-center space-x-2">
-                    <Calendar className="h-6 w-6 text-blue-800" />
-                    <span className="text-xl font-semibold text-blue-800">
+                    <Calendar className="h-6 w-6 text-black" />
+                    <span className="text-xl font-semibold text-black">
                       {formatDatePart(currentParsedScheduleDatetime[0])}
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Clock className="h-6 w-6 text-blue-800" />
-                    <span className="text-xl font-semibold text-blue-800">
+                    <Clock className="h-6 w-6 text-black" />
+                    <span className="text-xl font-semibold text-black">
                       {formatTimePart(currentParsedScheduleDatetime[0])} - {formatTimePart(currentParsedScheduleDatetime[1])}
                     </span>
                   </div>
