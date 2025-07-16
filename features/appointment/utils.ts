@@ -1,4 +1,4 @@
-import { parseISO, format, isAfter } from 'date-fns';
+import { parseISO, format, isAfter, isValid, isEqual } from 'date-fns';
 
 import { weekdays } from '@/constants';
 
@@ -94,5 +94,45 @@ export const filterFutureSchedules = (
       console.error('Datetime parsing error:', err);
       return false;
     }
+  });
+};
+
+export const parseScheduleDatetimeString = (datetimeStr: string): [string, string] | null => {
+  const parts = datetimeStr.split(',').map(s => s.trim());
+  if (parts.length !== 2) return null;
+  return [parts[0], parts[1]];
+};
+
+export const parseScheduleDatetime = (
+  datetimeStr: string
+): [Date, Date] | null => {
+  const strParts = parseScheduleDatetimeString(datetimeStr);
+  if (!strParts) return null;
+
+  const [startStr, endStr] = strParts;
+  const start = parseISO(startStr);
+  const end = parseISO(endStr);
+
+  if (!isValid(start) || !isValid(end)) {
+    console.error('Invalid datetime:', startStr, endStr);
+    return null;
+  }
+
+  return [start, end];
+};
+
+export const excludeCurrentScheduleDatetime = (
+  candidates: string[][],
+  current: [string, string] | null
+): string[][] => {
+  if (!current) return candidates;
+
+  const [currentStart, currentEnd] = current.map(d => parseISO(d));
+
+  return candidates.filter(([startStr, endStr]) => {
+    const start = parseISO(startStr);
+    const end = parseISO(endStr);
+
+    return !(isEqual(start, currentStart) && isEqual(end, currentEnd));
   });
 };
