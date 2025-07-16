@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { ReschedulePayload } from './type';
+
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const getRescheduleData = async (cosmos_db_id: string) => {
@@ -14,11 +16,9 @@ export const getRescheduleData = async (cosmos_db_id: string) => {
     }
 }
 
-export const submitRescheduleData = async (schedule_interview_datetime: string) => {
+export const submitRescheduleData = async (payload: ReschedulePayload) => {
     try {
-        const { data } = await axios.post(`${apiUrl}/reschedule`, {
-            params: { schedule_interview_datetime },
-        });
+        const { data } = await axios.post(`${apiUrl}/reschedule`, payload);
         return data;
     } catch (error) {
         console.error('Error submitting reschedule data:', error);
