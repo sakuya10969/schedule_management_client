@@ -20,7 +20,7 @@ export default function ReschedulePage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
   const [currentScheduleInterviewDatetime, setCurrentScheduleInterviewDatetime] = useState<string>('');
-  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('none');
+  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string | null>(null);
   const [startTime, setStartTime] = useState<string>('09:00');
   const [endTime, setEndTime] = useState<string>('18:00');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
@@ -77,7 +77,7 @@ export default function ReschedulePage() {
     try {
       setIsLoading(true);
       const formattedScheduleInterviewDatetime =
-      selectedScheduleInterviewDatetime === 'none'
+      selectedScheduleInterviewDatetime === null
         ? 'なし'
         : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
       await submitRescheduleData(formattedScheduleInterviewDatetime);
@@ -90,7 +90,7 @@ export default function ReschedulePage() {
     }
   };
 
-  const onSelectScheduleInterviewDatetime = (datetime: string) => {
+  const onSelectScheduleInterviewDatetime = (datetime: string | null) => {
     setSelectedScheduleInterviewDatetime(datetime);
   };
 
@@ -106,7 +106,7 @@ export default function ReschedulePage() {
               <p className="text-gray-600 text-lg">
                 日程の変更が完了しました。
               </p>
-              {selectedScheduleInterviewDatetime !== 'none' && (
+              {selectedScheduleInterviewDatetime !== null && (
                 <div className="mt-6 p-4 bg-green-100 rounded-lg">
                   <p className="text-green-800 font-semibold">
                     新しい日程: {selectedScheduleInterviewDatetime}

@@ -5,15 +5,15 @@ export interface ConfirmedScheduleProps {
 export interface ScheduleCandidateItemProps {
   scheduleInterviewDatetime: string[];
   isSelected: boolean;
-  onSelectScheduleInterviewDatetime: (value: string) => void;
+  onSelectScheduleInterviewDatetime: (value: string | null) => void;
   formatDatePart: (isoString: string) => string;
   formatTimePart: (isoString: string) => string;
 }
 
 export interface ScheduleCandidateListProps {
   scheduleInterviewDatetimes: string[][];
-  selectedScheduleInterviewDatetime: string;
-  onSelectScheduleInterviewDatetime: (value: string) => void;
+  selectedScheduleInterviewDatetime: string | null;
+  onSelectScheduleInterviewDatetime: (value: string | null) => void;
   formatDatePart: (isoString: string) => string;
   formatTimePart: (isoString: string) => string;
 }
@@ -23,14 +23,14 @@ export interface ScheduleFormProps {
   candidateFirstname: string;
   company: string;
   candidateEmail: string;
-  selectedScheduleInterviewDatetime: string;
+  selectedScheduleInterviewDatetime: string | null;
   isLoading: boolean;
   filteredScheduleInterviewDatetimes: string[][];
   onCandidateLastNameChange: (value: string) => void;
   onCandidateFirstNameChange: (value: string) => void;
   onCompanyChange: (value: string) => void;
   onCandidateEmailChange: (value: string) => void;
-  onSelectScheduleInterviewDatetime: (value: string) => void;
+  onSelectScheduleInterviewDatetime: (value: string | null) => void;
   onSubmit: (e: React.FormEvent) => void;
   formatDatePart: (isoString: string) => string;
   formatTimePart: (isoString: string) => string;

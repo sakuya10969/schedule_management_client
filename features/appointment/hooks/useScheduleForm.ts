@@ -11,7 +11,7 @@ import {
 export const useScheduleForm = () => {
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
   const [employeeEmail, setEmployeeEmail] = useState<string>('');
-  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('');
+  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string | null>(null);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [startTime, setStartTime] = useState<string>('9:00');
@@ -63,7 +63,7 @@ export const useScheduleForm = () => {
     }
 
     const formattedScheduleInterviewDatetime =
-      selectedScheduleInterviewDatetime === 'none'
+      selectedScheduleInterviewDatetime === null
         ? 'なし'
         : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
 
@@ -78,7 +78,7 @@ export const useScheduleForm = () => {
     setIsLoading(true);
 
     const payload = {
-      schedule_interview_datetime: selectedScheduleInterviewDatetime === 'none' ? null : selectedScheduleInterviewDatetime,
+      schedule_interview_datetime: selectedScheduleInterviewDatetime,
       employee_email: employeeEmail,
       candidate_lastname: candidateLastname,
       candidate_firstname: candidateFirstname,

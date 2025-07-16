@@ -10,7 +10,7 @@ export const ConfirmedSchedule = ({
       <div className="p-8 bg-gray-200 rounded-lg text-center mb-4">
         <p className="text-xl font-semibold text-gray-800">確定した日程</p>
         <p className="text-lg text-gray-700">
-          {confirmedScheduleInterviewDatetime === 'none'
+          {confirmedScheduleInterviewDatetime === null
             ? '確定した日程はありません。\n再度担当者から連絡します。'
             : confirmedScheduleInterviewDatetime
               ? confirmedScheduleInterviewDatetime
