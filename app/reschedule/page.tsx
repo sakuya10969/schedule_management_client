@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Calendar, Clock } from 'lucide-react';
 
 import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCandidateList';
 import { formatDatePart, formatTimePart, formatScheduleInterviewDatetime, filterScheduleInterviewDatetimes, filterFutureSchedules } from '@/features/appointment/utils';
@@ -11,7 +12,8 @@ export default function ReschedulePage() {
   const [showRescheduleForm, setShowRescheduleForm] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
-  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('');
+  const [currentScheduleInterviewDatetime, setCurrentScheduleInterviewDatetime] = useState<string[]>([]);
+  const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string>('none');
   const [startTime, setStartTime] = useState<string>('09:00');
   const [endTime, setEndTime] = useState<string>('18:00');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
@@ -31,6 +33,7 @@ export default function ReschedulePage() {
       setIsLoading(true);
       const data = await getRescheduleData(cosmosDbId!);
       setScheduleInterviewDatetimes(data.schedule_interview_datetimes || []);
+      setCurrentScheduleInterviewDatetime(data.schedule_interview_datetime || []);
       setStartTime(data.start_time || '09:00');
       setEndTime(data.end_time || '18:00');
       setSelectedDays(data.selected_days || []);
@@ -122,8 +125,32 @@ export default function ReschedulePage() {
                 以下の候補から新しい希望日程を選択してください。
               </p>
             </div>
+
+            {/* 現在の予定の表示 */}
+            {currentScheduleInterviewDatetime.length > 0 && (
+              <div className="mb-8">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">現在の予定日時</h2>
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                  <div className="flex items-center space-x-6">
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-6 w-6 text-blue-500" />
+                      <span className="text-xl font-semibold text-blue-500">
+                        {formatDatePart(currentScheduleInterviewDatetime[0])}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-6 w-6 text-blue-500" />
+                      <span className="text-xl font-semibold text-blue-500">
+                        {formatTimePart(currentScheduleInterviewDatetime[0])} - {formatTimePart(currentScheduleInterviewDatetime[1])}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             
             <form onSubmit={handleSubmit}>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">新しい日程を選択</h2>
               {/* 日程候補の表示 */}
               <ScheduleCandidateList
                 scheduleInterviewDatetimes={filteredScheduleInterviewDatetimes}
