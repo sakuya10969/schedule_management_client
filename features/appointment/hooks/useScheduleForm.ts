@@ -62,14 +62,14 @@ export const useScheduleForm = () => {
       return;
     }
 
-    const formattedCandidate =
+    const formattedScheduleInterviewDatetime =
       selectedScheduleInterviewDatetime === 'none'
         ? 'なし'
         : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
 
     if (
       !window.confirm(
-        `以下の日程で登録を行います:\n${formattedCandidate}\n\nこちらの内容で間違いないですか？`
+        `以下の日程で登録を行います:\n${formattedScheduleInterviewDatetime}\n\nこちらの内容で間違いないですか？`
       )
     ) {
       return;
@@ -91,7 +91,7 @@ export const useScheduleForm = () => {
 
     try {
       await submitSchedule(payload);
-      setConfirmedScheduleInterviewDatetime(formattedCandidate);
+      setConfirmedScheduleInterviewDatetime(formattedScheduleInterviewDatetime);
       setIsConfirmed(true);
     } catch (error) {
       alert('日程の確定に失敗しました。');
