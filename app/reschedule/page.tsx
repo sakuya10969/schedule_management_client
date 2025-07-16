@@ -54,6 +54,10 @@ export default function ReschedulePage() {
     }
   };
 
+  const formattedScheduleInterviewDatetime =
+      selectedScheduleInterviewDatetime === null
+        ? 'なし'
+        : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
   const filteredScheduleInterviewDatetimes = filterScheduleInterviewDatetimes(
     scheduleInterviewDatetimes,
     startTime,
@@ -74,13 +78,20 @@ export default function ReschedulePage() {
       return;
     }
 
+        if (
+          !window.confirm(
+            `以下の日程で登録を行います:\n${formattedScheduleInterviewDatetime}\n\nこちらの内容で間違いないですか？`
+          )
+        ) {
+          return;
+        }
+
     try {
       setIsLoading(true);
-      const formattedScheduleInterviewDatetime =
-      selectedScheduleInterviewDatetime === null
-        ? 'なし'
-        : formatScheduleInterviewDatetime(selectedScheduleInterviewDatetime.split(', '));
-      await submitRescheduleData(formattedScheduleInterviewDatetime);
+      await submitRescheduleData({
+        cosmos_db_id: cosmosDbId!,
+        schedule_interview_datetime: selectedScheduleInterviewDatetime,
+      });
       setIsConfirmed(true);
     } catch (error) {
       console.error('Error submitting reschedule:', error);
@@ -106,10 +117,10 @@ export default function ReschedulePage() {
               <p className="text-gray-600 text-lg">
                 日程の変更が完了しました。
               </p>
-              {selectedScheduleInterviewDatetime !== null && (
+              {formattedScheduleInterviewDatetime !== null && (
                 <div className="mt-6 p-4 bg-green-100 rounded-lg">
                   <p className="text-green-800 font-semibold">
-                    新しい日程: {selectedScheduleInterviewDatetime}
+                    新しい日程: {formattedScheduleInterviewDatetime}
                   </p>
                 </div>
               )}
