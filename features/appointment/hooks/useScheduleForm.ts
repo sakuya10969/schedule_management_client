@@ -75,8 +75,6 @@ export const useScheduleForm = () => {
       return;
     }
 
-    setIsLoading(true);
-
     const payload = {
       schedule_interview_datetime: selectedScheduleInterviewDatetime,
       employee_email: employeeEmail,
@@ -90,6 +88,7 @@ export const useScheduleForm = () => {
     };
 
     try {
+      setIsLoading(true);
       await submitSchedule(payload);
       setConfirmedScheduleInterviewDatetime(formattedScheduleInterviewDatetime);
       setIsConfirmed(true);
