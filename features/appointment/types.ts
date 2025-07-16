@@ -6,16 +6,12 @@ export interface ScheduleCandidateItemProps {
   scheduleInterviewDatetime: string[];
   isSelected: boolean;
   onSelectScheduleInterviewDatetime: (value: string | null) => void;
-  formatDatePart: (isoString: string) => string;
-  formatTimePart: (isoString: string) => string;
 }
 
 export interface ScheduleCandidateListProps {
   scheduleInterviewDatetimes: string[][];
   selectedScheduleInterviewDatetime: string | null;
   onSelectScheduleInterviewDatetime: (value: string | null) => void;
-  formatDatePart: (isoString: string) => string;
-  formatTimePart: (isoString: string) => string;
 }
 
 export interface ScheduleFormProps {
@@ -32,8 +28,6 @@ export interface ScheduleFormProps {
   onCandidateEmailChange: (value: string) => void;
   onSelectScheduleInterviewDatetime: (value: string | null) => void;
   onSubmit: (e: React.FormEvent) => void;
-  formatDatePart: (isoString: string) => string;
-  formatTimePart: (isoString: string) => string;
 }
 
 export interface FormData {

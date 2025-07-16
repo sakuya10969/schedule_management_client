@@ -17,8 +17,6 @@ export const ScheduleForm = ({
   onCandidateEmailChange,
   onSelectScheduleInterviewDatetime,
   onSubmit,
-  formatDatePart,
-  formatTimePart,
 }: ScheduleFormProps) => {
   return (
     <form onSubmit={onSubmit} className="space-y-6">
@@ -100,8 +98,6 @@ export const ScheduleForm = ({
         scheduleInterviewDatetimes={filteredScheduleInterviewDatetimes}
         selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
         onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
-        formatDatePart={formatDatePart}
-        formatTimePart={formatTimePart}
       />
       {/* 送信ボタン */}
       <button

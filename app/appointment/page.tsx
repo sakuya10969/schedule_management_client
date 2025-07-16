@@ -3,7 +3,6 @@
 import { ScheduleForm } from '@/app/appointment/components/ScheduleForm';
 import { ConfirmedSchedule } from '@/app/appointment/components/ConfirmedSchedule';
 import { useScheduleForm } from '@/features/appointment/hooks/useScheduleForm';
-import { formatDatePart, formatTimePart } from '@/features/appointment/utils';
 
 export default function SelectSchedulePage() {
   const {
@@ -53,8 +52,6 @@ export default function SelectSchedulePage() {
               onCandidateEmailChange={setCandidateEmail}
               onSelectScheduleInterviewDatetime={setSelectedScheduleInterviewDatetime}
               onSubmit={handleSubmit}
-              formatDatePart={formatDatePart}
-              formatTimePart={formatTimePart}
             />
           )}
         </div>

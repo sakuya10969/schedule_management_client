@@ -164,8 +164,6 @@ export default function ReschedulePage() {
                 scheduleInterviewDatetimes={filteredRecheduleInterviewDatetimes}
                 selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
                 onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
-                formatDatePart={formatDatePart}
-                formatTimePart={formatTimePart}
               />
               
               {/* 送信ボタン */}

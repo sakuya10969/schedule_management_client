@@ -2,13 +2,12 @@ import React from 'react';
 import { Calendar, Clock, Check } from 'lucide-react';
 
 import { ScheduleCandidateItemProps } from '@/features/appointment/types';
+import { formatDatePart, formatTimePart } from '@/features/appointment/utils';
 
 export const ScheduleCandidateItem = ({
   scheduleInterviewDatetime,
   isSelected,
   onSelectScheduleInterviewDatetime,
-  formatDatePart,
-  formatTimePart,
 }: ScheduleCandidateItemProps) => {
   const candidateValue = scheduleInterviewDatetime.join(', ');
   const candidateDate = formatDatePart(scheduleInterviewDatetime[0]);

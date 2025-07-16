@@ -8,8 +8,6 @@ export const ScheduleCandidateList = ({
   scheduleInterviewDatetimes,
   selectedScheduleInterviewDatetime,
   onSelectScheduleInterviewDatetime,
-  formatDatePart,
-  formatTimePart,
 }: ScheduleCandidateListProps) => {
   return (
     <div className="grid gap-6">
@@ -19,8 +17,6 @@ export const ScheduleCandidateList = ({
           scheduleInterviewDatetime={scheduleInterviewDatetime}
           isSelected={selectedScheduleInterviewDatetime === scheduleInterviewDatetime.join(', ')}
           onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
-          formatDatePart={formatDatePart}
-          formatTimePart={formatTimePart}
         />
       ))}
       {/* 「可能な日程がない」選択肢 */}
