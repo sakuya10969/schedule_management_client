@@ -1,6 +1,7 @@
 'use client';
 
 import { CalendarSearch } from 'lucide-react';
+
 import DateRangePicker from '@/app/schedule/components/DateRangePicker';
 import TimeRangePicker from '@/app/schedule/components/TimeRangePicker';
 import WeekdaySelector from '@/app/schedule/components/WeekdaySelector';
