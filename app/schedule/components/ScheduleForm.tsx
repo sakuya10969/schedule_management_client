@@ -1,5 +1,6 @@
 'use client';
 
+import { CalendarSearch } from 'lucide-react';
 import DateRangePicker from '@/app/schedule/components/DateRangePicker';
 import TimeRangePicker from '@/app/schedule/components/TimeRangePicker';
 import WeekdaySelector from '@/app/schedule/components/WeekdaySelector';
@@ -28,7 +29,8 @@ const ScheduleForm = ({
 }: ScheduleFormProps) => {
   return (
     <div>
-      <h1 className="mb-5 ml-2 font-semibold text-xl text-black">
+      <h1 className="mb-5 ml-2 font-semibold text-xl text-black flex items-center gap-2">
+        <CalendarSearch className="w-6 h-6" />
         スケジュール調整
       </h1>
       <form onSubmit={handleSubmit} className="gap-4 md:grid-cols-2">
