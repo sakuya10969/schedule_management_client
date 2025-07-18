@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo } from 'react';
 import { parseISO } from 'date-fns';
+import { CalendarDays } from 'lucide-react';
 
 import {
   formatScheduleInterviewDatetime,
@@ -46,7 +47,10 @@ const CandidateList = ({
 
   return (
     <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-2 text-black">候補日一覧</h2>
+      <h2 className="text-xl font-semibold mb-2 text-black flex items-center gap-2">
+        <CalendarDays className="w-6 h-6" />
+        候補日一覧
+      </h2>
       <div className="relative bg-blue-100 p-8 rounded min-h-[400px]">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center min-h-[400px]">
