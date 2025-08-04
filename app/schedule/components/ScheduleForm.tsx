@@ -77,7 +77,7 @@ const ScheduleForm = ({
             type="submit"
             className="bg-blue-300 hover:bg-blue-400 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-xl text-black py-3 px-4 mt-2 mb-5 rounded"
           >
-            候補日一覧を表示
+            祝日を除き候補日一覧を表示
           </button>
         </div>
       </form>
