@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { 
   formatScheduleInterviewDatetime, 
   filterScheduleInterviewDatetimes, 
@@ -18,9 +17,13 @@ export const useReschedule = () => {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [dataLoaded, setDataLoaded] = useState<boolean>(false);
-  const searchParams = useSearchParams();
+  const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
 
-  const cosmosDbId = searchParams.get('cosmosDbId');
+  useEffect(() => {
+    setSearchParams(new URLSearchParams(window.location.search));
+  }, []);
+
+  const cosmosDbId = searchParams?.get('cosmosDbId');
 
   useEffect(() => {
     if (cosmosDbId) {
