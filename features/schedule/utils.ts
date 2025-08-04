@@ -1,4 +1,5 @@
 import { parseISO, format } from 'date-fns';
+import Holidays from 'date-holidays';
 
 import { weekdays } from '@/constants';
 
@@ -124,3 +125,13 @@ export const handleDayToggle = (
     : [...selectedDays, scheduleInterviewDatetimeDay];
   setSelectedDays(newDays);
 };
+
+// 祝日を除外
+export const filterOutHolidays = (slots: string[][]): string[][] => {
+  const hd = new Holidays('JP');
+  return slots.filter(([start, _end]) => {
+    const date = new Date(start);
+    return !hd.isHoliday(date);
+  });
+};
+

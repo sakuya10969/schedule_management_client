@@ -8,6 +8,7 @@ import ScheduleForm from '@/app/schedule/components/ScheduleForm';
 import { useSchedule } from '@/features/schedule/hooks/useSchedule';
 import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
 import { getAvailability, storeFormData } from '@/features/schedule/api';
+import { filterOutHolidays } from '@/features/schedule/utils';
 
 const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
@@ -65,7 +66,7 @@ export default function SchedulePage() {
         employee_emails: validEmployeeEmails,
         required_participants: requiredParticipants,
       });
-      setScheduleInterviewDatetimes(data.common_availability || []);
+      setScheduleInterviewDatetimes(filterOutHolidays(data.common_availability || []));
     } catch (error) {
       console.error('Error:', error);
     } finally {
