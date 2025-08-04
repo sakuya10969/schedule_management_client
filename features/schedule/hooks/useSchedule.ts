@@ -10,7 +10,9 @@ export const useSchedule = () => {
   const [startTime, setStartTime] = useState<string>('09:00');
   const [endTime, setEndTime] = useState<string>('18:00');
   const [durationMinutes, setDurationMinutes] = useState<number>(30);
-  const [selectedDays, setSelectedDays] = useState<string[]>(weekdays);
+  const [selectedDays, setSelectedDays] = useState<string[]>(
+    weekdays.filter((day) => day !== '日' && day !== '土')
+  );  
   const [requiredParticipants, setRequiredParticipants] = useState<number>(1);
 
   return {
