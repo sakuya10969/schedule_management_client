@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Copy, Check } from 'lucide-react';
 
 import CandidateList from '@/app/schedule/components/CandidateList';
 import ScheduleForm from '@/app/schedule/components/ScheduleForm';
@@ -36,6 +37,7 @@ export default function SchedulePage() {
   const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
     null
   );
+  const [isCopied, setIsCopied] = useState<boolean>(false);
 
   useEffect(() => {
     setSearchParams(new URLSearchParams(window.location.search));
@@ -99,12 +101,13 @@ export default function SchedulePage() {
     window.open(url, 'SelectScheduleForm', 'width=700,height=800');
   };
 
-  // 「リンクを共有」ボタン押下時の処理（メール送信用）
-  const handleShareForm = async () => {
+  // 「リンクをコピー」ボタン押下時の処理
+  const handleCopyFormLink = async () => {
     if (scheduleInterviewDatetimes.length === 0) {
-      alert('候補がありません。フォームを作成してください。');
+      alert('候補がありません。候補を取得してください。');
       return;
     }
+  
     const cosmosDbId = await storeFormData({
       is_confirmed: isConfirmed,
       start_date: startDate,
@@ -117,30 +120,30 @@ export default function SchedulePage() {
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
     });
+  
     if (!cosmosDbId) {
-      alert('フォームの共有に失敗しました。再度お試しください。');
+      alert('リンクの生成に失敗しました。再度お試しください。');
       return;
     }
+  
     const candidateId = searchParams?.get('candidateId');
     const interviewStage = searchParams?.get('interviewStage');
-    const shareUrl = window.location.origin + `/appointment?cosmosDbId=${cosmosDbId}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
-
-    const subject = '【日程調整のお願い】インテリジェントフォース/採用担当';
-    const body = `＜ここにメール相手の性を入力＞様
-
-    インテリジェントフォース採用担当です。
-
-    以下URLよりご都合の良い時間帯を登録いただけますでしょうか。
-
-    ▼面接日程調整URL
-    <${shareUrl}>
-
-    ご不明点やご質問がございましたら、お気軽にご連絡くださいませ。
-    お手数をおかけいたしますが、何卒よろしくお願い申し上げます。`;
-
-    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-  };
+    const shareUrl =
+      window.location.origin +
+      `/appointment?cosmosDbId=${cosmosDbId}&candidateId=${candidateId}&interviewStage=${interviewStage}`;
+  
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setIsCopied(true);
+      // 2秒後にアイコンを元に戻す
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('クリップボードコピー失敗:', err);
+      alert('リンクのコピーに失敗しました。手動でコピーしてください。');
+    }
+  };  
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -189,19 +192,37 @@ export default function SchedulePage() {
             selectedDays={selectedDays}
           />
           {/* フォーム作成ボタン */}
-          <button
-            onClick={handleCreateForm}
-            className="mt-4 mr-4 inline-block bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            日程調整画面を表示
-          </button>
-          {/* フォーム共有ボタン */}
-          <button
-            onClick={handleShareForm}
-            className="inline-block bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            リンクを共有
-          </button>
+          <div className="flex gap-4 mt-4">
+            {/* 日程調整ボタン */}
+            <button
+              onClick={handleCreateForm}
+              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+            >
+              <span>日程調整画面を表示</span>
+            </button>
+
+            {/* リンクコピー */}
+            <button
+              onClick={handleCopyFormLink}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded text-white transition-colors ${
+                isCopied 
+                  ? 'bg-green-500 hover:bg-green-600' 
+                  : 'bg-gray-500 hover:bg-gray-600'
+              }`}
+            >
+              {isCopied ? (
+                <>
+                  <Check size={16} />
+                  <span>コピー完了</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={16} />
+                  <span>リンクをコピー</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>
