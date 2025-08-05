@@ -219,7 +219,7 @@ export default function SchedulePage() {
               ) : (
                 <>
                   <Copy size={16} />
-                  <span>リンクをコピー</span>
+                  <span>日程調整リンクのコピー</span>
                 </>
               )}
             </button>

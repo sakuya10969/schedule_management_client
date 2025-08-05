@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { parseISO } from 'date-fns';
-import { CalendarDays } from 'lucide-react';
+import { CalendarDays, Copy, Check } from 'lucide-react';
 
 import {
   formatScheduleInterviewDatetime,
@@ -19,6 +19,8 @@ const CandidateList = ({
   isLoading,
   selectedDays,
 }: CandidateListProps) => {
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
   // フィルタリング済み候補を取得
   const filtered = useMemo(
     () => filterScheduleInterviewDatetimes(scheduleInterviewDatetimes, startTime, endTime, selectedDays),
@@ -39,31 +41,57 @@ const CandidateList = ({
   );
 
   // コピー処理
-  const handleCopyClick = useCallback(() => {
+  const handleCopyClick = useCallback(async () => {
     if (merged.length === 0) return;
     const text = merged.map((pair) => formatScheduleInterviewDatetime(pair)).join('\n');
-    handleCopy(text);
+    
+    try {
+      await navigator.clipboard.writeText(text);
+      setIsCopied(true);
+      // 2秒後にアイコンを元に戻す
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('クリップボードコピー失敗:', err);
+      // フォールバック処理があれば実行
+      handleCopy(text);
+    }
   }, [merged]);
 
   return (
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-2 text-black flex items-center gap-2">
         <CalendarDays className="w-6 h-6" />
-        候補日一覧
+        候補日程一覧
       </h2>
       <div className="relative bg-blue-100 p-8 rounded min-h-[400px]">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center min-h-[400px]">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500"></div>
-            <span className="mt-2 text-gray-500 text-lg">Loading...</span>
+            <span className="mt-2 text-gray-500 text-lg">読み込み中...</span>
           </div>
         ) : (
           <>
             <button
               onClick={handleCopyClick}
-              className="absolute top-2 right-2 bg-white text-sm px-2 py-1 rounded shadow hover:bg-gray-50 text-black"
+              className={`absolute top-2 right-2 text-sm px-2 py-1 rounded shadow hover:bg-gray-50 text-black inline-flex items-center gap-1 transition-colors ${
+                isCopied 
+                  ? 'bg-green-100 text-green-700' 
+                  : 'bg-white'
+              }`}
             >
-              copy
+              {isCopied ? (
+                <>
+                  <Check size={14} />
+                  <span>コピー完了</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={14} />
+                  <span>候補日程のコピー</span>
+                </>
+              )}
             </button>
             {merged.length > 0 ? (
               <ul className="list-inside space-y-1 text-black">
