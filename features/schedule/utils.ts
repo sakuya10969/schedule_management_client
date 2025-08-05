@@ -110,7 +110,6 @@ export const mergeScheduleInterviewDatetimes = (sortedScheduleInterviewDatetimes
 export const handleCopy = (text: string) => {
   navigator.clipboard
     .writeText(text)
-    .then(() => alert('候補日程をコピーしました!'))
     .catch((err) => console.error('コピーに失敗しました:', err));
 };
 
