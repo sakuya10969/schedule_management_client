@@ -42,7 +42,10 @@ const CandidateList = ({
 
   // コピー処理
   const handleCopyClick = useCallback(async () => {
-    if (merged.length === 0) return;
+    if (merged.length === 0) {
+      alert('候補日程がありません。');
+      return;
+    }
     const text = merged.map((pair) => formatScheduleInterviewDatetime(pair)).join('\n');
     
     try {
@@ -100,7 +103,7 @@ const CandidateList = ({
                 ))}
               </ul>
             ) : (
-              <p className="text-black">候補がありません。</p>
+              <p className="text-black">候補日程がありません。</p>
             )}
           </>
         )}
