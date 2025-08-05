@@ -14,7 +14,7 @@ export interface ScheduleCandidateListProps {
   onSelectScheduleInterviewDatetime: (value: string | null) => void;
 }
 
-export interface ScheduleFormProps {
+export interface AppointmentFormProps {
   candidateLastname: string;
   candidateFirstname: string;
   company: string;

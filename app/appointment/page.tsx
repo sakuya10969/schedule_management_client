@@ -1,6 +1,6 @@
 'use client';
 
-import { ScheduleForm } from '@/app/appointment/components/ScheduleForm';
+import { AppointmentForm } from '@/app/appointment/components/AppointmentForm';
 import { ConfirmedSchedule } from '@/app/appointment/components/ConfirmedSchedule';
 import { useAppointment } from '@/features/appointment/hooks/useAppointment';
 
@@ -38,7 +38,7 @@ export default function AppointmentPage() {
           {isConfirmed ? (
             <ConfirmedSchedule confirmedScheduleInterviewDatetime={confirmedScheduleInterviewDatetime} />
           ) : (
-            <ScheduleForm
+            <AppointmentForm
               candidateLastname={candidateLastname}
               candidateFirstname={candidateFirstname}
               company={company}

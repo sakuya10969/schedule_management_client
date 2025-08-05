@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCandidateList';
-import { ScheduleFormProps } from '@/features/appointment/types';
+import { AppointmentFormProps } from '@/features/appointment/types';
 
-export const ScheduleForm = ({
+export const AppointmentForm = ({
   candidateLastname,
   candidateFirstname,
   company,
@@ -17,7 +17,7 @@ export const ScheduleForm = ({
   onCandidateEmailChange,
   onSelectScheduleInterviewDatetime,
   onSubmit,
-}: ScheduleFormProps) => {
+}: AppointmentFormProps) => {
   return (
     <form onSubmit={onSubmit} className="space-y-6">
       {/* 入力フィールド：氏名*/}
