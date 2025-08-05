@@ -8,7 +8,7 @@ import {
   filterScheduleInterviewDatetimes,
 } from '@/features/appointment/utils';
 
-export const useScheduleForm = () => {
+export const useAppointment = () => {
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
   const [employeeEmail, setEmployeeEmail] = useState<string>('');
   const [selectedScheduleInterviewDatetime, setSelectedScheduleInterviewDatetime] = useState<string | null>(null);

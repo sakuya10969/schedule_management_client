@@ -2,9 +2,9 @@
 
 import { ScheduleForm } from '@/app/appointment/components/ScheduleForm';
 import { ConfirmedSchedule } from '@/app/appointment/components/ConfirmedSchedule';
-import { useScheduleForm } from '@/features/appointment/hooks/useScheduleForm';
+import { useAppointment } from '@/features/appointment/hooks/useAppointment';
 
-export default function SelectSchedulePage() {
+export default function AppointmentPage() {
   const {
     candidateLastname,
     candidateFirstname,
@@ -21,7 +21,7 @@ export default function SelectSchedulePage() {
     setCandidateEmail,
     setSelectedScheduleInterviewDatetime,
     handleSubmit,
-  } = useScheduleForm();
+  } = useAppointment();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center py-12 px-4">
