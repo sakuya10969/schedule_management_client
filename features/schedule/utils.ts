@@ -108,9 +108,7 @@ export const mergeScheduleInterviewDatetimes = (sortedScheduleInterviewDatetimes
 
 // クリップボードにコピー
 export const handleCopy = (text: string) => {
-  navigator.clipboard
-    .writeText(text)
-    .catch((err) => console.error('コピーに失敗しました:', err));
+  navigator.clipboard.writeText(text);
 };
 
 // 曜日選択を切り替え
