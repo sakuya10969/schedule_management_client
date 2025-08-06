@@ -7,6 +7,15 @@ import {
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+export const getEmployeeDirectory = async () => {
+  try {
+    const { data } = await axios.get(`${apiUrl}/employee_directory`);
+    return data;
+  } catch (error) {
+    throw new Error('Failed to fetch employee directory');
+  }
+};
+
 export const getAvailability = async (params: GetAvailabilityParams) => {
   try {
     const { data } = await axios.post(`${apiUrl}/get_availability`, params);
