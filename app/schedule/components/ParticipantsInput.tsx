@@ -2,10 +2,10 @@
 
 import { useLayoutEffect, useState, useEffect } from 'react';
 
-import { employeeEmailList } from '@/constants';
+// import { employeeEmailList } from '@/constants';
 import MultiSelect from '@/app/schedule/components/MultiSelect';
 import { ParticipantsInputProps, Option } from '@/features/schedule/types';
-// import { getEmployeeDirectory } from '@/features/schedule/api';
+import { getEmployeeDirectory } from '@/features/schedule/api';
 
 const ParticipantsInput = ({
   employeeEmails,
@@ -13,20 +13,20 @@ const ParticipantsInput = ({
   requiredParticipants,
   setRequiredParticipants,
 }: ParticipantsInputProps) => {
-  // const [employeeEmailList, setEmployeeEmailList] = useState<Option[]>([]);
+  const [employeeEmailList, setEmployeeEmailList] = useState<Option[]>([]);
 
-  // useEffect(() => {
-  //   const fetchEmployeeDirectory = async () => {
-  //     try {
-  //       const data = await getEmployeeDirectory();
-  //       setEmployeeEmailList(data);
-  //     } catch (error) {
-  //       console.error('Failed to fetch employee directory:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchEmployeeDirectory = async () => {
+      try {
+        const data = await getEmployeeDirectory();
+        setEmployeeEmailList(data);
+      } catch (error) {
+        console.error('Failed to fetch employee directory:', error);
+      }
+    };
 
-  //   fetchEmployeeDirectory();
-  // }, []);
+    fetchEmployeeDirectory();
+  }, []);
 
   const handleMultiSelectChange = (selectedEmails: string[]) => {
     const filtered = selectedEmails.filter((email) => email.trim() !== '');
