@@ -23,6 +23,7 @@ export const useAppointment = () => {
   const [candidateLastname, setCandidateLastName] = useState('');
   const [candidateFirstname, setCandidateFirstName] = useState('');
   const [company, setCompany] = useState('');
+  const [universityName, setUniversityName] = useState('');
   const [candidateEmail, setCandidateEmail] = useState('');
 
   useEffect(() => {
@@ -85,6 +86,7 @@ export const useAppointment = () => {
       cosmos_db_id: cosmosDbId,
       candidate_id: candidateId ? Number(candidateId) : null,
       interview_stage: interviewStage,
+      universityName,
     };
 
     try {
@@ -119,6 +121,7 @@ export const useAppointment = () => {
     candidateLastname,
     candidateFirstname,
     company,
+    universityName,
     candidateEmail,
     filteredScheduleInterviewDatetimes,
     setSelectedScheduleInterviewDatetime,
@@ -128,6 +131,7 @@ export const useAppointment = () => {
     setCandidateLastName,
     setCandidateFirstName,
     setCompany,
+    setUniversityName,
     setCandidateEmail,
     handleSubmit,
   };

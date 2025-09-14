@@ -9,6 +9,7 @@ export default function AppointmentPage() {
     candidateLastname,
     candidateFirstname,
     company,
+    universityName,
     candidateEmail,
     selectedScheduleInterviewDatetime,
     isLoading,
@@ -18,6 +19,7 @@ export default function AppointmentPage() {
     setCandidateLastName,
     setCandidateFirstName,
     setCompany,
+    setUniversityName,
     setCandidateEmail,
     setSelectedScheduleInterviewDatetime,
     handleSubmit,
@@ -42,6 +44,7 @@ export default function AppointmentPage() {
               candidateLastname={candidateLastname}
               candidateFirstname={candidateFirstname}
               company={company}
+              universityName = {universityName}
               candidateEmail={candidateEmail}
               selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
               isLoading={isLoading}
@@ -49,6 +52,7 @@ export default function AppointmentPage() {
               onCandidateLastNameChange={setCandidateLastName}
               onCandidateFirstNameChange={setCandidateFirstName}
               onCompanyChange={setCompany}
+              onUniversityNameChange={setUniversityName}
               onCandidateEmailChange={setCandidateEmail}
               onSelectScheduleInterviewDatetime={setSelectedScheduleInterviewDatetime}
               onSubmit={handleSubmit}

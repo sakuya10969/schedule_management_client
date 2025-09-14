@@ -18,6 +18,7 @@ export interface AppointmentFormProps {
   candidateLastname: string;
   candidateFirstname: string;
   company: string;
+  universityName: string;
   candidateEmail: string;
   selectedScheduleInterviewDatetime: string | null;
   isLoading: boolean;
@@ -25,6 +26,7 @@ export interface AppointmentFormProps {
   onCandidateLastNameChange: (value: string) => void;
   onCandidateFirstNameChange: (value: string) => void;
   onCompanyChange: (value: string) => void;
+  onUniversityNameChange: (value: string) => void;
   onCandidateEmailChange: (value: string) => void;
   onSelectScheduleInterviewDatetime: (value: string | null) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -51,4 +53,5 @@ export interface SubmitSchedulePayload {
   cosmos_db_id: string | null;
   candidate_id: number | null;
   interview_stage: string | null;
+  universityName: string | null;
 }
