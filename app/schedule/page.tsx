@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Copy, Check } from 'lucide-react';
 
-import CandidateList from '@/app/schedule/components/CandidateList';
+import CandidateDateList from '@/app/schedule/components/CandidateDateList';
 import ScheduleForm from '@/app/schedule/components/ScheduleForm';
 import { useSchedule } from '@/features/schedule/hooks/useSchedule';
 import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
@@ -185,7 +185,7 @@ export default function SchedulePage() {
         {/* 右カラム */}
         <div>
           {/* 候補日一覧の表示 */}
-          <CandidateList
+          <CandidateDateList
             scheduleInterviewDatetimes={scheduleInterviewDatetimes}
             startTime={startTime}
             endTime={endTime}

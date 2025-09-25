@@ -10,15 +10,15 @@ import {
   mergeScheduleInterviewDatetimes,
   handleCopy,
 } from '@/features/schedule/utils';
-import { CandidateListProps } from '@/features/schedule/types';
+import { CandidateDateListProps } from '@/features/schedule/types';
 
-const CandidateList = ({
+const CandidateDateList = ({
   scheduleInterviewDatetimes,
   startTime,
   endTime,
   isLoading,
   selectedDays,
-}: CandidateListProps) => {
+}: CandidateDateListProps) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   // フィルタリング済み候補を取得
@@ -112,4 +112,4 @@ const CandidateList = ({
   );
 };
 
-export default CandidateList;
+export default CandidateDateList;

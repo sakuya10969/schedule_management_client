@@ -1,4 +1,4 @@
-export interface CandidateListProps {
+export interface CandidateDateListProps {
   scheduleInterviewDatetimes: string[][];
   startTime: string;
   endTime: string;
