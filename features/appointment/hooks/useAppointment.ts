@@ -7,6 +7,7 @@ import {
   formatScheduleInterviewDatetime,
   filterScheduleInterviewDatetimes,
 } from '@/features/appointment/utils';
+import { filterOutHolidays } from '@/features/schedule/utils';
 
 export const useAppointment = () => {
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
@@ -35,7 +36,7 @@ export const useAppointment = () => {
       try {
         const data = await getFormData(cosmosDbId);
         if (data.employee_emails) setEmployeeEmail(data.employee_emails[0].email);
-        if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(data.schedule_interview_datetimes);
+        if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(filterOutHolidays(data.schedule_interview_datetimes));
         if (data.start_time) setStartTime(data.start_time);
         if (data.end_time) setEndTime(data.end_time);
         if (data.selected_days) setSelectedDays(data.selected_days);
