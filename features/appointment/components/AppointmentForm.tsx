@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCandidateList';
+import { ScheduleCandidateList } from '@/features/appointment/components/ScheduleCandidateList';
 import { AppointmentFormProps } from '@/features/appointment/types';
 
 export const AppointmentForm = ({

@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Copy, Check } from 'lucide-react';
 
-import CandidateDateList from '@/app/schedule/components/CandidateDateList';
-import ScheduleForm from '@/app/schedule/components/ScheduleForm';
+import CandidateDateList from '@/features/schedule/components/CandidateDateList';
+import ScheduleForm from '@/features/schedule/components/ScheduleForm';
 import { useSchedule } from '@/features/schedule/hooks/useSchedule';
 import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
 import { getAvailability, storeFormData } from '@/features/schedule/api';

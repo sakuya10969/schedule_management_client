@@ -3,7 +3,7 @@
 import { useLayoutEffect, useState, useEffect } from 'react';
 
 // import { employeeEmailList } from '@/constants';
-import MultiSelect from '@/app/schedule/components/MultiSelect';
+import MultiSelect from '@/features/schedule/components/MultiSelect';
 import { ParticipantsInputProps, Option } from '@/features/schedule/types';
 import { getEmployeeDirectory } from '@/features/schedule/api';
 
