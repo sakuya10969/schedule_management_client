@@ -3,7 +3,7 @@
 import React from 'react';
 import { Calendar, Clock } from 'lucide-react';
 
-import { ScheduleCandidateList } from '@/features/appointment/components/ScheduleCandidateList';
+import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCandidateList';
 import { 
   formatDatePart, 
   formatTimePart, 

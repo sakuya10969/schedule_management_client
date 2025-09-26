@@ -2,11 +2,11 @@
 
 import { CalendarSearch } from 'lucide-react';
 
-import DateRangePicker from '@/features/schedule/components/DateRangePicker';
-import TimeRangePicker from '@/features/schedule/components/TimeRangePicker';
-import WeekdaySelector from '@/features/schedule/components/WeekdaySelector';
-import DurationSelector from '@/features/schedule/components/DurationSelector';
-import ParticipantsInput from '@/features/schedule/components/ParticipantsInput';
+import DateRangePicker from '@/app/schedule/components/DateRangePicker';
+import TimeRangePicker from '@/app/schedule/components/TimeRangePicker';
+import WeekdaySelector from '@/app/schedule/components/WeekdaySelector';
+import DurationSelector from '@/app/schedule/components/DurationSelector';
+import ParticipantsInput from '@/app/schedule/components/ParticipantsInput';
 import { ScheduleFormProps } from '@/features/schedule/types';
 
 const ScheduleForm = ({

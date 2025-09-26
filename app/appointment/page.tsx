@@ -1,7 +1,7 @@
 'use client';
 
-import { AppointmentForm } from '@/features/appointment/components/AppointmentForm';
-import { ConfirmedSchedule } from '@/features/appointment/components/ConfirmedSchedule';
+import { AppointmentForm } from '@/app/appointment/components/AppointmentForm';
+import { ConfirmedSchedule } from '@/app/appointment/components/ConfirmedSchedule';
 import { useAppointment } from '@/features/appointment/hooks/useAppointment';
 
 export default function AppointmentPage() {
