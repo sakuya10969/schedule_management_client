@@ -8,6 +8,7 @@ import WeekdaySelector from '@/app/schedule/components/WeekdaySelector';
 import DurationSelector from '@/app/schedule/components/DurationSelector';
 import ParticipantsInput from '@/app/schedule/components/ParticipantsInput';
 import { ScheduleFormProps } from '@/features/schedule/types';
+import { Button } from '@/components/ui/button';
 
 const ScheduleForm = ({
   startDate,
@@ -72,13 +73,13 @@ const ScheduleForm = ({
         />
 
         {/* フォーム送信ボタン */}
-        <div className="md:col-span-2 ml-4">
-          <button
+        <div className="md:col-span-2 mt-2 ml-4">
+          <Button
             type="submit"
-            className="bg-blue-300 hover:bg-blue-400 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-xl text-black py-3 px-4 mt-2 mb-5 rounded"
+            className="bg-blue-200 hover:bg-blue-300 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-xl text-black py-3 px-4 mt-2 mb-5 rounded"
           >
             祝日を除いた候補日程一覧を表示
-          </button>
+          </Button>
         </div>
       </form>
     </div>
