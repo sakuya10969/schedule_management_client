@@ -42,7 +42,7 @@ const ParticipantsInput = ({
   }, [employeeEmails, requiredParticipants, setRequiredParticipants]);
 
   return (
-    <div className="md:col-span-2 mt-2 ml-4">
+    <div className="md:col-span-2 mt-2">
       <label className="block mb-1 font-semibold text-xl text-black">
         担当者
       </label>

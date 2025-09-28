@@ -6,7 +6,7 @@ const DurationSelector = ({
   setDurationMinutes,
 }: DurationSelectorProps) => {
   return (
-    <div className="items-end p-3 rounded">
+    <div className="items-end rounded mt-2">
       <label className="block mb-1 font-semibold text-xl text-black">
         面談時間
       </label>

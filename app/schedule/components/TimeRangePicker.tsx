@@ -8,7 +8,7 @@ const TimeRangePicker = ({
   setEndTime,
 }: TimeRangePickerProps) => {
   return (
-    <div className="flex items-end space-x-2 p-3 rounded w-full">
+    <div className="flex items-end space-x-2 mt-2 rounded w-full">
       <div className="flex-1">
         <label className="block mb-1 font-semibold text-xl text-black">
           時間帯

@@ -8,7 +8,7 @@ const WeekdaySelector = ({
   setSelectedDays,
 }: WeekdaySelectorProps) => {
   return (
-    <div className="p-3 rounded-lg">
+    <div className="rounded-lg mt-2">
       <label className="block mb-1 font-bold text-xl text-black">
         曜日選択
       </label>
