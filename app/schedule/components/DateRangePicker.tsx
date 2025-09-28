@@ -16,7 +16,7 @@ const DateRangePicker = ({
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="border p-3 w-full bg-blue-100 text-black"
+          className="border p-3 w-full bg-blue-100 text-black rounded"
           required
         />
       </div>
@@ -26,7 +26,7 @@ const DateRangePicker = ({
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="border p-3 w-full bg-blue-100 text-black"
+          className="border p-3 w-full bg-blue-100 text-black rounded"
           required
         />
       </div>

@@ -16,7 +16,7 @@ const TimeRangePicker = ({
         <select
           value={startTime}
           onChange={(e) => setStartTime(e.target.value)}
-          className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
+          className="border p-3 bg-blue-100 w-full text-black rounded cursor-pointer"
           required
         >
           {generateTimeOptions().map((timeStr) => (
@@ -32,7 +32,7 @@ const TimeRangePicker = ({
         <select
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
-          className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
+          className="border p-3 bg-blue-100 w-full text-black rounded cursor-pointer"
           required
         >
           {generateTimeOptions().map((timeStr) => (
