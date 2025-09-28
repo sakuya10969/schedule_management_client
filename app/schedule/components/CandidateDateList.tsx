@@ -84,7 +84,7 @@ const CandidateDateList = ({
           </a>
         </Button>
       </div>
-      <div className="relative bg-blue-100 p-8 rounded min-h-[450px]">
+      <div className="relative bg-blue-100 p-6 rounded h-[450px] overflow-y-auto">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center min-h-[450px]">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500"></div>
@@ -94,7 +94,7 @@ const CandidateDateList = ({
           <>
             <button
               onClick={handleCopyClick}
-              className={`absolute top-3 right-3 text-md px-2 py-1 rounded shadow hover:bg-gray-100 text-black inline-flex items-center gap-1 transition-colors ${
+              className={`absolute top-3 right-3 text-md px-3 py-2 rounded shadow hover:bg-gray-100 text-black inline-flex items-center gap-1 transition-colors ${
                 isCopied 
                   ? 'bg-green-100 text-green-700' 
                   : 'bg-white'
@@ -113,7 +113,7 @@ const CandidateDateList = ({
               )}
             </button>
             {merged.length > 0 ? (
-              <ul className="list-inside space-y-1 text-black">
+              <ul className="list-inside text-lg text-black">
                 {merged.map((slotPair, index) => (
                   <li key={index}>{formatScheduleInterviewDatetime(slotPair)}</li>
                 ))}
