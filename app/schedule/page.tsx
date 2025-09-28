@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Copy, Check, ExternalLink } from 'lucide-react';
+import { Copy, Check, CornerUpRight } from 'lucide-react';
 
 import CandidateDateList from '@/app/schedule/components/CandidateDateList';
 import ScheduleForm from '@/app/schedule/components/ScheduleForm';
@@ -10,8 +10,6 @@ import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
 import { getAvailability, storeFormData } from '@/features/schedule/api';
 import { filterOutHolidays } from '@/features/schedule/utils';
 import { Button } from '@/components/ui/button';
-
-const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
 export default function SchedulePage() {
   const {
@@ -149,20 +147,7 @@ export default function SchedulePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
-      <div className="text-right mb-5">
-        <Button asChild className="text-md">
-          <a
-            href={recruitment_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded"
-          >
-            <ExternalLink size={20} />
-            採用管理ページへ
-          </a>
-        </Button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* 左カラム */}
         <div>
           {/* スケジュール設定フォーム */}
@@ -203,7 +188,8 @@ export default function SchedulePage() {
               onClick={handleCreateForm}
               className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-md text-white px-4 py-3 rounded"
             >
-              <span>日程調整画面を表示</span>
+              <CornerUpRight size={20} />
+              <span>日程調整フォームへ移動</span>
             </Button>
 
             {/* リンクコピー */}
