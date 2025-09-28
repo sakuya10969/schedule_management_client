@@ -94,7 +94,7 @@ const CandidateDateList = ({
           <>
             <button
               onClick={handleCopyClick}
-              className={`absolute top-2 right-2 text-sm px-2 py-1 rounded shadow hover:bg-gray-50 text-black inline-flex items-center gap-1 transition-colors ${
+              className={`absolute top-3 right-3 text-md px-2 py-1 rounded shadow hover:bg-gray-100 text-black inline-flex items-center gap-1 transition-colors ${
                 isCopied 
                   ? 'bg-green-100 text-green-700' 
                   : 'bg-white'
@@ -102,12 +102,12 @@ const CandidateDateList = ({
             >
               {isCopied ? (
                 <>
-                  <Check size={14} />
+                  <Check size={16} />
                   <span>コピー完了</span>
                 </>
               ) : (
                 <>
-                  <Copy size={14} />
+                  <Copy size={16} />
                   <span>候補日程のコピー</span>
                 </>
               )}
