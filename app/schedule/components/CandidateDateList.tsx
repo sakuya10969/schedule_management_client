@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { parseISO } from 'date-fns';
-import { CalendarDays, Copy, Check } from 'lucide-react';
+import { CalendarDays, Copy, Check, ExternalLink } from 'lucide-react';
 
 import {
   formatScheduleInterviewDatetime,
@@ -11,6 +11,9 @@ import {
   handleCopy,
 } from '@/features/schedule/utils';
 import { CandidateDateListProps } from '@/features/schedule/types';
+import { Button } from '@/components/ui';
+
+const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
 const CandidateDateList = ({
   scheduleInterviewDatetimes,
@@ -63,14 +66,27 @@ const CandidateDateList = ({
   }, [merged]);
 
   return (
-    <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-2 text-black flex items-center gap-2">
-        <CalendarDays className="w-6 h-6" />
-        候補日程一覧
-      </h2>
-      <div className="relative bg-blue-100 p-8 rounded min-h-[400px]">
+    <div>
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-xl font-semibold text-black flex items-center gap-2">
+          <CalendarDays className="w-6 h-6" />
+          候補日程一覧
+        </h2>
+        <Button asChild className="text-md mb-2">
+          <a
+            href={recruitment_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded"
+          >
+            <ExternalLink size={20} />
+            採用管理ページへ
+          </a>
+        </Button>
+      </div>
+      <div className="relative bg-blue-100 p-8 rounded min-h-[450px]">
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center min-h-[400px]">
+          <div className="flex flex-col items-center justify-center min-h-[450px]">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500"></div>
             <span className="mt-2 text-gray-500 text-lg">読み込み中...</span>
           </div>
