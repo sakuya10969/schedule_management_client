@@ -77,7 +77,7 @@ const CandidateDateList = ({
             href={recruitment_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded"
+            className="inline-block bg-gray-500 hover:bg-gray-600 text-white p-3 rounded"
           >
             <ExternalLink size={20} />
             採用管理ページへ
