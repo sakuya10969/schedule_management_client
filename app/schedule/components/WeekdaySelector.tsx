@@ -28,7 +28,7 @@ const WeekdaySelector = ({
         <Button
           type="button"
           onClick={() => setSelectedDays([])}
-          className="bg-blue-100 hover:bg-blue-200 text-md text-black px-3 py-2 rounded"
+          className="bg-blue-100 hover:bg-blue-200 text-md text-black p-3 rounded"
         >
           曜日選択をリセット
         </Button>
