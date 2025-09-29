@@ -6,6 +6,7 @@ import { useLayoutEffect, useState, useEffect } from 'react';
 import MultiSelect from '@/app/schedule/components/MultiSelect';
 import { ParticipantsInputProps, Option } from '@/features/schedule/types';
 import { getEmployeeDirectory } from '@/features/schedule/api';
+import { Button } from '@/components/ui';
 
 const ParticipantsInput = ({
   employeeEmails,
@@ -34,6 +35,10 @@ const ParticipantsInput = ({
     setEmployeeEmails(updatedEmployeeEmails);
   };
 
+  const handleClearAll = () => {
+    setEmployeeEmails([]);
+  };
+
   useLayoutEffect(() => {
     const expected = employeeEmails.length > 1 ? employeeEmails.length : 1;
     if (requiredParticipants !== expected) {
@@ -43,9 +48,18 @@ const ParticipantsInput = ({
 
   return (
     <div className="md:col-span-2 mt-2">
-      <label className="block mb-1 font-semibold text-xl text-black">
-        担当者
-      </label>
+      <div className="flex justify-between items-center mb-1">
+        <label className="block font-semibold text-xl text-black">
+          担当者
+        </label>
+        <Button
+          type="button"
+          onClick={handleClearAll}
+          className="bg-blue-100 hover:bg-blue-200 text-md text-black p-3 rounded"
+        >
+          担当者を全て解除
+        </Button>
+      </div>
       <div className="mb-4">
         <MultiSelect
           options={employeeEmailList}
