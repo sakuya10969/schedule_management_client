@@ -76,7 +76,7 @@ const ScheduleForm = ({
         <div className="md:col-span-2 mt-2">
           <Button
             type="submit"
-            className="bg-blue-200 hover:bg-blue-300 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-lg text-black py-3 px-4 mt-2 mb-5 rounded"
+            className="bg-blue-100 hover:bg-blue-200 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-lg text-black p-3 mt-2 mb-5 rounded"
           >
             <CalendarCheck2 size={22} />
             <span>祝日を除いた候補日程一覧を表示</span>
