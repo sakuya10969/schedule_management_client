@@ -8,8 +8,8 @@ const MultiSelect = ({
   onChange,
   placeholder = '担当者を選択',
 }: MultiSelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const MultiSelect = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <div
-        className={`w-full border rounded p-2 min-h-[42px] bg-white cursor-pointer flex flex-wrap gap-2 ${selectedValues.length === 0 ? 'items-center' : ''}`}
+        className={`w-full border rounded p-2 min-h-[45px] bg-white cursor-pointer flex flex-wrap gap-1 focus ${selectedValues.length === 0 ? 'items-center' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedValues.length > 0 ? (
@@ -67,22 +67,22 @@ const MultiSelect = ({
 
       {isOpen && (
         <div
-          className="absolute z-10 w-full bottom-full mb-1 bg-white border rounded shadow-lg"
+          className="absolute z-10 w-full bottom-full bg-white border rounded shadow-lg"
           style={{ marginBottom: '10px' }}
         >
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="検索..."
-            className="w-full p-2 border-b text-black"
+            placeholder="検索"
+            className="w-full p-2 border-b text-black focus:outline-none"
             onClick={(e) => e.stopPropagation()}
           />
           <div className="max-h-[400px] min-h-[400px] overflow-y-auto">
             {filteredOptions.map((option) => (
               <div
                 key={option.email}
-                className={`p-2 cursor-pointer hover:bg-gray-50 ${
+                className={`p-2 cursor-pointer hover:bg-gray-100 ${
                   selectedValues.includes(option.email) ? 'bg-blue-50' : ''
                 } text-black`}
                 onClick={() => toggleOption(option.email)}
