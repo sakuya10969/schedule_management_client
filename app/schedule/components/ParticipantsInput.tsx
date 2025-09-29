@@ -1,6 +1,7 @@
 'use client';
 
 import { useLayoutEffect, useState, useEffect } from 'react';
+import { UserRoundX } from 'lucide-react';
 
 // import { employeeEmailList } from '@/constants';
 import MultiSelect from '@/app/schedule/components/MultiSelect';
@@ -55,8 +56,9 @@ const ParticipantsInput = ({
         <Button
           type="button"
           onClick={handleClearAll}
-          className="bg-blue-100 hover:bg-blue-200 text-md text-black p-3 rounded"
+          className="bg-blue-100 hover:bg-blue-200 text-md text-black p-3 rounded inline-flex items-center gap-2"
         >
+          <UserRoundX size={20} />
           担当者を全て解除
         </Button>
       </div>
