@@ -186,7 +186,7 @@ export default function SchedulePage() {
             {/* 日程調整ボタン */}
             <Button
               onClick={handleCreateForm}
-              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-md text-white px-4 py-3 rounded"
+              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-md text-white p-3 rounded"
             >
               <CornerUpRight size={20} />
               <span>日程調整フォームへ移動</span>
@@ -195,9 +195,9 @@ export default function SchedulePage() {
             {/* リンクコピー */}
             <Button
               onClick={handleCopyFormLink}
-              className={`inline-flex items-center gap-2 px-4 py-3 rounded text-md text-white transition-colors ${
+              className={`inline-flex items-center gap-2 p-3 rounded text-md text-white transition-colors ${
                 isCopied 
-                  ? 'bg-green-500 hover:bg-green-600' 
+                  ? 'bg-green-500 hover:bg-green-600'
                   : 'bg-gray-500 hover:bg-gray-600'
               }`}
             >
