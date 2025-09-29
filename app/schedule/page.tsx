@@ -49,7 +49,7 @@ export default function SchedulePage() {
 
     const validEmployeeEmails = getValidEmployeeEmails();
     if (!validEmployeeEmails.length) {
-      alert('参加者がありません。');
+      alert('担当者を選択してください。');
       return;
     }
 
