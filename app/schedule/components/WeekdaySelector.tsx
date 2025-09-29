@@ -1,3 +1,5 @@
+import { CalendarX2 } from 'lucide-react';
+
 import { weekdays } from '@/constants';
 import { handleDayToggle } from '@/features/schedule/utils';
 import { WeekdaySelectorProps } from '@/features/schedule/types';
@@ -28,8 +30,9 @@ const WeekdaySelector = ({
         <Button
           type="button"
           onClick={() => setSelectedDays([])}
-          className="bg-blue-100 hover:bg-blue-200 text-md text-black p-3 rounded"
+          className="bg-blue-100 hover:bg-blue-200 text-md text-black p-3 rounded inline-flex items-center gap-2"
         >
+          <CalendarX2 size={20} />
           曜日選択をリセット
         </Button>
       </div>
