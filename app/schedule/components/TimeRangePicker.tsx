@@ -1,7 +1,7 @@
 import { generateTimeOptions } from '@/features/schedule/utils';
 import { TimeRangePickerProps } from '@/features/schedule/types';
 
-const TimeRangePicker = ({
+export const TimeRangePicker = ({
   startTime,
   setStartTime,
   endTime,
@@ -45,5 +45,3 @@ const TimeRangePicker = ({
     </div>
   );
 };
-
-export default TimeRangePicker;

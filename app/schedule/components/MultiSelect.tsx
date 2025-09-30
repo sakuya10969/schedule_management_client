@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 
 import { MultiSelectProps } from '@/features/schedule/types';
 
-const MultiSelect = ({
+export const MultiSelect = ({
   options,
   selectedValues,
   onChange,
@@ -117,5 +117,3 @@ const MultiSelect = ({
     </div>
   );
 };
-
-export default MultiSelect;

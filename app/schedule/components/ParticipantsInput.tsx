@@ -3,12 +3,12 @@
 import { useLayoutEffect, useState, useEffect } from 'react';
 import { UserRoundX } from 'lucide-react';
 
-import MultiSelect from '@/app/schedule/components/MultiSelect';
+import { MultiSelect } from '@/app/schedule/components';
 import { ParticipantsInputProps, Option } from '@/features/schedule/types';
 import { getEmployeeDirectory } from '@/features/schedule/api';
 import { Button } from '@/components/ui';
 
-const ParticipantsInput = ({
+export const ParticipantsInput = ({
   employeeEmails,
   setEmployeeEmails,
   requiredParticipants,
@@ -90,5 +90,3 @@ const ParticipantsInput = ({
     </div>
   );
 };
-
-export default ParticipantsInput;

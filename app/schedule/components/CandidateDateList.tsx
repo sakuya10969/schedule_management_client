@@ -15,7 +15,7 @@ import { Button } from '@/components/ui';
 
 const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
-const CandidateDateList = ({
+export const CandidateDateList = ({
   scheduleInterviewDatetimes,
   startTime,
   endTime,
@@ -127,5 +127,3 @@ const CandidateDateList = ({
     </div>
   );
 };
-
-export default CandidateDateList;

@@ -1,6 +1,6 @@
 import { DateRangePickerProps } from '@/features/schedule/types';
 
-const DateRangePicker = ({
+export const DateRangePicker = ({
   startDate,
   setStartDate,
   endDate,
@@ -33,5 +33,3 @@ const DateRangePicker = ({
     </div>
   );
 };
-
-export default DateRangePicker;

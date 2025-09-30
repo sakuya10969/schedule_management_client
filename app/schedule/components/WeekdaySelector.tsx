@@ -5,7 +5,7 @@ import { handleDayToggle } from '@/features/schedule/utils';
 import { WeekdaySelectorProps } from '@/features/schedule/types';
 import { Button, Checkbox } from '@/components/ui';
 
-const WeekdaySelector = ({
+export const WeekdaySelector = ({
   selectedDays,
   setSelectedDays,
 }: WeekdaySelectorProps) => {
@@ -39,5 +39,3 @@ const WeekdaySelector = ({
     </div>
   );
 };
-
-export default WeekdaySelector;

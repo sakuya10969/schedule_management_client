@@ -2,15 +2,11 @@
 
 import { CalendarSearch, CalendarCheck2 } from 'lucide-react';
 
-import DateRangePicker from '@/app/schedule/components/DateRangePicker';
-import TimeRangePicker from '@/app/schedule/components/TimeRangePicker';
-import WeekdaySelector from '@/app/schedule/components/WeekdaySelector';
-import DurationSelector from '@/app/schedule/components/DurationSelector';
-import ParticipantsInput from '@/app/schedule/components/ParticipantsInput';
+import { DateRangePicker, TimeRangePicker, WeekdaySelector, DurationSelector, ParticipantsInput } from '@/app/schedule/components';
 import { ScheduleFormProps } from '@/features/schedule/types';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui';
 
-const ScheduleForm = ({
+export const ScheduleForm = ({
   startDate,
   setStartDate,
   endDate,
@@ -86,5 +82,3 @@ const ScheduleForm = ({
     </div>
   );
 };
-
-export default ScheduleForm;

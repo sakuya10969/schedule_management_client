@@ -1,7 +1,7 @@
 import { durationOptions } from '@/constants';
 import { DurationSelectorProps } from '@/features/schedule/types';
 
-const DurationSelector = ({
+export const DurationSelector = ({
   durationMinutes,
   setDurationMinutes,
 }: DurationSelectorProps) => {
@@ -25,5 +25,3 @@ const DurationSelector = ({
     </div>
   );
 };
-
-export default DurationSelector;

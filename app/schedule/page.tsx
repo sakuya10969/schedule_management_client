@@ -3,13 +3,12 @@
 import { useState, useEffect } from 'react';
 import { Copy, Check, CornerUpRight } from 'lucide-react';
 
-import CandidateDateList from '@/app/schedule/components/CandidateDateList';
-import ScheduleForm from '@/app/schedule/components/ScheduleForm';
+import { CandidateDateList, ScheduleForm } from '@/app/schedule/components';
 import { useSchedule } from '@/features/schedule/hooks/useSchedule';
 import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
 import { getAvailability, storeFormData } from '@/features/schedule/api';
 import { filterOutHolidays } from '@/features/schedule/utils';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui';
 
 export default function SchedulePage() {
   const {
