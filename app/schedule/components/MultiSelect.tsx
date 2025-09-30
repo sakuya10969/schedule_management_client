@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { X } from 'lucide-react';
 
 import { MultiSelectProps } from '@/features/schedule/types';
 
@@ -41,6 +42,12 @@ const MultiSelect = ({
     onChange(newSelectedValues);
   };
 
+  const removeOption = (emailToRemove: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+    const newSelectedValues = selectedValues.filter((value) => value !== emailToRemove);
+    onChange(newSelectedValues);
+  };
+
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <div
@@ -57,6 +64,13 @@ const MultiSelect = ({
                 className="bg-blue-100 text-sm px-2 py-1 rounded flex items-center gap-1 text-black"
               >
                 {option.name}
+                <button
+                  onClick={(e) => removeOption(email, e)}
+                  className="ml-1 hover:bg-blue-200 rounded-full p-0.5 transition-colors"
+                  type="button"
+                >
+                  <X size={12} className="text-gray-600 hover:text-gray-800" />
+                </button>
               </span>
             );
           })
