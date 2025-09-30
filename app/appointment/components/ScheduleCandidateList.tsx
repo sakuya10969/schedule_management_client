@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 
-import { ScheduleCandidateItem } from '@/app/appointment/components/ScheduleCandidateItem';
+import { ScheduleCandidateItem } from '@/app/appointment/components';
 import { ScheduleCandidateListProps } from '@/features/appointment/types';
 
 export const ScheduleCandidateList = ({
