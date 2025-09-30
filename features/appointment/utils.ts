@@ -1,11 +1,11 @@
 import { parseISO, format, isAfter, isValid, isEqual } from 'date-fns';
 
-import { weekdays } from '@/constants';
+import { weekAllDays } from '@/constants';
 
 export const formatDatePart = (isoString: string) => {
   try {
     const date = parseISO(isoString);
-    return format(date, 'M/d') + `(${weekdays[date.getDay()]})`;
+    return format(date, 'M/d') + `(${weekAllDays[date.getDay()]})`;
   } catch (err) {
     console.error('Date parsing error:', err);
     return isoString;
@@ -27,7 +27,7 @@ export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
     const startDate = parseISO(slotPair[0]);
     const endDate = parseISO(slotPair[1]);
     if (format(startDate, 'M/d') === format(endDate, 'M/d')) {
-      const candidateDay = weekdays[startDate.getDay()];
+      const candidateDay = weekAllDays[startDate.getDay()];
       return `${format(startDate, 'M/d')}(${candidateDay}) ${format(
         startDate,
         'HH:mm'
@@ -71,7 +71,7 @@ export const filterScheduleInterviewDatetimes = (
     if (!(startTimeStr >= startTime && endTimeStr <= endTime)) return false;
 
     if (selectedDays.length > 0) {
-      const day = weekdays[start.getDay()];
+      const day = weekAllDays[start.getDay()];
       if (!selectedDays.includes(day)) return false;
     }
 

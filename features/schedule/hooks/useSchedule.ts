@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { weekdays } from '@/constants';
+import { weekAllDays } from '@/constants';
 
 export const useSchedule = () => {
   const today = new Date().toISOString().split('T')[0];
@@ -11,7 +11,7 @@ export const useSchedule = () => {
   const [endTime, setEndTime] = useState<string>('18:00');
   const [durationMinutes, setDurationMinutes] = useState<number>(30);
   const [selectedDays, setSelectedDays] = useState<string[]>(
-    weekdays.filter((day) => day !== '日' && day !== '土')
+    weekAllDays.filter((day) => day !== '日' && day !== '土')
   );
   const [requiredParticipants, setRequiredParticipants] = useState<number>(1);
 

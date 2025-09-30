@@ -3,7 +3,6 @@
 import { useLayoutEffect, useState, useEffect } from 'react';
 import { UserRoundX } from 'lucide-react';
 
-// import { employeeEmailList } from '@/constants';
 import MultiSelect from '@/app/schedule/components/MultiSelect';
 import { ParticipantsInputProps, Option } from '@/features/schedule/types';
 import { getEmployeeDirectory } from '@/features/schedule/api';

@@ -1,6 +1,6 @@
 import { CalendarX2 } from 'lucide-react';
 
-import { weekdays } from '@/constants';
+import { weekAllDays } from '@/constants';
 import { handleDayToggle } from '@/features/schedule/utils';
 import { WeekdaySelectorProps } from '@/features/schedule/types';
 import { Button, Checkbox } from '@/components/ui';
@@ -15,7 +15,7 @@ const WeekdaySelector = ({
         曜日選択
       </label>
       <div className="flex flex-wrap gap-4">
-        {weekdays.map((day) => (
+        {weekAllDays.map((day) => (
           <div key={day} className="flex items-center space-x-2">
             <Checkbox
               checked={selectedDays.includes(day)}

@@ -1,7 +1,7 @@
 import { parseISO, format } from 'date-fns';
 import Holidays from 'date-holidays';
 
-import { weekdays } from '@/constants';
+import { weekAllDays } from '@/constants';
 
 // 候補日程のフォーマット
 export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
@@ -13,14 +13,14 @@ export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
     const endDate = parseISO(slotPair[1]);
 
     if (format(startDate, 'M/d') === format(endDate, 'M/d')) {
-      const candidateDay = weekdays[startDate.getDay()];
+      const candidateDay = weekAllDays[startDate.getDay()];
       const datePart = format(startDate, 'M/d') + `(${candidateDay})`;
       const startTime = format(startDate, 'HH:mm');
       const endTime = format(endDate, 'HH:mm');
       return `${datePart} ${startTime}～${endTime}`;
     } else {
-      const startDay = weekdays[startDate.getDay()];
-      const endDay = weekdays[endDate.getDay()];
+      const startDay = weekAllDays[startDate.getDay()];
+      const endDay = weekAllDays[endDate.getDay()];
       const startFormatted =
         format(startDate, 'MM/dd') +
         `(${startDay}) ` +
@@ -70,7 +70,7 @@ export const filterScheduleInterviewDatetimes = (
     if (selectedDays.length > 0) {
       try {
         const date = parseISO(slotPair[0]);
-        const scheduleInterviewDatetimeDay = weekdays[date.getDay()];
+        const scheduleInterviewDatetimeDay = weekAllDays[date.getDay()];
         if (!selectedDays.includes(scheduleInterviewDatetimeDay)) return false;
       } catch (err) {
         console.error('Day parsing error:', err);
