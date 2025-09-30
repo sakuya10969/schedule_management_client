@@ -31,7 +31,7 @@ export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
       return `${format(startDate, 'M/d')}(${candidateDay}) ${format(
         startDate,
         'HH:mm'
-      )} - ${format(endDate, 'HH:mm')}`;
+      )}～${format(endDate, 'HH:mm')}`;
     } else {
       return `${format(startDate, 'MM/dd HH:mm')} ~ ${format(
         endDate,

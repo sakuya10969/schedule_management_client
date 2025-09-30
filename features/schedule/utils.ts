@@ -17,7 +17,7 @@ export const formatScheduleInterviewDatetime = (slotPair: string[]): string => {
       const datePart = format(startDate, 'M/d') + `(${candidateDay})`;
       const startTime = format(startDate, 'HH:mm');
       const endTime = format(endDate, 'HH:mm');
-      return `${datePart} ${startTime}-${endTime}`;
+      return `${datePart} ${startTime}～${endTime}`;
     } else {
       const startDay = weekdays[startDate.getDay()];
       const endDay = weekdays[endDate.getDay()];

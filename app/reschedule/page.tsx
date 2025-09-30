@@ -4,9 +4,9 @@ import React from 'react';
 import { Calendar, Clock } from 'lucide-react';
 
 import { ScheduleCandidateList } from '@/app/appointment/components/ScheduleCandidateList';
-import { 
-  formatDatePart, 
-  formatTimePart, 
+import {
+  formatDatePart,
+  formatTimePart,
  } from '@/features/appointment/utils';
 import { useReschedule } from '@/features/reschedule/hooks/useReschedule';
 
@@ -77,14 +77,14 @@ export default function ReschedulePage() {
                   <div className="flex items-center space-x-2">
                     <Clock className="h-6 w-6 text-black" />
                     <span className="text-xl font-semibold text-black">
-                      {formatTimePart(currentParsedScheduleDatetime[0])} - {formatTimePart(currentParsedScheduleDatetime[1])}
+                      {formatTimePart(currentParsedScheduleDatetime[0])}～{formatTimePart(currentParsedScheduleDatetime[1])}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
           )}
-          
+
           {dataLoaded ? (
             <form onSubmit={handleSubmit}>
               <h2 className="text-xl font-semibold text-gray-800 mb-4">新しい日程を選択</h2>
@@ -94,7 +94,7 @@ export default function ReschedulePage() {
                 selectedScheduleInterviewDatetime={selectedScheduleInterviewDatetime}
                 onSelectScheduleInterviewDatetime={onSelectScheduleInterviewDatetime}
               />
-              
+
               {/* 送信ボタン */}
               <button
                 type="submit"

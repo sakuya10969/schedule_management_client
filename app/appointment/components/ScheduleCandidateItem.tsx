@@ -39,9 +39,9 @@ export const ScheduleCandidateItem = ({
             className={`h-6 w-6 ${isSelected ? 'text-blue-500' : 'text-gray-500'}`}
           />
           <span
-            className={`text-xl ${isSelected ? 'font-semibold text-blue-500' : 'text-gray-700'}`}
+            className={`text-xl text-black ${isSelected ? 'font-semibold' : ''}`}
           >
-            {startTime} - {endTime}
+            {startTime}～{endTime}
           </span>
         </div>
       </div>

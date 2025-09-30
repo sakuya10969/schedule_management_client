@@ -20,7 +20,7 @@ const DateRangePicker = ({
           required
         />
       </div>
-      <span className="pb-3">~</span>
+      <span className="pb-3 text-black">~</span>
       <div className="flex-1">
         <input
           type="date"
