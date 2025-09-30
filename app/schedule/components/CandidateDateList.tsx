@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { parseISO } from 'date-fns';
-import { CalendarDays, Copy, Check } from 'lucide-react';
+import { CalendarDays, Copy, Check, ExternalLink } from 'lucide-react';
 
 import {
   formatScheduleInterviewDatetime,
@@ -10,15 +10,18 @@ import {
   mergeScheduleInterviewDatetimes,
   handleCopy,
 } from '@/features/schedule/utils';
-import { CandidateListProps } from '@/features/schedule/types';
+import { CandidateDateListProps } from '@/features/schedule/types';
+import { Button } from '@/components/ui';
 
-const CandidateList = ({
+const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
+
+const CandidateDateList = ({
   scheduleInterviewDatetimes,
   startTime,
   endTime,
   isLoading,
   selectedDays,
-}: CandidateListProps) => {
+}: CandidateDateListProps) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   // フィルタリング済み候補を取得
@@ -63,14 +66,27 @@ const CandidateList = ({
   }, [merged]);
 
   return (
-    <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-2 text-black flex items-center gap-2">
-        <CalendarDays className="w-6 h-6" />
-        候補日程一覧
-      </h2>
-      <div className="relative bg-blue-100 p-8 rounded min-h-[400px]">
+    <div>
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-xl font-semibold text-black flex items-center gap-2">
+          <CalendarDays className="w-6 h-6" />
+          候補日程一覧
+        </h2>
+        <Button asChild className="text-md mb-2">
+          <a
+            href={recruitment_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gray-500 hover:bg-gray-600 text-white p-3 rounded"
+          >
+            <ExternalLink size={20} />
+            採用管理ページへ
+          </a>
+        </Button>
+      </div>
+      <div className="relative bg-blue-100 p-6 rounded h-[450px] overflow-y-auto">
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center min-h-[400px]">
+          <div className="flex flex-col items-center justify-center min-h-[450px]">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500"></div>
             <span className="mt-2 text-gray-500 text-lg">読み込み中...</span>
           </div>
@@ -78,7 +94,7 @@ const CandidateList = ({
           <>
             <button
               onClick={handleCopyClick}
-              className={`absolute top-2 right-2 text-sm px-2 py-1 rounded shadow hover:bg-gray-50 text-black inline-flex items-center gap-1 transition-colors ${
+              className={`absolute top-3 right-3 text-md px-3 py-2 rounded shadow hover:bg-gray-100 text-black inline-flex items-center gap-1 transition-colors ${
                 isCopied 
                   ? 'bg-green-100 text-green-700' 
                   : 'bg-white'
@@ -86,18 +102,18 @@ const CandidateList = ({
             >
               {isCopied ? (
                 <>
-                  <Check size={14} />
+                  <Check size={16} />
                   <span>コピー完了</span>
                 </>
               ) : (
                 <>
-                  <Copy size={14} />
+                  <Copy size={16} />
                   <span>候補日程のコピー</span>
                 </>
               )}
             </button>
             {merged.length > 0 ? (
-              <ul className="list-inside space-y-1 text-black">
+              <ul className="list-inside text-lg text-black">
                 {merged.map((slotPair, index) => (
                   <li key={index}>{formatScheduleInterviewDatetime(slotPair)}</li>
                 ))}
@@ -112,4 +128,4 @@ const CandidateList = ({
   );
 };
 
-export default CandidateList;
+export default CandidateDateList;

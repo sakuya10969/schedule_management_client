@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarSearch } from 'lucide-react';
+import { CalendarSearch, CalendarCheck2 } from 'lucide-react';
 
 import DateRangePicker from '@/app/schedule/components/DateRangePicker';
 import TimeRangePicker from '@/app/schedule/components/TimeRangePicker';
@@ -8,6 +8,7 @@ import WeekdaySelector from '@/app/schedule/components/WeekdaySelector';
 import DurationSelector from '@/app/schedule/components/DurationSelector';
 import ParticipantsInput from '@/app/schedule/components/ParticipantsInput';
 import { ScheduleFormProps } from '@/features/schedule/types';
+import { Button } from '@/components/ui/button';
 
 const ScheduleForm = ({
   startDate,
@@ -30,7 +31,7 @@ const ScheduleForm = ({
 }: ScheduleFormProps) => {
   return (
     <div>
-      <h1 className="mb-5 ml-2 font-semibold text-xl text-black flex items-center gap-2">
+      <h1 className="mt-4 mb-5 font-semibold text-xl text-black flex items-center gap-2">
         <CalendarSearch className="w-6 h-6" />
         スケジュール調整
       </h1>
@@ -72,13 +73,14 @@ const ScheduleForm = ({
         />
 
         {/* フォーム送信ボタン */}
-        <div className="md:col-span-2 ml-4">
-          <button
+        <div className="md:col-span-2 mt-2">
+          <Button
             type="submit"
-            className="bg-blue-300 hover:bg-blue-400 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-xl text-black py-3 px-4 mt-2 mb-5 rounded"
+            className="bg-blue-100 hover:bg-blue-200 active:translate-y-0.3 active:scale-95 transition-all duration-200 text-lg text-black p-3 mt-2 mb-5 rounded"
           >
-            祝日を除いた候補日程一覧を表示
-          </button>
+            <CalendarCheck2 size={22} />
+            <span>祝日を除いた候補日程一覧を表示</span>
+          </Button>
         </div>
       </form>
     </div>

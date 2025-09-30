@@ -1,16 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, CornerUpRight } from 'lucide-react';
 
-import CandidateList from '@/app/schedule/components/CandidateList';
+import CandidateDateList from '@/app/schedule/components/CandidateDateList';
 import ScheduleForm from '@/app/schedule/components/ScheduleForm';
 import { useSchedule } from '@/features/schedule/hooks/useSchedule';
 import { useEmployeeEmails } from '@/features/schedule/hooks/useEmployeeEmails';
 import { getAvailability, storeFormData } from '@/features/schedule/api';
 import { filterOutHolidays } from '@/features/schedule/utils';
-
-const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
+import { Button } from '@/components/ui/button';
 
 export default function SchedulePage() {
   const {
@@ -50,7 +49,7 @@ export default function SchedulePage() {
 
     const validEmployeeEmails = getValidEmployeeEmails();
     if (!validEmployeeEmails.length) {
-      alert('参加者がありません。');
+      alert('担当者を選択してください。');
       return;
     }
 
@@ -148,17 +147,7 @@ export default function SchedulePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
-      <div className="text-right mb-5">
-        <a
-          href={recruitment_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-gray-500 text-white px-4 py-2 rounded"
-        >
-          採用管理ページへ
-        </a>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* 左カラム */}
         <div>
           {/* スケジュール設定フォーム */}
@@ -185,7 +174,7 @@ export default function SchedulePage() {
         {/* 右カラム */}
         <div>
           {/* 候補日一覧の表示 */}
-          <CandidateList
+          <CandidateDateList
             scheduleInterviewDatetimes={scheduleInterviewDatetimes}
             startTime={startTime}
             endTime={endTime}
@@ -195,34 +184,35 @@ export default function SchedulePage() {
           {/* フォーム作成ボタン */}
           <div className="flex gap-4 mt-4">
             {/* 日程調整ボタン */}
-            <button
+            <Button
               onClick={handleCreateForm}
-              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+              className="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-md text-white p-3 rounded"
             >
-              <span>日程調整画面を表示</span>
-            </button>
+              <CornerUpRight size={20} />
+              <span>日程調整フォームへ移動</span>
+            </Button>
 
             {/* リンクコピー */}
-            <button
+            <Button
               onClick={handleCopyFormLink}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded text-white transition-colors ${
+              className={`inline-flex items-center gap-2 p-3 rounded text-md text-white transition-colors ${
                 isCopied 
-                  ? 'bg-green-500 hover:bg-green-600' 
+                  ? 'bg-green-500 hover:bg-green-600'
                   : 'bg-gray-500 hover:bg-gray-600'
               }`}
             >
               {isCopied ? (
                 <>
-                  <Check size={16} />
+                  <Check size={20} />
                   <span>コピー完了</span>
                 </>
               ) : (
                 <>
-                  <Copy size={16} />
+                  <Copy size={20} />
                   <span>日程調整リンクのコピー</span>
                 </>
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </div>

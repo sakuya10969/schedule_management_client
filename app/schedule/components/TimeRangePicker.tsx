@@ -8,7 +8,7 @@ const TimeRangePicker = ({
   setEndTime,
 }: TimeRangePickerProps) => {
   return (
-    <div className="flex items-end space-x-2 p-3 rounded w-full">
+    <div className="flex items-end space-x-2 mt-2 rounded w-full">
       <div className="flex-1">
         <label className="block mb-1 font-semibold text-xl text-black">
           時間帯
@@ -16,7 +16,7 @@ const TimeRangePicker = ({
         <select
           value={startTime}
           onChange={(e) => setStartTime(e.target.value)}
-          className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
+          className="border p-3 bg-blue-100 w-full text-black rounded cursor-pointer"
           required
         >
           {generateTimeOptions().map((timeStr) => (
@@ -32,7 +32,7 @@ const TimeRangePicker = ({
         <select
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
-          className="border p-3 bg-blue-100 w-full text-black cursor-pointer"
+          className="border p-3 bg-blue-100 w-full text-black rounded cursor-pointer"
           required
         >
           {generateTimeOptions().map((timeStr) => (
