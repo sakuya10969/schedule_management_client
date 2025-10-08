@@ -48,7 +48,7 @@ export const ParticipantsInput = ({
 
   return (
     <div className="md:col-span-2 mt-2">
-      <div className="flex justify-between items-center mb-1">
+      <div className="flex justify-between items-end mb-1">
         <label className="block font-semibold text-xl text-black">
           担当者
         </label>

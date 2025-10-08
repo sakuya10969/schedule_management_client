@@ -9,7 +9,7 @@ export const DateRangePicker = ({
   return (
     <div className="flex items-end space-x-2 rounded w-full">
       <div className="flex-1">
-        <label className="block mb-2 font-semibold text-xl text-black">
+        <label className="block mb-1 font-semibold text-xl text-black">
           調整期間
         </label>
         <input

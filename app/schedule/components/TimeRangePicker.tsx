@@ -28,7 +28,6 @@ export const TimeRangePicker = ({
       </div>
       <span className="pb-3 text-black">~</span>
       <div className="flex-1">
-        <label className="block mb-1 mt-7"></label>
         <select
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}

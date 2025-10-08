@@ -11,7 +11,7 @@ export const WeekdaySelector = ({
 }: WeekdaySelectorProps) => {
   return (
     <div className="rounded-lg mt-2">
-      <label className="block mb-1 font-bold text-xl text-black">
+      <label className="block font-bold text-xl text-black">
         曜日選択
       </label>
       <div className="flex flex-wrap gap-4">
