@@ -12,7 +12,7 @@ import {
 } from '@/features/schedule/utils';
 import { CandidateDateListProps } from '@/features/schedule/types';
 import { Button } from '@/components/ui';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui';
 
 const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
