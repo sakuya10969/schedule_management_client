@@ -27,7 +27,7 @@ export const ScheduleForm = ({
 }: ScheduleFormProps) => {
   return (
     <div>
-      <h1 className="mt-4 mb-5 font-semibold text-xl text-black flex items-center gap-2">
+      <h1 className="mt-3 mb-5 font-semibold text-xl text-black flex items-center gap-2">
         <CalendarSearch className="w-6 h-6" />
         スケジュール調整
       </h1>
