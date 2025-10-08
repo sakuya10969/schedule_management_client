@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { UserRoundX } from 'lucide-react';
 
 import { MultiSelect } from '@/app/schedule/components';
@@ -29,6 +29,13 @@ export const ParticipantsInput = ({
     fetchEmployeeDirectory();
   }, []);
 
+  useEffect(() => {
+    // 担当者が選択されていて、必要参加者数が設定されていない場合のみ全員をデフォルトに設定
+    if (employeeEmails.length > 0 && requiredParticipants === 0) {
+      setRequiredParticipants(employeeEmails.length);
+    }
+  }, [employeeEmails.length, requiredParticipants, setRequiredParticipants]);
+
   const handleMultiSelectChange = (selectedEmails: string[]) => {
     const filtered = selectedEmails.filter((email) => email.trim() !== '');
     const updatedEmployeeEmails = filtered.map((email) => ({ email }));
@@ -38,13 +45,6 @@ export const ParticipantsInput = ({
   const handleClearAll = () => {
     setEmployeeEmails([]);
   };
-
-  useLayoutEffect(() => {
-    const expected = employeeEmails.length > 1 ? employeeEmails.length : 1;
-    if (requiredParticipants !== expected) {
-      setRequiredParticipants(expected);
-    }
-  }, [employeeEmails, requiredParticipants, setRequiredParticipants]);
 
   return (
     <div className="md:col-span-2 mt-2">
