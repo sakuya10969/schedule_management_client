@@ -12,6 +12,7 @@ import {
 } from '@/features/schedule/utils';
 import { CandidateDateListProps } from '@/features/schedule/types';
 import { Button } from '@/components/ui';
+import { Card, CardContent } from '@/components/ui/card';
 
 const recruitment_url = process.env.NEXT_PUBLIC_RECRUITMENT_URL ?? "/schedule";
 
@@ -84,46 +85,48 @@ export const CandidateDateList = ({
           </a>
         </Button>
       </div>
-      <div className="relative bg-blue-100 p-6 rounded h-[450px] overflow-y-auto">
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center min-h-[450px]">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500"></div>
-            <span className="mt-2 text-gray-500 text-lg">読み込み中...</span>
-          </div>
-        ) : (
-          <>
-            <button
-              onClick={handleCopyClick}
-              className={`absolute top-3 right-3 text-md px-3 py-2 rounded shadow hover:bg-gray-100 text-black inline-flex items-center gap-1 transition-colors ${
-                isCopied 
-                  ? 'bg-green-100 text-green-700' 
-                  : 'bg-white'
-              }`}
-            >
-              {isCopied ? (
-                <>
-                  <Check size={16} />
-                  <span>コピー完了</span>
-                </>
+      <Card>
+        <CardContent className="relative bg-blue-100 p-6 h-[450px] overflow-y-auto rounded-xl">
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center min-h-[450px]">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500"></div>
+              <span className="mt-2 text-gray-500 text-lg">読み込み中...</span>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={handleCopyClick}
+                className={`absolute top-3 right-3 text-md px-3 py-2 rounded shadow hover:bg-gray-100 text-black inline-flex items-center gap-1 transition-colors ${
+                  isCopied 
+                    ? 'bg-green-100 text-green-700' 
+                    : 'bg-white'
+                }`}
+              >
+                {isCopied ? (
+                  <>
+                    <Check size={16} />
+                    <span>コピー完了</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={16} />
+                    <span>候補日程のコピー</span>
+                  </>
+                )}
+              </button>
+              {merged.length > 0 ? (
+                <ul className="list-inside text-lg text-black">
+                  {merged.map((slotPair, index) => (
+                    <li key={index}>{formatScheduleInterviewDatetime(slotPair)}</li>
+                  ))}
+                </ul>
               ) : (
-                <>
-                  <Copy size={16} />
-                  <span>候補日程のコピー</span>
-                </>
+                <p className="text-black">候補日程がありません。</p>
               )}
-            </button>
-            {merged.length > 0 ? (
-              <ul className="list-inside text-lg text-black">
-                {merged.map((slotPair, index) => (
-                  <li key={index}>{formatScheduleInterviewDatetime(slotPair)}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-black">候補日程がありません。</p>
-            )}
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };
