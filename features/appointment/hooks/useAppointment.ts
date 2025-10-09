@@ -6,6 +6,7 @@ import { getFormData, submitSchedule } from '@/features/appointment/api';
 import {
   formatScheduleInterviewDatetime,
   filterScheduleInterviewDatetimes,
+  createSlotKey,
 } from '@/features/appointment/utils';
 import { filterOutHolidays } from '@/features/schedule/utils';
 
@@ -19,13 +20,14 @@ export const useAppointment = () => {
   const [endTime, setEndTime] = useState<string>('18:00');
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [confirmedScheduleInterviewDatetime, setConfirmedScheduleInterviewDatetime] = useState<string>('');
+  const [slotMembersMap, setSlotMembersMap] = useState<Map<string, string[]>>(new Map());
 
   // 新規入力欄用の state
-  const [candidateLastname, setCandidateLastName] = useState('');
-  const [candidateFirstname, setCandidateFirstName] = useState('');
-  const [company, setCompany] = useState('');
-  const [universityName, setUniversityName] = useState('');
-  const [candidateEmail, setCandidateEmail] = useState('');
+  const [candidateLastname, setCandidateLastName] = useState<string>('');
+  const [candidateFirstname, setCandidateFirstName] = useState<string>('');
+  const [company, setCompany] = useState<string>('');
+  const [university, setUniversity] = useState<string>('');
+  const [candidateEmail, setCandidateEmail] = useState<string>('');
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -35,11 +37,11 @@ export const useAppointment = () => {
     const getData = async () => {
       try {
         const data = await getFormData(cosmosDbId);
-        if (data.employee_emails) setEmployeeEmail(data.employee_emails[0].email);
         if (data.schedule_interview_datetimes) setScheduleInterviewDatetimes(filterOutHolidays(data.schedule_interview_datetimes));
         if (data.start_time) setStartTime(data.start_time);
         if (data.end_time) setEndTime(data.end_time);
         if (data.selected_days) setSelectedDays(data.selected_days);
+        if (data.slot_members_map) setSlotMembersMap(data.slot_members_map);
         if (data.is_confirmed) {
           setIsConfirmed(true);
           setConfirmedScheduleInterviewDatetime(data.confirmedCandidate || '');
@@ -79,7 +81,7 @@ export const useAppointment = () => {
 
     const payload = {
       schedule_interview_datetime: selectedScheduleInterviewDatetime,
-      employee_email: employeeEmail,
+      employee_email: slotMembersMap.get(createSlotKey(selectedScheduleInterviewDatetime))?.[0] || '',
       candidate_lastname: candidateLastname,
       candidate_firstname: candidateFirstname,
       company,
@@ -87,7 +89,7 @@ export const useAppointment = () => {
       cosmos_db_id: cosmosDbId,
       candidate_id: candidateId ? Number(candidateId) : null,
       interview_stage: interviewStage,
-      universityName,
+      university
     };
 
     try {
@@ -122,7 +124,7 @@ export const useAppointment = () => {
     candidateLastname,
     candidateFirstname,
     company,
-    universityName,
+    university,
     candidateEmail,
     filteredScheduleInterviewDatetimes,
     setSelectedScheduleInterviewDatetime,
@@ -132,7 +134,7 @@ export const useAppointment = () => {
     setCandidateLastName,
     setCandidateFirstName,
     setCompany,
-    setUniversityName,
+    setUniversity,
     setCandidateEmail,
     handleSubmit,
   };
