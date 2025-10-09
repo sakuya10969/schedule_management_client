@@ -136,3 +136,13 @@ export const excludeCurrentScheduleDatetime = (
     return !(isEqual(start, currentStart) && isEqual(end, currentEnd));
   });
 };
+
+export const createSlotKey = (value: string): string => {
+  // 文字列の場合（カンマ・スペースを除去してスプリット）
+  const parts = value.split(',').map(v => v.trim());
+  if (parts.length !== 2) {
+    throw new Error(`Invalid slot format: ${value}`);
+  }
+
+  return `${parts[0]}/${parts[1]}`;
+};
