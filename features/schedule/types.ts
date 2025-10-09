@@ -83,6 +83,7 @@ export interface StoreFormDataParams {
   employee_emails: { email: string }[];
   schedule_interview_datetimes: string[][];
   required_participants: number;
+  slot_members_map: Map<string, string[]>;
 }
 
 export interface Option {
