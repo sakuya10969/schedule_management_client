@@ -33,7 +33,7 @@ export default function SchedulePage() {
   const isConfirmed = false;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
-  const [slotMembersMap, setSlotMembersMap] = useState<Record<string, string[]>>({});
+  const [slotEmployeesMap, setSlotEmployeesMap] = useState<Record<string, string[]>>({});
   const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
     null
   );
@@ -66,7 +66,7 @@ export default function SchedulePage() {
         required_participants: requiredParticipants,
       });
       setScheduleInterviewDatetimes(filterOutHolidays(data.common_availability || []));
-      setSlotMembersMap(data.slot_members_map || {});
+      setSlotEmployeesMap(data.slot_employees_map || {});
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -91,7 +91,7 @@ export default function SchedulePage() {
       employee_emails: employeeEmails,
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
-      slot_members_map: slotMembersMap,
+      slot_employees_map: slotEmployeesMap,
     });
     if (!cosmosDbId) {
       alert('フォームの作成に失敗しました。再度お試しください。');
@@ -121,7 +121,7 @@ export default function SchedulePage() {
       employee_emails: employeeEmails,
       required_participants: requiredParticipants,
       schedule_interview_datetimes: scheduleInterviewDatetimes,
-      slot_members_map: slotMembersMap,
+      slot_employees_map: slotEmployeesMap,
     });
   
     if (!cosmosDbId) {
