@@ -33,7 +33,7 @@ export default function SchedulePage() {
   const isConfirmed = false;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [scheduleInterviewDatetimes, setScheduleInterviewDatetimes] = useState<string[][]>([]);
-  const [slotMembersMap, setSlotMembersMap] = useState<Map<string, string[]>>(new Map());
+  const [slotMembersMap, setSlotMembersMap] = useState<Record<string, string[]>>({});
   const [searchParams, setSearchParams] = useState<URLSearchParams | null>(
     null
   );
@@ -66,7 +66,7 @@ export default function SchedulePage() {
         required_participants: requiredParticipants,
       });
       setScheduleInterviewDatetimes(filterOutHolidays(data.common_availability || []));
-      setSlotMembersMap(data.slot_members_map || new Map());
+      setSlotMembersMap(data.slot_members_map || {});
     } catch (error) {
       console.error('Error:', error);
     } finally {

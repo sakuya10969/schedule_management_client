@@ -41,7 +41,7 @@ export interface FormData {
   is_confirmed: boolean;
   confirmedCandidate: string;
   required_participants: number;
-  slot_members_map: Map<string, string[]>;
+  slot_members_map: Record<string, string[]>;
 }
 
 export interface SubmitSchedulePayload {

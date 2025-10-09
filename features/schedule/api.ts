@@ -18,7 +18,7 @@ export const getEmployeeDirectory = async () => {
 
 export const getAvailability = async (params: GetAvailabilityParams) => {
   try {
-    const { data } = await axios.post(`${apiUrl}/get_availability`, params);
+    const { data } = await axios.post(`${apiUrl}/availability`, params);
     return data;
   } catch (error) {
     throw new Error('Failed to fetch schedule');

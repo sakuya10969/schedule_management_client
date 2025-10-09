@@ -20,7 +20,7 @@ export const useAppointment = () => {
   const [endTime, setEndTime] = useState<string>('18:00');
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [confirmedScheduleInterviewDatetime, setConfirmedScheduleInterviewDatetime] = useState<string>('');
-  const [slotMembersMap, setSlotMembersMap] = useState<Map<string, string[]>>(new Map());
+  const [slotMembersMap, setSlotMembersMap] = useState<Record<string, string[]>>({});
 
   // 新規入力欄用の state
   const [candidateLastname, setCandidateLastName] = useState<string>('');
@@ -81,7 +81,7 @@ export const useAppointment = () => {
 
     const payload = {
       schedule_interview_datetime: selectedScheduleInterviewDatetime,
-      employee_email: slotMembersMap.get(createSlotKey(selectedScheduleInterviewDatetime))?.[0] || '',
+      employee_email: slotMembersMap[createSlotKey(selectedScheduleInterviewDatetime)]?.[0] || '',
       candidate_lastname: candidateLastname,
       candidate_firstname: candidateFirstname,
       company,
