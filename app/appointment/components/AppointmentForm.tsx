@@ -7,7 +7,7 @@ export const AppointmentForm = ({
   candidateLastname,
   candidateFirstname,
   company,
-  universityName,
+  university,
   candidateEmail,
   selectedScheduleInterviewDatetime,
   isLoading,
@@ -15,7 +15,7 @@ export const AppointmentForm = ({
   onCandidateLastNameChange,
   onCandidateFirstNameChange,
   onCompanyChange,
-  onUniversityNameChange,
+  onUniversityChange,
   onCandidateEmailChange,
   onSelectScheduleInterviewDatetime,
   onSubmit,
@@ -80,16 +80,16 @@ export const AppointmentForm = ({
       {/* 入力フィールド：大学名*/}
       <div>
         <label
-          htmlFor="universityName"
+          htmlFor="university"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           大学名
         </label>
         <input
           type="text"
-          id="universityName"
-          value={universityName}
-          onChange={(e) => onUniversityNameChange(e.target.value)}
+          id="university"
+          value={university}
+          onChange={(e) => onUniversityChange(e.target.value)}
           placeholder="〇〇大学"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
